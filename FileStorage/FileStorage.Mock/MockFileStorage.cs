@@ -1,4 +1,4 @@
-﻿using FileStorage.Interface;
+﻿using FileStorage.FileStorageInterface;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FileStorage.Mock
+namespace FileStorage.FileStorageMock
 {
     public class MockFileStorage : IFileStorage
     {
@@ -17,12 +17,7 @@ namespace FileStorage.Mock
             this.targetPath = targetPath;
         }
 
-        public System.IO.Stream EchoFileStream(System.IO.Stream inStreeam)
-        {
-            return inStreeam;
-        }
-
-        public void AddFileMetadata(RemoteFileInfo fileInfo)
+        public void AddFileMetadata(StoreFileInfo fileInfo)
         {
             throw new NotImplementedException();
         }
@@ -35,7 +30,7 @@ namespace FileStorage.Mock
             }
         }
 
-        public RemoteFileInfo GetFileMetadata(Guid id)
+        public StoreFileInfo GetFileMetadata(Guid id)
         {
             throw new NotImplementedException();
         }

@@ -1,5 +1,5 @@
-﻿using FileStorage.Lib;
-using FileStorage.Mock;
+﻿using FileStorage.FileStorageMock;
+using FileStorage.Lib;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -19,17 +19,19 @@ namespace FileStorage.ConsoleClient
 
         private static void TestFileUpload()
         {
-            ServiceReference1.FileStorageServiceClient sc = new ServiceReference1.FileStorageServiceClient();
-            MockFileStorage msf = new MockFileStorage(ConfigurationManager.AppSettings["fileToUploadPath"]);
-            sc.UploadFile(msf.GetFile(Guid.Empty));
-            sc.Close();
+            ServiceReference1.FileStorageServiceClient TargetFileStorage = new ServiceReference1.FileStorageServiceClient();
+            MockFileStorage SourceFileStorage = new MockFileStorage(ConfigurationManager.AppSettings["fileToUploadPath"]);
+
+            TargetFileStorage.UploadFile(SourceFileStorage.GetFile(Guid.Empty));
+            TargetFileStorage.Close();
         }
 
         private static void TestFileDownload()
         {
             ServiceReference1.FileStorageServiceClient sc = new ServiceReference1.FileStorageServiceClient();
-            MockFileStorage msf = new MockFileStorage(ConfigurationManager.AppSettings["downloadResultFilePath"]);
-            msf.AddFile(sc.GetFile());
+            MockFileStorage FileStorage = new MockFileStorage(ConfigurationManager.AppSettings["downloadResultFilePath"]);
+
+            FileStorage.AddFile(sc.GetFile());
             sc.Close();
             sc.Close();
         }

@@ -40,9 +40,9 @@ namespace FileStorage.Lib
             set;
         }
 
+        //1GB stream
         int streamLength = 1024 * 1024 * 1024;
         
-
         public override int Read(byte[] buffer, int offset, int count)
         {
             int i = 0;

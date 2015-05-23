@@ -5,26 +5,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FileStorage.Interface
+namespace FileStorage.FileStorageInterface
 {
-    public class RemoteFileInfo
-    {
-        Guid FileId;
-
-        string FileName;
-
-        string FileExtension;
-    }
-
     public interface IFileStorage
     {
-        Stream EchoFileStream(Stream inStreeam);
-
-        void AddFileMetadata(RemoteFileInfo fileInfo);
+        void AddFileMetadata(StoreFileInfo fileInfo);
 
         void AddFile(Stream fileData);
 
-        RemoteFileInfo GetFileMetadata(Guid id);
+        StoreFileInfo GetFileMetadata(Guid id);
 
         Stream GetFile(Guid id);
     }
