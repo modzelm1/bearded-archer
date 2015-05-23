@@ -28,12 +28,19 @@ namespace FileStorage.ConsoleClient
 
         private static void TestFileDownload()
         {
-            ServiceReference1.FileStorageServiceClient sc = new ServiceReference1.FileStorageServiceClient();
-            MockFileStorage FileStorage = new MockFileStorage(ConfigurationManager.AppSettings["downloadResultFilePath"]);
+            ServiceReference1.FileStorageServiceClient SourceFileStorage = new ServiceReference1.FileStorageServiceClient();
+            MockFileStorage TargetFileStorage = new MockFileStorage(ConfigurationManager.AppSettings["downloadResultFilePath"]);
 
-            FileStorage.AddFile(sc.GetFile());
-            sc.Close();
-            sc.Close();
+            TargetFileStorage.AddFile(SourceFileStorage.GetFile());
+            SourceFileStorage.Close();
+            SourceFileStorage.Close();
+        }
+
+        private void CreateTestFile()
+        {
+            using (var source = new LongStream())
+                using (var target = File.Create(""))
+                target.CopyTo(source);
         }
     }
 }

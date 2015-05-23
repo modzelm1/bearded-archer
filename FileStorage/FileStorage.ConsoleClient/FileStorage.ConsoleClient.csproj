@@ -64,17 +64,17 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\FileStorage.Interface\FileStorage.Interface.csproj">
+    <ProjectReference Include="..\FileStorage.Interface\FileStorage.FileStorageInterface.csproj">
       <Project>{c6de4c0e-e6a4-42d2-9204-616a15835e6a}</Project>
-      <Name>FileStorage.Interface</Name>
+      <Name>FileStorage.FileStorageInterface</Name>
     </ProjectReference>
     <ProjectReference Include="..\FileStorage.Lib\FileStorage.Lib.csproj">
       <Project>{d0e48ad8-714b-4e53-a580-928fa572e252}</Project>
       <Name>FileStorage.Lib</Name>
     </ProjectReference>
-    <ProjectReference Include="..\FileStorage.Mock\FileStorage.Mock.csproj">
+    <ProjectReference Include="..\FileStorage.Mock\FileStorage.FileStorageMock.csproj">
       <Project>{1be106da-2f1b-48dd-904b-b0e0c614efd0}</Project>
-      <Name>FileStorage.Mock</Name>
+      <Name>FileStorage.FileStorageMock</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

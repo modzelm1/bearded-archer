@@ -1,16 +1,16 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.21005.1
+VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileStorage.Interface", "FileStorage.Interface\FileStorage.Interface.csproj", "{C6DE4C0E-E6A4-42D2-9204-616A15835E6A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileStorage.FileStorageInterface", "FileStorage.Interface\FileStorage.FileStorageInterface.csproj", "{C6DE4C0E-E6A4-42D2-9204-616A15835E6A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileStorage.ConsoleClient", "FileStorage.ConsoleClient\FileStorage.ConsoleClient.csproj", "{6339ABE1-9539-4AC2-8094-F62DDEE5F308}"
 	ProjectSection(ProjectDependencies) = postProject
 		{96163181-E0D0-4196-B376-E9587C5FE2F7} = {96163181-E0D0-4196-B376-E9587C5FE2F7}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileStorage.Mock", "FileStorage.Mock\FileStorage.Mock.csproj", "{1BE106DA-2F1B-48DD-904B-B0E0C614EFD0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileStorage.FileStorageMock", "FileStorage.Mock\FileStorage.FileStorageMock.csproj", "{1BE106DA-2F1B-48DD-904B-B0E0C614EFD0}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileStorage.Lib", "FileStorage.Lib\FileStorage.Lib.csproj", "{D0E48AD8-714B-4E53-A580-928FA572E252}"
 EndProject
