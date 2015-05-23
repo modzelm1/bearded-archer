@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FileStorage.FileStorageInterface
 {
-    class StoreFileInfo
+    public class StoreFileInfo
     {
     }
 }

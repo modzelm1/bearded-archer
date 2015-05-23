@@ -14,7 +14,7 @@ namespace FileStorage.ConsoleClient
     {
         static void Main(string[] args)
         {
-            TestFileDownload();
+            CreateTestFile();
         }
 
         private static void TestFileUpload()
@@ -36,11 +36,24 @@ namespace FileStorage.ConsoleClient
             SourceFileStorage.Close();
         }
 
-        private void CreateTestFile()
+        private static void CreateTestFile()
         {
+            int buffSize = 512;
+            byte[] buff = new byte[buffSize];
+            int count = 0;
+            long totalSize = 0;
             using (var source = new LongStream())
-                using (var target = File.Create(""))
-                target.CopyTo(source);
+                using (var target = File.Create(@"C:\TestStorage\Client\fileToUpload.txt"))
+                {
+                    while ((count = source.Read(buff, 0, buffSize)) != 0)
+                    {
+                        target.Write(buff, 0, count);
+                        Console.WriteLine("Readed bytes: {0}", (totalSize+=count));
+                    }
+                    //target.CopyTo(source);
+                }
+            Console.WriteLine("End!");
+            Console.ReadKey();
         }
     }
 }
