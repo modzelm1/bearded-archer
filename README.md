@@ -15,3 +15,8 @@ I plan to use WCF for service and SQL Filestream for storage.
 5. Web API interface
 6. ASP MVC Client
 7. Publish on Azure
+
+###Helpful links
+
+http://www.codeproject.com/Articles/20364/Progress-Indication-while-Uploading-Downloading-Fi
+http://www.codeproject.com/Articles/112655/Progress-Streamed-File-download-and-Upload-with-Re
