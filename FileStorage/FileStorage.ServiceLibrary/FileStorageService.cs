@@ -13,7 +13,7 @@ namespace FileStorage.ServiceLibrary
     {
         public void UploadFile(System.IO.Stream fileData)
         {
-            using (FileStream fs = new FileStream(ConfigurationManager.AppSettings["fileToUploadPath"], 
+            using (FileStream fs = new FileStream(ConfigurationManager.AppSettings["uploadResultFilePath"], 
                 FileMode.OpenOrCreate, 
                 FileAccess.Write))
             {

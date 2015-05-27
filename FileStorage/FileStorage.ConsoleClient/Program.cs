@@ -1,5 +1,5 @@
 ﻿using FileStorage.FileStorageMock;
-using FileStorage.Lib;
+using FileStorage.StreamCore;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -14,26 +14,31 @@ namespace FileStorage.ConsoleClient
     {
         static void Main(string[] args)
         {
-            CreateTestFile();
+            //CreateTestFile();
+            TestFileUpload();
         }
 
         private static void TestFileUpload()
         {
-            ServiceReference1.FileStorageServiceClient TargetFileStorage = new ServiceReference1.FileStorageServiceClient();
-            MockFileStorage SourceFileStorage = new MockFileStorage(ConfigurationManager.AppSettings["fileToUploadPath"]);
-
-            TargetFileStorage.UploadFile(SourceFileStorage.GetFile(Guid.Empty));
-            TargetFileStorage.Close();
+            MockFileStorage LocalFileStorage = new MockFileStorage(ConfigurationManager.AppSettings["fileToUploadPath"]);
+            using (ServiceReference1.FileStorageServiceClient TargetFileStorageService = new ServiceReference1.FileStorageServiceClient())
+            {
+                using (var fileToUpload = new RemoteStream(LocalFileStorage.GetFile(Guid.Empty)))
+                {
+                    fileToUpload.ReadPart += (a, b, c) => { Console.WriteLine("Progress {0}", b); };
+                    TargetFileStorageService.UploadFile(fileToUpload);
+                }
+            }
+            Console.ReadKey();
         }
 
         private static void TestFileDownload()
         {
-            ServiceReference1.FileStorageServiceClient SourceFileStorage = new ServiceReference1.FileStorageServiceClient();
-            MockFileStorage TargetFileStorage = new MockFileStorage(ConfigurationManager.AppSettings["downloadResultFilePath"]);
+            ServiceReference1.FileStorageServiceClient SourceFileStorageService = new ServiceReference1.FileStorageServiceClient();
+            MockFileStorage LocalFileStorage = new MockFileStorage(ConfigurationManager.AppSettings["downloadResultFilePath"]);
 
-            TargetFileStorage.AddFile(SourceFileStorage.GetFile());
-            SourceFileStorage.Close();
-            SourceFileStorage.Close();
+            LocalFileStorage.AddFile(SourceFileStorageService.GetFile());
+            SourceFileStorageService.Close();
         }
 
         private static void CreateTestFile()
