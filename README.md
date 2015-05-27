@@ -18,5 +18,6 @@ I plan to use WCF for service and SQL Filestream for storage.
 
 ###Helpful links
 
+https://msdn.microsoft.com/en-us/library/ms733742%28v=vs.110%29.aspx
 http://www.codeproject.com/Articles/20364/Progress-Indication-while-Uploading-Downloading-Fi
 http://www.codeproject.com/Articles/112655/Progress-Streamed-File-download-and-Upload-with-Re
