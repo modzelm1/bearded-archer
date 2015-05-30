@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{D0E48AD8-714B-4E53-A580-928FA572E252}</ProjectGuid>
+    <ProjectGuid>{1BE106DA-2F1B-48DD-904B-B0E0C614EFD0}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>FileStorage.SharedKernel</RootNamespace>
-    <AssemblyName>FileStorage.SharedKernel</AssemblyName>
+    <RootNamespace>FileStorageRepository.FileStorageMock</RootNamespace>
+    <AssemblyName>FileStorageRepository.FileStorageMock</AssemblyName>
     <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -39,12 +39,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Entities\RemoteStreamEnvelope.cs" />
-    <Compile Include="StreamExtension\LongStream.cs" />
+    <Compile Include="MockFileStorage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="StreamExtension\ProgressStreamWrapper.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\FileStorage.Interface\FileStorageRepository.Interface.csproj">
+      <Project>{c6de4c0e-e6a4-42d2-9204-616a15835e6a}</Project>
+      <Name>FileStorageRepository.Interface</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

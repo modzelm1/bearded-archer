@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FileStorage.SharedKernel.Entities
+namespace WCFService.ServiceLibrary.Entities
 {
     public class RemoteStreamEnvelope
     {

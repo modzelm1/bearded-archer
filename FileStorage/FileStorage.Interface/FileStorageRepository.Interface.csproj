@@ -7,8 +7,8 @@
     <ProjectGuid>{C6DE4C0E-E6A4-42D2-9204-616A15835E6A}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>FileStorage.FileStorageInterface</RootNamespace>
-    <AssemblyName>FileStorage.FileStorageInterface</AssemblyName>
+    <RootNamespace>FileStorageRepository.Interface</RootNamespace>
+    <AssemblyName>FileStorageRepository.Interface</AssemblyName>
     <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

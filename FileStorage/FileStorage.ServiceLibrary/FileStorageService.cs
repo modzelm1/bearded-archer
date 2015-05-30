@@ -7,7 +7,7 @@ using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.Text;
 
-namespace FileStorage.ServiceLibrary
+namespace WCFService.ServiceLibrary
 {
     public class FileStorageService : IFileStorageService
     {

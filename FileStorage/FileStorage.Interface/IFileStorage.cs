@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FileStorage.FileStorageInterface
+namespace FileStorageRepository.Interface
 {
     public interface IFileStorage
     {

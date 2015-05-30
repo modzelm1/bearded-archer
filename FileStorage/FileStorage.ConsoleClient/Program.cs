@@ -1,10 +1,10 @@
-﻿using FileStorage.FileStorageMock;
-using FileStorage.SharedKernel.StreamExtension;
+﻿using FileStorageRepository.FileStorageMock;
+using SharedKernel.StreamExtension;
 using System;
 using System.Configuration;
 using System.IO;
 
-namespace FileStorage.ConsoleClient
+namespace Client.ConsoleClient
 {
     class Program
     {
@@ -18,7 +18,8 @@ namespace FileStorage.ConsoleClient
         private static void TestFileUpload()
         {
             MockFileStorage LocalFileStorage = new MockFileStorage(ConfigurationManager.AppSettings["fileToUploadPath"]);
-            using (ServiceReference1.FileStorageServiceClient TargetFileStorageService = new ServiceReference1.FileStorageServiceClient())
+            using (FileStorageServiceReference.FileStorageServiceClient TargetFileStorageService =
+                new FileStorageServiceReference.FileStorageServiceClient())
             {
                 using (var fileToUpload = new ProgressStreamWrapper(LocalFileStorage.GetFile(Guid.Empty)))
                 {
@@ -33,7 +34,8 @@ namespace FileStorage.ConsoleClient
         {
             MockFileStorage LocalFileStorage = new MockFileStorage(ConfigurationManager.AppSettings["downloadResultFilePath"]);
 
-            using (ServiceReference1.FileStorageServiceClient SourceFileStorageService = new ServiceReference1.FileStorageServiceClient())
+            using (FileStorageServiceReference.FileStorageServiceClient SourceFileStorageService =
+                new FileStorageServiceReference.FileStorageServiceClient())
             {
                 using (var downloadedFile = new ProgressStreamWrapper(SourceFileStorageService.GetFile()))
                 {

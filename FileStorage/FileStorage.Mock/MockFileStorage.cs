@@ -1,12 +1,8 @@
-﻿using FileStorage.FileStorageInterface;
+﻿using FileStorageRepository.Interface;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace FileStorage.FileStorageMock
+namespace FileStorageRepository.FileStorageMock
 {
     public class MockFileStorage : IFileStorage
     {
