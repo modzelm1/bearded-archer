@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace FileStorage.StreamCore
 {
-    public class RemoteStream : Stream
+    public class ProgressStreamWrapper : Stream
     {
         Stream baseStream;
 
-        public RemoteStream(Stream baseStream)
+        public ProgressStreamWrapper(Stream baseStream)
         {
             this.baseStream = baseStream;
         }
@@ -38,7 +38,13 @@ namespace FileStorage.StreamCore
 
         public override long Length
         {
-            get { return baseStream.Length; }
+            get 
+            {
+                if (baseStream.CanSeek)
+                    return baseStream.Length;
+                else
+                    return 0;
+            }
         }
 
         public override long Position
@@ -53,12 +59,12 @@ namespace FileStorage.StreamCore
             int bytesReaded = baseStream.Read(buffer, offset, count);
             totalBytesReaded += bytesReaded;
 
-            ReadPart(bytesReaded, totalBytesReaded, baseStream.Length);
+            ReportReadProgressEvent(bytesReaded, totalBytesReaded, this.Length);
 
             return bytesReaded;
         }
 
-        public event Action<long, long, long> ReadPart = (a, b, c) => { };
+        public event Action<long, long, long> ReportReadProgressEvent = (a, b, c) => { };
 
         public override long Seek(long offset, SeekOrigin origin)
         {

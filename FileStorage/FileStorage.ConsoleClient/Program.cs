@@ -14,8 +14,9 @@ namespace FileStorage.ConsoleClient
     {
         static void Main(string[] args)
         {
-            //CreateTestFile();
-            TestFileUpload();
+            CreateTestFile();
+            //TestFileUpload();
+            //TestFileDownload();
         }
 
         private static void TestFileUpload()
@@ -23,9 +24,9 @@ namespace FileStorage.ConsoleClient
             MockFileStorage LocalFileStorage = new MockFileStorage(ConfigurationManager.AppSettings["fileToUploadPath"]);
             using (ServiceReference1.FileStorageServiceClient TargetFileStorageService = new ServiceReference1.FileStorageServiceClient())
             {
-                using (var fileToUpload = new RemoteStream(LocalFileStorage.GetFile(Guid.Empty)))
+                using (var fileToUpload = new ProgressStreamWrapper(LocalFileStorage.GetFile(Guid.Empty)))
                 {
-                    fileToUpload.ReadPart += (a, b, c) => { Console.WriteLine("Progress {0}", b); };
+                    fileToUpload.ReportReadProgressEvent += (a, b, c) => { Console.WriteLine("Progress {0}", b); };
                     TargetFileStorageService.UploadFile(fileToUpload);
                 }
             }
@@ -34,11 +35,17 @@ namespace FileStorage.ConsoleClient
 
         private static void TestFileDownload()
         {
-            ServiceReference1.FileStorageServiceClient SourceFileStorageService = new ServiceReference1.FileStorageServiceClient();
             MockFileStorage LocalFileStorage = new MockFileStorage(ConfigurationManager.AppSettings["downloadResultFilePath"]);
 
-            LocalFileStorage.AddFile(SourceFileStorageService.GetFile());
-            SourceFileStorageService.Close();
+            using (ServiceReference1.FileStorageServiceClient SourceFileStorageService = new ServiceReference1.FileStorageServiceClient())
+            {
+                using (var downloadedFile = new ProgressStreamWrapper(SourceFileStorageService.GetFile()))
+                {
+                    downloadedFile.ReportReadProgressEvent += (a, b, c) => { Console.WriteLine("Progress {0}", b); };
+                    LocalFileStorage.AddFile(downloadedFile);
+                }
+            }
+            Console.ReadKey();
         }
 
         private static void CreateTestFile()
