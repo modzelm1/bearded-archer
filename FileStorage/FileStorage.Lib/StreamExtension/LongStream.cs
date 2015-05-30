@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FileStorage.StreamCore
+namespace FileStorage.SharedKernel.StreamExtension
 {
     public class LongStream : Stream
     {

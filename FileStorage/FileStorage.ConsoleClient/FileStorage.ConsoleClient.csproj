@@ -68,9 +68,9 @@
       <Project>{c6de4c0e-e6a4-42d2-9204-616a15835e6a}</Project>
       <Name>FileStorage.FileStorageInterface</Name>
     </ProjectReference>
-    <ProjectReference Include="..\FileStorage.Lib\FileStorage.StreamCore.csproj">
+    <ProjectReference Include="..\FileStorage.Lib\FileStorage.SharedKernel.csproj">
       <Project>{d0e48ad8-714b-4e53-a580-928fa572e252}</Project>
-      <Name>FileStorage.StreamCore</Name>
+      <Name>FileStorage.SharedKernel</Name>
     </ProjectReference>
     <ProjectReference Include="..\FileStorage.Mock\FileStorage.FileStorageMock.csproj">
       <Project>{1be106da-2f1b-48dd-904b-b0e0c614efd0}</Project>

@@ -12,14 +12,21 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileStorage.ConsoleClient",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileStorage.FileStorageMock", "FileStorage.Mock\FileStorage.FileStorageMock.csproj", "{1BE106DA-2F1B-48DD-904B-B0E0C614EFD0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileStorage.StreamCore", "FileStorage.Lib\FileStorage.StreamCore.csproj", "{D0E48AD8-714B-4E53-A580-928FA572E252}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{F5C09092-CEE9-4F91-BF2D-7C15BB681B1F}"
-	ProjectSection(SolutionItems) = preProject
-		Performance1.psess = Performance1.psess
-	EndProjectSection
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileStorage.SharedKernel", "FileStorage.Lib\FileStorage.SharedKernel.csproj", "{D0E48AD8-714B-4E53-A580-928FA572E252}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileStorage.ServiceLibrary", "FileStorage.ServiceLibrary\FileStorage.ServiceLibrary.csproj", "{96163181-E0D0-4196-B376-E9587C5FE2F7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WCFService", "WCFService", "{85F710E6-3E3A-43DE-985C-7F1460542BC1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SharedKernel", "SharedKernel", "{FD1334BA-1B11-49EC-832F-469D9D69E158}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Client", "Client", "{BF60B0EE-B680-4C9A-BD2B-25E5F46BCD6C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Entities", "Entities", "{0A9773F9-1481-40BD-858F-B370D52B93FD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "StreamExtension", "StreamExtension", "{3876FD56-D5C4-4AC2-8526-764120F5E6E9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "FileStorageRepository", "FileStorageRepository", "{1D0F6CB7-3FDC-4291-B4E8-2E018D17B3CD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -50,6 +57,10 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{0A9773F9-1481-40BD-858F-B370D52B93FD} = {85F710E6-3E3A-43DE-985C-7F1460542BC1}
+		{3876FD56-D5C4-4AC2-8526-764120F5E6E9} = {FD1334BA-1B11-49EC-832F-469D9D69E158}
 	EndGlobalSection
 	GlobalSection(Performance) = preSolution
 		HasPerformanceSessions = true
