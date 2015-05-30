@@ -3,19 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileStorageRepository.Interface", "FileStorage.Interface\FileStorageRepository.Interface.csproj", "{C6DE4C0E-E6A4-42D2-9204-616A15835E6A}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Client.ConsoleClient", "FileStorage.ConsoleClient\Client.ConsoleClient.csproj", "{6339ABE1-9539-4AC2-8094-F62DDEE5F308}"
-	ProjectSection(ProjectDependencies) = postProject
-		{96163181-E0D0-4196-B376-E9587C5FE2F7} = {96163181-E0D0-4196-B376-E9587C5FE2F7}
-	EndProjectSection
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileStorageRepository.FileStorageMock", "FileStorage.Mock\FileStorageRepository.FileStorageMock.csproj", "{1BE106DA-2F1B-48DD-904B-B0E0C614EFD0}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharedKernel.StreamExtension", "FileStorage.Lib\SharedKernel.StreamExtension.csproj", "{D0E48AD8-714B-4E53-A580-928FA572E252}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WCFService.ServiceLibrary", "FileStorage.ServiceLibrary\WCFService.ServiceLibrary.csproj", "{96163181-E0D0-4196-B376-E9587C5FE2F7}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WCFService", "WCFService", "{85F710E6-3E3A-43DE-985C-7F1460542BC1}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SharedKernel", "SharedKernel", "{FD1334BA-1B11-49EC-832F-469D9D69E158}"
@@ -23,6 +10,16 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Client", "Client", "{BF60B0EE-B680-4C9A-BD2B-25E5F46BCD6C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "FileStorageRepository", "FileStorageRepository", "{59AE1A6A-A111-4CB7-9EFF-60D36357E609}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileStorageRepository.Interface", "FileStorageRepository.Interface\FileStorageRepository.Interface.csproj", "{C6DE4C0E-E6A4-42D2-9204-616A15835E6A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileStorageRepository.FileStorageMock", "FileStorageRepository.FileStorageMock\FileStorageRepository.FileStorageMock.csproj", "{1BE106DA-2F1B-48DD-904B-B0E0C614EFD0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Client.ConsoleClient", "Client.ConsoleClient\Client.ConsoleClient.csproj", "{6339ABE1-9539-4AC2-8094-F62DDEE5F308}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharedKernel.StreamExtension", "SharedKernel.StreamExtension\SharedKernel.StreamExtension.csproj", "{D0E48AD8-714B-4E53-A580-928FA572E252}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WCFService.ServiceLibrary", "WCFService.ServiceLibrary\WCFService.ServiceLibrary.csproj", "{96163181-E0D0-4196-B376-E9587C5FE2F7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -34,14 +31,14 @@ Global
 		{C6DE4C0E-E6A4-42D2-9204-616A15835E6A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C6DE4C0E-E6A4-42D2-9204-616A15835E6A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C6DE4C0E-E6A4-42D2-9204-616A15835E6A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6339ABE1-9539-4AC2-8094-F62DDEE5F308}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6339ABE1-9539-4AC2-8094-F62DDEE5F308}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6339ABE1-9539-4AC2-8094-F62DDEE5F308}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6339ABE1-9539-4AC2-8094-F62DDEE5F308}.Release|Any CPU.Build.0 = Release|Any CPU
 		{1BE106DA-2F1B-48DD-904B-B0E0C614EFD0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{1BE106DA-2F1B-48DD-904B-B0E0C614EFD0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1BE106DA-2F1B-48DD-904B-B0E0C614EFD0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1BE106DA-2F1B-48DD-904B-B0E0C614EFD0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6339ABE1-9539-4AC2-8094-F62DDEE5F308}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6339ABE1-9539-4AC2-8094-F62DDEE5F308}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6339ABE1-9539-4AC2-8094-F62DDEE5F308}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6339ABE1-9539-4AC2-8094-F62DDEE5F308}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D0E48AD8-714B-4E53-A580-928FA572E252}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{D0E48AD8-714B-4E53-A580-928FA572E252}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D0E48AD8-714B-4E53-A580-928FA572E252}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -56,8 +53,8 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{C6DE4C0E-E6A4-42D2-9204-616A15835E6A} = {59AE1A6A-A111-4CB7-9EFF-60D36357E609}
-		{6339ABE1-9539-4AC2-8094-F62DDEE5F308} = {BF60B0EE-B680-4C9A-BD2B-25E5F46BCD6C}
 		{1BE106DA-2F1B-48DD-904B-B0E0C614EFD0} = {59AE1A6A-A111-4CB7-9EFF-60D36357E609}
+		{6339ABE1-9539-4AC2-8094-F62DDEE5F308} = {BF60B0EE-B680-4C9A-BD2B-25E5F46BCD6C}
 		{D0E48AD8-714B-4E53-A580-928FA572E252} = {FD1334BA-1B11-49EC-832F-469D9D69E158}
 		{96163181-E0D0-4196-B376-E9587C5FE2F7} = {85F710E6-3E3A-43DE-985C-7F1460542BC1}
 	EndGlobalSection

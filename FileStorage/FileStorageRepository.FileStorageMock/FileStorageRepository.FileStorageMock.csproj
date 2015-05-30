@@ -43,7 +43,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\FileStorage.Interface\FileStorageRepository.Interface.csproj">
+    <ProjectReference Include="..\FileStorageRepository.Interface\FileStorageRepository.Interface.csproj">
       <Project>{c6de4c0e-e6a4-42d2-9204-616a15835e6a}</Project>
       <Name>FileStorageRepository.Interface</Name>
     </ProjectReference>

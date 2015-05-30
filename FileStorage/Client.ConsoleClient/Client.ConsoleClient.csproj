@@ -64,20 +64,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\FileStorage.Interface\FileStorageRepository.Interface.csproj">
-      <Project>{c6de4c0e-e6a4-42d2-9204-616a15835e6a}</Project>
-      <Name>FileStorageRepository.Interface</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\FileStorage.Lib\SharedKernel.StreamExtension.csproj">
-      <Project>{d0e48ad8-714b-4e53-a580-928fa572e252}</Project>
-      <Name>SharedKernel.StreamExtension</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\FileStorage.Mock\FileStorageRepository.FileStorageMock.csproj">
-      <Project>{1be106da-2f1b-48dd-904b-b0e0c614efd0}</Project>
-      <Name>FileStorageRepository.FileStorageMock</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
@@ -94,6 +80,20 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\FileStorageRepository.FileStorageMock\FileStorageRepository.FileStorageMock.csproj">
+      <Project>{1be106da-2f1b-48dd-904b-b0e0c614efd0}</Project>
+      <Name>FileStorageRepository.FileStorageMock</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FileStorageRepository.Interface\FileStorageRepository.Interface.csproj">
+      <Project>{c6de4c0e-e6a4-42d2-9204-616a15835e6a}</Project>
+      <Name>FileStorageRepository.Interface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SharedKernel.StreamExtension\SharedKernel.StreamExtension.csproj">
+      <Project>{d0e48ad8-714b-4e53-a580-928fa572e252}</Project>
+      <Name>SharedKernel.StreamExtension</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
