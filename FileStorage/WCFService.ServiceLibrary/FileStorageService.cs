@@ -6,12 +6,13 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.Text;
+using WCFService.ServiceLibrary.Entities;
 
 namespace WCFService.ServiceLibrary
 {
     public class FileStorageService : IFileStorageService
     {
-        public void UploadFile(System.IO.Stream fileData)
+        public void UploadFile(Stream fileData)
         {
             using (FileStream fs = new FileStream(ConfigurationManager.AppSettings["uploadResultFilePath"], 
                 FileMode.OpenOrCreate, 
@@ -22,9 +23,20 @@ namespace WCFService.ServiceLibrary
             fileData.Close();
         }
 
-        public System.IO.Stream GetFile()
+        public Stream GetFile()
         {
             return File.OpenRead(ConfigurationManager.AppSettings["fileToDownloadPath"]);
+        }
+
+
+        public void UploadFile(RemoteStreamEnvelope fileData)
+        {
+            throw new NotImplementedException();
+        }
+
+        public RemoteStreamEnvelope GetFile(Guid fileId)
+        {
+            throw new NotImplementedException();
         }
     }
 }
