@@ -29,12 +29,12 @@ namespace WCFService.ServiceLibrary
         }
 
 
-        public void UploadFile(RemoteStreamEnvelope fileData)
+        public void UploadFileEnvelope(RemoteStreamEnvelope fileData)
         {
             throw new NotImplementedException();
         }
 
-        public RemoteStreamEnvelope GetFile(Guid fileId)
+        public RemoteStreamEnvelope GetFileEnvelope(Guid fileId)
         {
             throw new NotImplementedException();
         }

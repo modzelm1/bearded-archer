@@ -9,7 +9,86 @@
 //------------------------------------------------------------------------------
 
 namespace Client.ConsoleClient.FileStorageServiceReference {
+    using System.Runtime.Serialization;
+    using System;
     
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="RemoteStreamEnvelope", Namespace="http://schemas.datacontract.org/2004/07/WCFService.ServiceLibrary.Entities")]
+    [System.SerializableAttribute()]
+    public partial class RemoteStreamEnvelope : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.IO.Stream FileDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Guid FileIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private long StreamLengthField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.IO.Stream FileData {
+            get {
+                return this.FileDataField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.FileDataField, value) != true)) {
+                    this.FileDataField = value;
+                    this.RaisePropertyChanged("FileData");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid FileId {
+            get {
+                return this.FileIdField;
+            }
+            set {
+                if ((this.FileIdField.Equals(value) != true)) {
+                    this.FileIdField = value;
+                    this.RaisePropertyChanged("FileId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long StreamLength {
+            get {
+                return this.StreamLengthField;
+            }
+            set {
+                if ((this.StreamLengthField.Equals(value) != true)) {
+                    this.StreamLengthField = value;
+                    this.RaisePropertyChanged("StreamLength");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="FileStorageServiceReference.IFileStorageService")]
@@ -26,6 +105,18 @@ namespace Client.ConsoleClient.FileStorageServiceReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFileStorageService/GetFile", ReplyAction="http://tempuri.org/IFileStorageService/GetFileResponse")]
         System.Threading.Tasks.Task<System.IO.Stream> GetFileAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFileStorageService/UploadFileEnvelope", ReplyAction="http://tempuri.org/IFileStorageService/UploadFileEnvelopeResponse")]
+        void UploadFileEnvelope(Client.ConsoleClient.FileStorageServiceReference.RemoteStreamEnvelope fileData);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFileStorageService/UploadFileEnvelope", ReplyAction="http://tempuri.org/IFileStorageService/UploadFileEnvelopeResponse")]
+        System.Threading.Tasks.Task UploadFileEnvelopeAsync(Client.ConsoleClient.FileStorageServiceReference.RemoteStreamEnvelope fileData);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFileStorageService/GetFileEnvelope", ReplyAction="http://tempuri.org/IFileStorageService/GetFileEnvelopeResponse")]
+        Client.ConsoleClient.FileStorageServiceReference.RemoteStreamEnvelope GetFileEnvelope(System.Guid fileId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFileStorageService/GetFileEnvelope", ReplyAction="http://tempuri.org/IFileStorageService/GetFileEnvelopeResponse")]
+        System.Threading.Tasks.Task<Client.ConsoleClient.FileStorageServiceReference.RemoteStreamEnvelope> GetFileEnvelopeAsync(System.Guid fileId);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -69,6 +160,22 @@ namespace Client.ConsoleClient.FileStorageServiceReference {
         
         public System.Threading.Tasks.Task<System.IO.Stream> GetFileAsync() {
             return base.Channel.GetFileAsync();
+        }
+        
+        public void UploadFileEnvelope(Client.ConsoleClient.FileStorageServiceReference.RemoteStreamEnvelope fileData) {
+            base.Channel.UploadFileEnvelope(fileData);
+        }
+        
+        public System.Threading.Tasks.Task UploadFileEnvelopeAsync(Client.ConsoleClient.FileStorageServiceReference.RemoteStreamEnvelope fileData) {
+            return base.Channel.UploadFileEnvelopeAsync(fileData);
+        }
+        
+        public Client.ConsoleClient.FileStorageServiceReference.RemoteStreamEnvelope GetFileEnvelope(System.Guid fileId) {
+            return base.Channel.GetFileEnvelope(fileId);
+        }
+        
+        public System.Threading.Tasks.Task<Client.ConsoleClient.FileStorageServiceReference.RemoteStreamEnvelope> GetFileEnvelopeAsync(System.Guid fileId) {
+            return base.Channel.GetFileEnvelopeAsync(fileId);
         }
     }
 }

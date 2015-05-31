@@ -19,9 +19,9 @@ namespace WCFService.ServiceLibrary
         Stream GetFile();
 
         [OperationContract]
-        void UploadFile(RemoteStreamEnvelope fileData);
+        void UploadFileEnvelope(RemoteStreamEnvelope fileData);
 
         [OperationContract]
-        RemoteStreamEnvelope GetFile(Guid fileId);
+        RemoteStreamEnvelope GetFileEnvelope(Guid fileId);
     }
 }
