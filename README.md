@@ -23,6 +23,9 @@ http://www.codeproject.com/Articles/20364/Progress-Indication-while-Uploading-Do
 
 http://www.codeproject.com/Articles/112655/Progress-Streamed-File-download-and-Upload-with-Re
 
+http://www.codeproject.com/Articles/166763/WCF-Streaming-Upload-Download-Files-Over-HTTP
+
+http://stackoverflow.com/questions/14479885/wcf-streaming-large-data-500mb-1gb-on-a-self-hosted-service
 
 ###File storage service
 File storage service is located in FileStorage.ServiceLibrary project. For current testing purpose it iis hosted in Visual Studio thanks to "start wcf service host when debugging another project" option.
