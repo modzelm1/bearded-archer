@@ -10,7 +10,7 @@ namespace Client.ConsoleClient
     {
         static void Main(string[] args)
         {
-            CreateTestFile();
+            GenerateTestFile();
             //TestFileUpload();
             //TestFileDownload();
         }
@@ -46,7 +46,7 @@ namespace Client.ConsoleClient
             Console.ReadKey();
         }
 
-        private static void CreateTestFile()
+        private static void GenerateTestFile()
         {
             int buffSize = 512;
             byte[] buff = new byte[buffSize];

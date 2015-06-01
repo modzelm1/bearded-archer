@@ -16,6 +16,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileStorageRepository.FileStorageMock", "FileStorageRepository.FileStorageMock\FileStorageRepository.FileStorageMock.csproj", "{1BE106DA-2F1B-48DD-904B-B0E0C614EFD0}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Client.ConsoleClient", "Client.ConsoleClient\Client.ConsoleClient.csproj", "{6339ABE1-9539-4AC2-8094-F62DDEE5F308}"
+	ProjectSection(ProjectDependencies) = postProject
+		{96163181-E0D0-4196-B376-E9587C5FE2F7} = {96163181-E0D0-4196-B376-E9587C5FE2F7}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharedKernel.StreamExtension", "SharedKernel.StreamExtension\SharedKernel.StreamExtension.csproj", "{D0E48AD8-714B-4E53-A580-928FA572E252}"
 EndProject

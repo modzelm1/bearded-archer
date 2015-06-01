@@ -15,7 +15,7 @@ namespace Client.ConsoleClient.FileStorageServiceReference {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="RemoteStreamEnvelope", Namespace="http://schemas.datacontract.org/2004/07/WCFService.ServiceLibrary.Entities")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="RemoteStreamEnvelope", Namespace="http://schemas.datacontract.org/2004/07/WCFService.ServiceLibrary")]
     [System.SerializableAttribute()]
     public partial class RemoteStreamEnvelope : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -27,6 +27,9 @@ namespace Client.ConsoleClient.FileStorageServiceReference {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private System.Guid FileIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int MyPropertyField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private long StreamLengthField;
@@ -63,6 +66,19 @@ namespace Client.ConsoleClient.FileStorageServiceReference {
                 if ((this.FileIdField.Equals(value) != true)) {
                     this.FileIdField = value;
                     this.RaisePropertyChanged("FileId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int MyProperty {
+            get {
+                return this.MyPropertyField;
+            }
+            set {
+                if ((this.MyPropertyField.Equals(value) != true)) {
+                    this.MyPropertyField = value;
+                    this.RaisePropertyChanged("MyProperty");
                 }
             }
         }
