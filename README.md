@@ -27,6 +27,12 @@ http://www.codeproject.com/Articles/166763/WCF-Streaming-Upload-Download-Files-O
 
 http://stackoverflow.com/questions/14479885/wcf-streaming-large-data-500mb-1gb-on-a-self-hosted-service
 
+
+https://msdn.microsoft.com/en-us/library/ms730167.aspx
+
+http://stackoverflow.com/questions/10561061/progress-update-while-wcf-is-executed
+
+
 ###File storage service
 File storage service is located in FileStorage.ServiceLibrary project. For current testing purpose it iis hosted in Visual Studio thanks to "start wcf service host when debugging another project" option.
 
