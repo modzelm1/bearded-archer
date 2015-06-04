@@ -11,10 +11,21 @@ namespace Client.ConsoleClient
     {
         static void Main(string[] args)
         {
-            //GenerateTestFile();
-            //TestFileUpload();
+            Console.WriteLine("Start!");
+
+            Console.WriteLine("Create file to upload ...");
+            GenerateTestFile();
+
+            Console.WriteLine("Upload file stream ...");
+            TestFileUpload();
+
             //TestFileDownload();
+
+            Console.WriteLine("Upload message with file stream ...");
             TestUploadFileObject();
+
+            Console.WriteLine("End!");
+            Console.ReadKey();
         }
 
         private static void TestUploadFileObject()
@@ -24,14 +35,7 @@ namespace Client.ConsoleClient
                 new FileStorageServiceReference.FileStorageServiceClient();
             var streamToUpload = new ProgressStreamWrapper(LocalFileStorage.GetFile(Guid.Empty));
             streamToUpload.ReportReadProgressEvent += (a, b, c) => { Console.WriteLine("Progress {0}", b); };
-            //var fileToUpload = new Client.ConsoleClient.FileStorageServiceReference.UploadStreamMessage
-            //{
-            //    FileId = Guid.NewGuid(),
-            //    StreamLength = streamToUpload.Length,
-            //    FileData = streamToUpload
-            //};
             TargetFileStorageService.UploadFileEnvelope(streamToUpload.Length.ToString(), streamToUpload);
-            Console.ReadKey();
         }
 
         private static void TestFileUpload()
@@ -46,7 +50,6 @@ namespace Client.ConsoleClient
                     TargetFileStorageService.UploadFile(fileToUpload);
                 }
             }
-            Console.ReadKey();
         }
 
         private static void TestFileDownload()
@@ -62,7 +65,6 @@ namespace Client.ConsoleClient
                     LocalFileStorage.AddFile(downloadedFile);
                 }
             }
-            Console.ReadKey();
         }
 
         private static void GenerateTestFile()
@@ -72,17 +74,14 @@ namespace Client.ConsoleClient
             int count = 0;
             long totalSize = 0;
             using (var source = new LongStream())
-            using (var target = File.Create(@"C:\TestStorage\Client\fileToUpload.txt"))
+            using (var target = File.Create(ConfigurationManager.AppSettings["fileToUploadPath"]))
             {
                 while ((count = source.Read(buff, 0, buffSize)) != 0)
                 {
                     target.Write(buff, 0, count);
-                    Console.WriteLine("Readed bytes: {0}", (totalSize += count));
+                    Console.WriteLine("Writed bytes: {0}", (totalSize += count));
                 }
-                //target.CopyTo(source);
             }
-            Console.WriteLine("End!");
-            Console.ReadKey();
         }
     }
 }

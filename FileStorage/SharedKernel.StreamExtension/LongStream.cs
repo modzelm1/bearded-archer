@@ -41,7 +41,7 @@ namespace SharedKernel.StreamExtension
         }
 
         //1GB stream
-        int streamLength = 1024 * 1024;// * 1024;
+        int streamLength = 1024 * 1024 * 1024;// * 1024;
         
         public override int Read(byte[] buffer, int offset, int count)
         {
