@@ -12,7 +12,9 @@ namespace WCFService.ServiceLibrary
     public class UploadStreamMessage
     {
         [MessageHeader]
-        public string appRef;
+        public long streamLength;
+        [MessageHeader]
+        public string streamName;
         [MessageBodyMember]
         public Stream data;
     } 

@@ -42,7 +42,10 @@ namespace Client.ConsoleClient.FileStorageServiceReference {
     public partial class UploadStreamMessage {
         
         [System.ServiceModel.MessageHeaderAttribute(Namespace="http://tempuri.org/")]
-        public string appRef;
+        public long streamLength;
+        
+        [System.ServiceModel.MessageHeaderAttribute(Namespace="http://tempuri.org/")]
+        public string streamName;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=0)]
         public System.IO.Stream data;
@@ -50,8 +53,9 @@ namespace Client.ConsoleClient.FileStorageServiceReference {
         public UploadStreamMessage() {
         }
         
-        public UploadStreamMessage(string appRef, System.IO.Stream data) {
-            this.appRef = appRef;
+        public UploadStreamMessage(long streamLength, string streamName, System.IO.Stream data) {
+            this.streamLength = streamLength;
+            this.streamName = streamName;
             this.data = data;
         }
     }
@@ -114,9 +118,10 @@ namespace Client.ConsoleClient.FileStorageServiceReference {
             return base.Channel.UploadFileEnvelope(request);
         }
         
-        public void UploadFileEnvelope(string appRef, System.IO.Stream data) {
+        public void UploadFileEnvelope(long streamLength, string streamName, System.IO.Stream data) {
             Client.ConsoleClient.FileStorageServiceReference.UploadStreamMessage inValue = new Client.ConsoleClient.FileStorageServiceReference.UploadStreamMessage();
-            inValue.appRef = appRef;
+            inValue.streamLength = streamLength;
+            inValue.streamName = streamName;
             inValue.data = data;
             Client.ConsoleClient.FileStorageServiceReference.UploadFileEnvelopeResponse retVal = ((Client.ConsoleClient.FileStorageServiceReference.IFileStorageService)(this)).UploadFileEnvelope(inValue);
         }
@@ -126,9 +131,10 @@ namespace Client.ConsoleClient.FileStorageServiceReference {
             return base.Channel.UploadFileEnvelopeAsync(request);
         }
         
-        public System.Threading.Tasks.Task<Client.ConsoleClient.FileStorageServiceReference.UploadFileEnvelopeResponse> UploadFileEnvelopeAsync(string appRef, System.IO.Stream data) {
+        public System.Threading.Tasks.Task<Client.ConsoleClient.FileStorageServiceReference.UploadFileEnvelopeResponse> UploadFileEnvelopeAsync(long streamLength, string streamName, System.IO.Stream data) {
             Client.ConsoleClient.FileStorageServiceReference.UploadStreamMessage inValue = new Client.ConsoleClient.FileStorageServiceReference.UploadStreamMessage();
-            inValue.appRef = appRef;
+            inValue.streamLength = streamLength;
+            inValue.streamName = streamName;
             inValue.data = data;
             return ((Client.ConsoleClient.FileStorageServiceReference.IFileStorageService)(this)).UploadFileEnvelopeAsync(inValue);
         }

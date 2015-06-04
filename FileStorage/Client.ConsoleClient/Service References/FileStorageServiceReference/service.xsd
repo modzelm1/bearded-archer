@@ -32,5 +32,6 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="appRef" nillable="true" type="xs:string" />
+  <xs:element name="streamLength" type="xs:long" />
+  <xs:element name="streamName" nillable="true" type="xs:string" />
 </xs:schema>

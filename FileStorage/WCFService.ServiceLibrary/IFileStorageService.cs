@@ -15,7 +15,7 @@ namespace WCFService.ServiceLibrary
         void UploadFile(Stream fileData);
 
         [OperationContract]
-        Stream GetFile();
+        Stream GetFile(Guid fileId);
 
         [OperationContract]
         void UploadFileEnvelope(UploadStreamMessage fileData);

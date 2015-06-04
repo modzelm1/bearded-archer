@@ -23,7 +23,8 @@
     <wsdl:part name="parameters" element="tns:UploadStreamMessage" />
   </wsdl:message>
   <wsdl:message name="UploadStreamMessage_Headers">
-    <wsdl:part name="appRef" element="tns:appRef" />
+    <wsdl:part name="streamLength" element="tns:streamLength" />
+    <wsdl:part name="streamName" element="tns:streamName" />
   </wsdl:message>
   <wsdl:message name="IFileStorageService_UploadFileEnvelope_OutputMessage" />
   <wsdl:portType name="IFileStorageService">
@@ -63,7 +64,8 @@
     <wsdl:operation name="UploadFileEnvelope">
       <soap:operation soapAction="http://tempuri.org/IFileStorageService/UploadFileEnvelope" style="document" />
       <wsdl:input name="UploadStreamMessage">
-        <soap:header message="tns:UploadStreamMessage_Headers" part="appRef" use="literal" />
+        <soap:header message="tns:UploadStreamMessage_Headers" part="streamLength" use="literal" />
+        <soap:header message="tns:UploadStreamMessage_Headers" part="streamName" use="literal" />
         <soap:body use="literal" />
       </wsdl:input>
       <wsdl:output>

@@ -24,10 +24,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharedKernel.StreamExtensio
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WCFService.ServiceLibrary", "WCFService.ServiceLibrary\WCFService.ServiceLibrary.csproj", "{96163181-E0D0-4196-B376-E9587C5FE2F7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WCFService.CallbackServiceLibrary", "WCFService.CallbackServiceLibrary\WCFService.CallbackServiceLibrary.csproj", "{8976848A-4E8E-4CC3-9E8B-ABEA7C443C60}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharedKernel.CallbackInterface", "SharedKernel.CallbackInterface\SharedKernel.CallbackInterface.csproj", "{EE791A1A-C58E-4608-8C1D-910BBCAB1BB6}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -54,14 +50,6 @@ Global
 		{96163181-E0D0-4196-B376-E9587C5FE2F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{96163181-E0D0-4196-B376-E9587C5FE2F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{96163181-E0D0-4196-B376-E9587C5FE2F7}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8976848A-4E8E-4CC3-9E8B-ABEA7C443C60}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8976848A-4E8E-4CC3-9E8B-ABEA7C443C60}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8976848A-4E8E-4CC3-9E8B-ABEA7C443C60}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8976848A-4E8E-4CC3-9E8B-ABEA7C443C60}.Release|Any CPU.Build.0 = Release|Any CPU
-		{EE791A1A-C58E-4608-8C1D-910BBCAB1BB6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EE791A1A-C58E-4608-8C1D-910BBCAB1BB6}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EE791A1A-C58E-4608-8C1D-910BBCAB1BB6}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EE791A1A-C58E-4608-8C1D-910BBCAB1BB6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -72,8 +60,6 @@ Global
 		{6339ABE1-9539-4AC2-8094-F62DDEE5F308} = {BF60B0EE-B680-4C9A-BD2B-25E5F46BCD6C}
 		{D0E48AD8-714B-4E53-A580-928FA572E252} = {FD1334BA-1B11-49EC-832F-469D9D69E158}
 		{96163181-E0D0-4196-B376-E9587C5FE2F7} = {85F710E6-3E3A-43DE-985C-7F1460542BC1}
-		{8976848A-4E8E-4CC3-9E8B-ABEA7C443C60} = {85F710E6-3E3A-43DE-985C-7F1460542BC1}
-		{EE791A1A-C58E-4608-8C1D-910BBCAB1BB6} = {FD1334BA-1B11-49EC-832F-469D9D69E158}
 	EndGlobalSection
 	GlobalSection(Performance) = preSolution
 		HasPerformanceSessions = true

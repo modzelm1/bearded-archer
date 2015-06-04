@@ -22,7 +22,7 @@ namespace WCFService.ServiceLibrary
             fileData.Close();
         }
 
-        public Stream GetFile()
+        public Stream GetFile(Guid fileId)
         {
             return File.OpenRead(ConfigurationManager.AppSettings["fileToDownloadPath"]);
         }

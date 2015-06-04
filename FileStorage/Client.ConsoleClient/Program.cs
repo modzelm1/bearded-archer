@@ -13,29 +13,35 @@ namespace Client.ConsoleClient
         {
             Console.WriteLine("Start!");
 
-            Console.WriteLine("Create file to upload ...");
-            GenerateTestFile();
+            //Console.WriteLine("Create file to upload ...");
+            //GenerateTestFile();
 
-            Console.WriteLine("Upload file stream ...");
-            TestFileUpload();
+            //Console.WriteLine("Upload file stream ...");
+            //TestFileUpload();
 
+            //Console.WriteLine("Download file stream ...");
             //TestFileDownload();
 
             Console.WriteLine("Upload message with file stream ...");
-            TestUploadFileObject();
+            TestUploadFileWithMetadata();
 
             Console.WriteLine("End!");
             Console.ReadKey();
         }
 
-        private static void TestUploadFileObject()
+        private static void TestUploadWithCallbackTest()
+        {
+
+        }
+
+        private static void TestUploadFileWithMetadata()
         {
             MockFileStorage LocalFileStorage = new MockFileStorage(ConfigurationManager.AppSettings["fileToUploadPath"]);
             FileStorageServiceReference.FileStorageServiceClient TargetFileStorageService =
                 new FileStorageServiceReference.FileStorageServiceClient();
             var streamToUpload = new ProgressStreamWrapper(LocalFileStorage.GetFile(Guid.Empty));
-            streamToUpload.ReportReadProgressEvent += (a, b, c) => { Console.WriteLine("Progress {0}", b); };
-            TargetFileStorageService.UploadFileEnvelope(streamToUpload.Length.ToString(), streamToUpload);
+            streamToUpload.ReportReadProgressEvent += (a, b, c) => { Console.WriteLine("Progress: {0}", b); };
+            TargetFileStorageService.UploadFileEnvelope(streamToUpload.Length, "TestFileName.txt", streamToUpload);
         }
 
         private static void TestFileUpload()
@@ -61,7 +67,7 @@ namespace Client.ConsoleClient
             {
                 using (var downloadedFile = new ProgressStreamWrapper(SourceFileStorageService.GetFile()))
                 {
-                    downloadedFile.ReportReadProgressEvent += (a, b, c) => { Console.WriteLine("Progress {0}", b); };
+                    downloadedFile.ReportReadProgressEvent += (a, b, c) => { Console.WriteLine("Progress: {0}", b); };
                     LocalFileStorage.AddFile(downloadedFile);
                 }
             }
