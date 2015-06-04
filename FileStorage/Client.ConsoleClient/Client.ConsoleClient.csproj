@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Callback.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service References\FileStorageServiceReference\Reference.cs">
@@ -55,7 +56,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="Service References\FileStorageServiceReference\Client.ConsoleClient.FileStorageServiceReference.RemoteStreamEnvelope.datasource">
+    <None Include="Properties\DataSources\WCFService.ServiceLibrary.FileDataEnvelope.datasource" />
+    <None Include="Service References\FileStorageServiceReference\Client.ConsoleClient.FileStorageServiceReference.UploadFileEnvelopeResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\FileStorageServiceReference\Message.xsd">
@@ -66,15 +68,6 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\FileStorageServiceReference\service1.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\FileStorageServiceReference\System.IO.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\FileStorageServiceReference\System.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\FileStorageServiceReference\WCFService.ServiceLibrary.xsd">
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>

@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace SharedKernel.StreamExtension
 {
+    [Serializable]
     public class ProgressStreamWrapper : Stream
     {
         Stream baseStream;
@@ -68,17 +69,17 @@ namespace SharedKernel.StreamExtension
 
         public override long Seek(long offset, SeekOrigin origin)
         {
-            throw new NotImplementedException();
+            return baseStream.Seek(offset, origin);
         }
 
         public override void SetLength(long value)
         {
-            throw new NotImplementedException();
+            baseStream.SetLength(value);
         }
 
         public override void Write(byte[] buffer, int offset, int count)
         {
-            throw new NotImplementedException();
+            baseStream.Write(buffer, offset, count);
         }
     }
 }

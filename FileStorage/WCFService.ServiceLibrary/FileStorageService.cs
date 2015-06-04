@@ -28,14 +28,20 @@ namespace WCFService.ServiceLibrary
         }
 
 
-        public void UploadFileEnvelope(RemoteStreamEnvelope fileData)
+        public void UploadFileEnvelope(UploadStreamMessage fileData)
         {
-            throw new NotImplementedException();
+            using (FileStream fs = new FileStream(ConfigurationManager.AppSettings["uploadResultFilePath"],
+                FileMode.OpenOrCreate,
+                FileAccess.Write))
+            {
+                fileData.data.CopyTo(fs, 512);
+            }
+            fileData.data.Close();
         }
 
-        public RemoteStreamEnvelope GetFileEnvelope(Guid fileId)
-        {
-            throw new NotImplementedException();
-        }
+        //public FileDataEnvelope GetFileEnvelope(Guid fileId)
+        //{
+        //    throw new NotImplementedException();
+        //}
     }
 }

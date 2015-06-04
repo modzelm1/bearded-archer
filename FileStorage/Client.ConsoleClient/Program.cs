@@ -3,6 +3,7 @@ using SharedKernel.StreamExtension;
 using System;
 using System.Configuration;
 using System.IO;
+using System.ServiceModel;
 
 namespace Client.ConsoleClient
 {
@@ -10,9 +11,27 @@ namespace Client.ConsoleClient
     {
         static void Main(string[] args)
         {
-            GenerateTestFile();
+            //GenerateTestFile();
             //TestFileUpload();
             //TestFileDownload();
+            TestUploadFileObject();
+        }
+
+        private static void TestUploadFileObject()
+        {
+            MockFileStorage LocalFileStorage = new MockFileStorage(ConfigurationManager.AppSettings["fileToUploadPath"]);
+            FileStorageServiceReference.FileStorageServiceClient TargetFileStorageService =
+                new FileStorageServiceReference.FileStorageServiceClient();
+            var streamToUpload = new ProgressStreamWrapper(LocalFileStorage.GetFile(Guid.Empty));
+            streamToUpload.ReportReadProgressEvent += (a, b, c) => { Console.WriteLine("Progress {0}", b); };
+            //var fileToUpload = new Client.ConsoleClient.FileStorageServiceReference.UploadStreamMessage
+            //{
+            //    FileId = Guid.NewGuid(),
+            //    StreamLength = streamToUpload.Length,
+            //    FileData = streamToUpload
+            //};
+            TargetFileStorageService.UploadFileEnvelope(streamToUpload.Length.ToString(), streamToUpload);
+            Console.ReadKey();
         }
 
         private static void TestFileUpload()
@@ -53,15 +72,15 @@ namespace Client.ConsoleClient
             int count = 0;
             long totalSize = 0;
             using (var source = new LongStream())
-                using (var target = File.Create(@"C:\TestStorage\Client\fileToUpload.txt"))
+            using (var target = File.Create(@"C:\TestStorage\Client\fileToUpload.txt"))
+            {
+                while ((count = source.Read(buff, 0, buffSize)) != 0)
                 {
-                    while ((count = source.Read(buff, 0, buffSize)) != 0)
-                    {
-                        target.Write(buff, 0, count);
-                        Console.WriteLine("Readed bytes: {0}", (totalSize+=count));
-                    }
-                    //target.CopyTo(source);
+                    target.Write(buff, 0, count);
+                    Console.WriteLine("Readed bytes: {0}", (totalSize += count));
                 }
+                //target.CopyTo(source);
+            }
             Console.WriteLine("End!");
             Console.ReadKey();
         }
