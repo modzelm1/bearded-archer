@@ -17,20 +17,33 @@ These are links to the articles which I read while I was working on that project
 
 ###Helpful links (Under construction ..)
 
+
+#####Stream files
 https://msdn.microsoft.com/en-us/library/ms733742%28v=vs.110%29.aspx
-
-http://www.codeproject.com/Articles/20364/Progress-Indication-while-Uploading-Downloading-Fi
-
-http://www.codeproject.com/Articles/112655/Progress-Streamed-File-download-and-Upload-with-Re
 
 http://www.codeproject.com/Articles/166763/WCF-Streaming-Upload-Download-Files-Over-HTTP
 
 http://stackoverflow.com/questions/14479885/wcf-streaming-large-data-500mb-1gb-on-a-self-hosted-service
 
+http://stackoverflow.com/questions/13384886/wcf-streaming-who-closes-the-file
 
+
+#####Stream files with progress
+http://www.codeproject.com/Articles/20364/Progress-Indication-while-Uploading-Downloading-Fi
+
+http://www.codeproject.com/Articles/112655/Progress-Streamed-File-download-and-Upload-with-Re
+
+
+#####Data Contract Known Types
 https://msdn.microsoft.com/en-us/library/ms730167.aspx
 
+
+#####WCF Callbacs
 http://stackoverflow.com/questions/10561061/progress-update-while-wcf-is-executed
+
+
+#####DataContract Vs MessageContract
+http://www.codeproject.com/Articles/733660/DataContract-Vs-MessageContract-in-WCF
 
 
 ###File storage service
