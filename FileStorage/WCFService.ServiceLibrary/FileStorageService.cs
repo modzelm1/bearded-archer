@@ -28,7 +28,7 @@ namespace WCFService.ServiceLibrary
         }
 
 
-        public void UploadFileEnvelope(UploadStreamMessage fileData)
+        public void UploadFileWithMetadata(RemoteFileStreamMessage fileData)
         {
             using (FileStream fs = new FileStream(ConfigurationManager.AppSettings["uploadResultFilePath"],
                 FileMode.OpenOrCreate,
@@ -39,9 +39,9 @@ namespace WCFService.ServiceLibrary
             fileData.data.Close();
         }
 
-        //public FileDataEnvelope GetFileEnvelope(Guid fileId)
-        //{
-        //    throw new NotImplementedException();
-        //}
+        public RemoteFileStreamMessage DownloadFileWithMetadata(RemoteFileStreamMessage fileRequest)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

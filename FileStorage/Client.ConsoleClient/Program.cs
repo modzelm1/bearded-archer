@@ -29,7 +29,7 @@ namespace Client.ConsoleClient
             Console.ReadKey();
         }
 
-        private static void TestUploadWithCallbackTest()
+        private static void TestDownloadFileWithMetadata()
         {
 
         }

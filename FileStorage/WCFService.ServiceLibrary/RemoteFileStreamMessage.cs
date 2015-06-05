@@ -9,12 +9,14 @@ using System.Threading.Tasks;
 namespace WCFService.ServiceLibrary
 {
     [MessageContract]
-    public class UploadStreamMessage
+    public class RemoteFileStreamMessage
     {
+        [MessageHeader]
+        public Guid fileId;
         [MessageHeader]
         public long streamLength;
         [MessageHeader]
-        public string streamName;
+        public string fileName;
         [MessageBodyMember]
         public Stream data;
     } 
