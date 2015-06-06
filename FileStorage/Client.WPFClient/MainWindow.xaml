@@ -9,11 +9,17 @@
     </Window.DataContext>
 
     <Grid>
-        <Button Content="Start Download" HorizontalAlignment="Left" Margin="433,135,0,0" VerticalAlignment="Top" Width="75"
+        <Button Content="Start Download" HorizontalAlignment="Left" Margin="419,60,0,0" VerticalAlignment="Top" Width="89"
                 Command="{Binding StartDownload}"/>
-        <ProgressBar HorizontalAlignment="Left" Height="19" Margin="10,135,0,0" VerticalAlignment="Top" Width="418"
-                     Maximum="{Binding ProgressMaxVal}"
-                     Value="{Binding ProgressVal}"/>
+        <ProgressBar HorizontalAlignment="Left" Height="19" Margin="10,60,0,0" VerticalAlignment="Top" Width="404"
+                     Maximum="{Binding DownloadProgressMaxVal}"
+                     Value="{Binding DownloadProgressVal}"/>
+      
+        <Button Content="Start Upload" HorizontalAlignment="Left" Margin="419,84,0,0" VerticalAlignment="Top" Width="89"
+        	Command="{Binding StartUpload}"/>
+        <ProgressBar HorizontalAlignment="Left" Height="19" Margin="10,84,0,0" VerticalAlignment="Top" Width="404"
+        	Maximum="{Binding UploadProgressMaxVal}"
+        	Value="{Binding UploadProgressVal}"/>
 
     </Grid>
 </Window>
