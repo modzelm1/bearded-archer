@@ -61,9 +61,25 @@ In FileStorage.ConsoleClient project Main method looks like this:
 ```cs
 static void Main(string[] args)
 {
-  CreateTestFile();
-  //TestFileUpload();
-  //TestFileDownload();
+        Console.WriteLine("Start!");
+
+        Console.WriteLine("Create file to upload ...");
+        GenerateTestFile();
+
+        //Console.WriteLine("Upload file stream ...");
+        //TestFileUpload();
+
+        //Console.WriteLine("Download file stream ...");
+        //TestFileDownload();
+
+        //Console.WriteLine("Upload message with file stream ...");
+        //TestUploadFileWithMetadata();
+
+        //Console.WriteLine("Download message with file stream ...");
+        //TestDownloadFileWithMetadata();
+
+        Console.WriteLine("End!");
+        Console.ReadKey();
 }
 ```
 
