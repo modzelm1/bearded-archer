@@ -22,11 +22,10 @@ namespace WCFService.ServiceLibrary
             fileData.Close();
         }
 
-        public Stream GetFile(Guid fileId)
+        public Stream DownloadFile(Guid fileId)
         {
             return File.OpenRead(ConfigurationManager.AppSettings["fileToDownloadPath"]);
         }
-
 
         public void UploadFileWithMetadata(RemoteFileStreamMessage fileData)
         {
@@ -41,7 +40,13 @@ namespace WCFService.ServiceLibrary
 
         public RemoteFileStreamMessage DownloadFileWithMetadata(RemoteFileStreamMessage fileRequest)
         {
-            throw new NotImplementedException();
+            var file = File.OpenRead(ConfigurationManager.AppSettings["fileToDownloadPath"]);
+            RemoteFileStreamMessage rfsm = new RemoteFileStreamMessage();
+            rfsm.fileId = Guid.NewGuid();
+            rfsm.fileName = "test";
+            rfsm.streamLength = file.Length;
+            rfsm.data = file;
+            return rfsm;
         }
     }
 }

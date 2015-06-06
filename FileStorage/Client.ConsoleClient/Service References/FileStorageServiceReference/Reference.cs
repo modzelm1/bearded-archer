@@ -21,41 +21,52 @@ namespace Client.ConsoleClient.FileStorageServiceReference {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFileStorageService/UploadFile", ReplyAction="http://tempuri.org/IFileStorageService/UploadFileResponse")]
         System.Threading.Tasks.Task UploadFileAsync(System.IO.Stream fileData);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFileStorageService/GetFile", ReplyAction="http://tempuri.org/IFileStorageService/GetFileResponse")]
-        System.IO.Stream GetFile();
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFileStorageService/DownloadFile", ReplyAction="http://tempuri.org/IFileStorageService/DownloadFileResponse")]
+        System.IO.Stream DownloadFile(System.Guid fileId);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFileStorageService/GetFile", ReplyAction="http://tempuri.org/IFileStorageService/GetFileResponse")]
-        System.Threading.Tasks.Task<System.IO.Stream> GetFileAsync();
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFileStorageService/DownloadFile", ReplyAction="http://tempuri.org/IFileStorageService/DownloadFileResponse")]
+        System.Threading.Tasks.Task<System.IO.Stream> DownloadFileAsync(System.Guid fileId);
         
-        // CODEGEN: Generating message contract since the operation UploadFileEnvelope is neither RPC nor document wrapped.
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFileStorageService/UploadFileEnvelope", ReplyAction="http://tempuri.org/IFileStorageService/UploadFileEnvelopeResponse")]
-        Client.ConsoleClient.FileStorageServiceReference.UploadFileEnvelopeResponse UploadFileEnvelope(Client.ConsoleClient.FileStorageServiceReference.UploadStreamMessage request);
+        // CODEGEN: Generating message contract since the operation UploadFileWithMetadata is neither RPC nor document wrapped.
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFileStorageService/UploadFileWithMetadata", ReplyAction="http://tempuri.org/IFileStorageService/UploadFileWithMetadataResponse")]
+        Client.ConsoleClient.FileStorageServiceReference.UploadFileWithMetadataResponse UploadFileWithMetadata(Client.ConsoleClient.FileStorageServiceReference.RemoteFileStreamMessage request);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFileStorageService/UploadFileEnvelope", ReplyAction="http://tempuri.org/IFileStorageService/UploadFileEnvelopeResponse")]
-        System.Threading.Tasks.Task<Client.ConsoleClient.FileStorageServiceReference.UploadFileEnvelopeResponse> UploadFileEnvelopeAsync(Client.ConsoleClient.FileStorageServiceReference.UploadStreamMessage request);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFileStorageService/UploadFileWithMetadata", ReplyAction="http://tempuri.org/IFileStorageService/UploadFileWithMetadataResponse")]
+        System.Threading.Tasks.Task<Client.ConsoleClient.FileStorageServiceReference.UploadFileWithMetadataResponse> UploadFileWithMetadataAsync(Client.ConsoleClient.FileStorageServiceReference.RemoteFileStreamMessage request);
+        
+        // CODEGEN: Generating message contract since the wrapper name (RemoteFileStreamMessage) of message RemoteFileStreamMessage does not match the default value (DownloadFileWithMetadata)
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFileStorageService/DownloadFileWithMetadata", ReplyAction="http://tempuri.org/IFileStorageService/DownloadFileWithMetadataResponse")]
+        Client.ConsoleClient.FileStorageServiceReference.RemoteFileStreamMessage DownloadFileWithMetadata(Client.ConsoleClient.FileStorageServiceReference.RemoteFileStreamMessage request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFileStorageService/DownloadFileWithMetadata", ReplyAction="http://tempuri.org/IFileStorageService/DownloadFileWithMetadataResponse")]
+        System.Threading.Tasks.Task<Client.ConsoleClient.FileStorageServiceReference.RemoteFileStreamMessage> DownloadFileWithMetadataAsync(Client.ConsoleClient.FileStorageServiceReference.RemoteFileStreamMessage request);
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="UploadStreamMessage", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
-    public partial class UploadStreamMessage {
+    [System.ServiceModel.MessageContractAttribute(WrapperName="RemoteFileStreamMessage", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
+    public partial class RemoteFileStreamMessage {
+        
+        [System.ServiceModel.MessageHeaderAttribute(Namespace="http://tempuri.org/")]
+        public System.Guid fileId;
+        
+        [System.ServiceModel.MessageHeaderAttribute(Namespace="http://tempuri.org/")]
+        public string fileName;
         
         [System.ServiceModel.MessageHeaderAttribute(Namespace="http://tempuri.org/")]
         public long streamLength;
         
-        [System.ServiceModel.MessageHeaderAttribute(Namespace="http://tempuri.org/")]
-        public string streamName;
-        
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=0)]
         public System.IO.Stream data;
         
-        public UploadStreamMessage() {
+        public RemoteFileStreamMessage() {
         }
         
-        public UploadStreamMessage(long streamLength, string streamName, System.IO.Stream data) {
+        public RemoteFileStreamMessage(System.Guid fileId, string fileName, long streamLength, System.IO.Stream data) {
+            this.fileId = fileId;
+            this.fileName = fileName;
             this.streamLength = streamLength;
-            this.streamName = streamName;
             this.data = data;
         }
     }
@@ -64,9 +75,9 @@ namespace Client.ConsoleClient.FileStorageServiceReference {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
-    public partial class UploadFileEnvelopeResponse {
+    public partial class UploadFileWithMetadataResponse {
         
-        public UploadFileEnvelopeResponse() {
+        public UploadFileWithMetadataResponse() {
         }
     }
     
@@ -105,38 +116,72 @@ namespace Client.ConsoleClient.FileStorageServiceReference {
             return base.Channel.UploadFileAsync(fileData);
         }
         
-        public System.IO.Stream GetFile() {
-            return base.Channel.GetFile();
+        public System.IO.Stream DownloadFile(System.Guid fileId) {
+            return base.Channel.DownloadFile(fileId);
         }
         
-        public System.Threading.Tasks.Task<System.IO.Stream> GetFileAsync() {
-            return base.Channel.GetFileAsync();
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        Client.ConsoleClient.FileStorageServiceReference.UploadFileEnvelopeResponse Client.ConsoleClient.FileStorageServiceReference.IFileStorageService.UploadFileEnvelope(Client.ConsoleClient.FileStorageServiceReference.UploadStreamMessage request) {
-            return base.Channel.UploadFileEnvelope(request);
-        }
-        
-        public void UploadFileEnvelope(long streamLength, string streamName, System.IO.Stream data) {
-            Client.ConsoleClient.FileStorageServiceReference.UploadStreamMessage inValue = new Client.ConsoleClient.FileStorageServiceReference.UploadStreamMessage();
-            inValue.streamLength = streamLength;
-            inValue.streamName = streamName;
-            inValue.data = data;
-            Client.ConsoleClient.FileStorageServiceReference.UploadFileEnvelopeResponse retVal = ((Client.ConsoleClient.FileStorageServiceReference.IFileStorageService)(this)).UploadFileEnvelope(inValue);
+        public System.Threading.Tasks.Task<System.IO.Stream> DownloadFileAsync(System.Guid fileId) {
+            return base.Channel.DownloadFileAsync(fileId);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<Client.ConsoleClient.FileStorageServiceReference.UploadFileEnvelopeResponse> Client.ConsoleClient.FileStorageServiceReference.IFileStorageService.UploadFileEnvelopeAsync(Client.ConsoleClient.FileStorageServiceReference.UploadStreamMessage request) {
-            return base.Channel.UploadFileEnvelopeAsync(request);
+        Client.ConsoleClient.FileStorageServiceReference.UploadFileWithMetadataResponse Client.ConsoleClient.FileStorageServiceReference.IFileStorageService.UploadFileWithMetadata(Client.ConsoleClient.FileStorageServiceReference.RemoteFileStreamMessage request) {
+            return base.Channel.UploadFileWithMetadata(request);
         }
         
-        public System.Threading.Tasks.Task<Client.ConsoleClient.FileStorageServiceReference.UploadFileEnvelopeResponse> UploadFileEnvelopeAsync(long streamLength, string streamName, System.IO.Stream data) {
-            Client.ConsoleClient.FileStorageServiceReference.UploadStreamMessage inValue = new Client.ConsoleClient.FileStorageServiceReference.UploadStreamMessage();
+        public void UploadFileWithMetadata(System.Guid fileId, string fileName, long streamLength, System.IO.Stream data) {
+            Client.ConsoleClient.FileStorageServiceReference.RemoteFileStreamMessage inValue = new Client.ConsoleClient.FileStorageServiceReference.RemoteFileStreamMessage();
+            inValue.fileId = fileId;
+            inValue.fileName = fileName;
             inValue.streamLength = streamLength;
-            inValue.streamName = streamName;
             inValue.data = data;
-            return ((Client.ConsoleClient.FileStorageServiceReference.IFileStorageService)(this)).UploadFileEnvelopeAsync(inValue);
+            Client.ConsoleClient.FileStorageServiceReference.UploadFileWithMetadataResponse retVal = ((Client.ConsoleClient.FileStorageServiceReference.IFileStorageService)(this)).UploadFileWithMetadata(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<Client.ConsoleClient.FileStorageServiceReference.UploadFileWithMetadataResponse> Client.ConsoleClient.FileStorageServiceReference.IFileStorageService.UploadFileWithMetadataAsync(Client.ConsoleClient.FileStorageServiceReference.RemoteFileStreamMessage request) {
+            return base.Channel.UploadFileWithMetadataAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<Client.ConsoleClient.FileStorageServiceReference.UploadFileWithMetadataResponse> UploadFileWithMetadataAsync(System.Guid fileId, string fileName, long streamLength, System.IO.Stream data) {
+            Client.ConsoleClient.FileStorageServiceReference.RemoteFileStreamMessage inValue = new Client.ConsoleClient.FileStorageServiceReference.RemoteFileStreamMessage();
+            inValue.fileId = fileId;
+            inValue.fileName = fileName;
+            inValue.streamLength = streamLength;
+            inValue.data = data;
+            return ((Client.ConsoleClient.FileStorageServiceReference.IFileStorageService)(this)).UploadFileWithMetadataAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        Client.ConsoleClient.FileStorageServiceReference.RemoteFileStreamMessage Client.ConsoleClient.FileStorageServiceReference.IFileStorageService.DownloadFileWithMetadata(Client.ConsoleClient.FileStorageServiceReference.RemoteFileStreamMessage request) {
+            return base.Channel.DownloadFileWithMetadata(request);
+        }
+        
+        public void DownloadFileWithMetadata(ref System.Guid fileId, ref string fileName, ref long streamLength, ref System.IO.Stream data) {
+            Client.ConsoleClient.FileStorageServiceReference.RemoteFileStreamMessage inValue = new Client.ConsoleClient.FileStorageServiceReference.RemoteFileStreamMessage();
+            inValue.fileId = fileId;
+            inValue.fileName = fileName;
+            inValue.streamLength = streamLength;
+            inValue.data = data;
+            Client.ConsoleClient.FileStorageServiceReference.RemoteFileStreamMessage retVal = ((Client.ConsoleClient.FileStorageServiceReference.IFileStorageService)(this)).DownloadFileWithMetadata(inValue);
+            fileId = retVal.fileId;
+            fileName = retVal.fileName;
+            streamLength = retVal.streamLength;
+            data = retVal.data;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<Client.ConsoleClient.FileStorageServiceReference.RemoteFileStreamMessage> Client.ConsoleClient.FileStorageServiceReference.IFileStorageService.DownloadFileWithMetadataAsync(Client.ConsoleClient.FileStorageServiceReference.RemoteFileStreamMessage request) {
+            return base.Channel.DownloadFileWithMetadataAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<Client.ConsoleClient.FileStorageServiceReference.RemoteFileStreamMessage> DownloadFileWithMetadataAsync(System.Guid fileId, string fileName, long streamLength, System.IO.Stream data) {
+            Client.ConsoleClient.FileStorageServiceReference.RemoteFileStreamMessage inValue = new Client.ConsoleClient.FileStorageServiceReference.RemoteFileStreamMessage();
+            inValue.fileId = fileId;
+            inValue.fileName = fileName;
+            inValue.streamLength = streamLength;
+            inValue.data = data;
+            return ((Client.ConsoleClient.FileStorageServiceReference.IFileStorageService)(this)).DownloadFileWithMetadataAsync(inValue);
         }
     }
 }

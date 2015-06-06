@@ -13,32 +13,37 @@
   <wsdl:message name="IFileStorageService_UploadFile_OutputMessage">
     <wsdl:part name="parameters" element="tns:UploadFileResponse" />
   </wsdl:message>
-  <wsdl:message name="IFileStorageService_GetFile_InputMessage">
-    <wsdl:part name="parameters" element="tns:GetFile" />
+  <wsdl:message name="IFileStorageService_DownloadFile_InputMessage">
+    <wsdl:part name="parameters" element="tns:DownloadFile" />
   </wsdl:message>
-  <wsdl:message name="IFileStorageService_GetFile_OutputMessage">
-    <wsdl:part name="parameters" element="tns:GetFileResponse" />
+  <wsdl:message name="IFileStorageService_DownloadFile_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DownloadFileResponse" />
   </wsdl:message>
-  <wsdl:message name="UploadStreamMessage">
-    <wsdl:part name="parameters" element="tns:UploadStreamMessage" />
+  <wsdl:message name="RemoteFileStreamMessage">
+    <wsdl:part name="parameters" element="tns:RemoteFileStreamMessage" />
   </wsdl:message>
-  <wsdl:message name="UploadStreamMessage_Headers">
+  <wsdl:message name="RemoteFileStreamMessage_Headers">
+    <wsdl:part name="fileId" element="tns:fileId" />
+    <wsdl:part name="fileName" element="tns:fileName" />
     <wsdl:part name="streamLength" element="tns:streamLength" />
-    <wsdl:part name="streamName" element="tns:streamName" />
   </wsdl:message>
-  <wsdl:message name="IFileStorageService_UploadFileEnvelope_OutputMessage" />
+  <wsdl:message name="IFileStorageService_UploadFileWithMetadata_OutputMessage" />
   <wsdl:portType name="IFileStorageService">
     <wsdl:operation name="UploadFile">
       <wsdl:input wsaw:Action="http://tempuri.org/IFileStorageService/UploadFile" message="tns:IFileStorageService_UploadFile_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IFileStorageService/UploadFileResponse" message="tns:IFileStorageService_UploadFile_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="GetFile">
-      <wsdl:input wsaw:Action="http://tempuri.org/IFileStorageService/GetFile" message="tns:IFileStorageService_GetFile_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IFileStorageService/GetFileResponse" message="tns:IFileStorageService_GetFile_OutputMessage" />
+    <wsdl:operation name="DownloadFile">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFileStorageService/DownloadFile" message="tns:IFileStorageService_DownloadFile_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFileStorageService/DownloadFileResponse" message="tns:IFileStorageService_DownloadFile_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="UploadFileEnvelope">
-      <wsdl:input wsaw:Action="http://tempuri.org/IFileStorageService/UploadFileEnvelope" name="UploadStreamMessage" message="tns:UploadStreamMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IFileStorageService/UploadFileEnvelopeResponse" message="tns:IFileStorageService_UploadFileEnvelope_OutputMessage" />
+    <wsdl:operation name="UploadFileWithMetadata">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFileStorageService/UploadFileWithMetadata" name="RemoteFileStreamMessage" message="tns:RemoteFileStreamMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFileStorageService/UploadFileWithMetadataResponse" message="tns:IFileStorageService_UploadFileWithMetadata_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DownloadFileWithMetadata">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFileStorageService/DownloadFileWithMetadata" name="RemoteFileStreamMessage" message="tns:RemoteFileStreamMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFileStorageService/DownloadFileWithMetadataResponse" name="RemoteFileStreamMessage" message="tns:RemoteFileStreamMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IFileStorageService" type="tns:IFileStorageService">
@@ -52,8 +57,8 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="GetFile">
-      <soap:operation soapAction="http://tempuri.org/IFileStorageService/GetFile" style="document" />
+    <wsdl:operation name="DownloadFile">
+      <soap:operation soapAction="http://tempuri.org/IFileStorageService/DownloadFile" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -61,14 +66,30 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="UploadFileEnvelope">
-      <soap:operation soapAction="http://tempuri.org/IFileStorageService/UploadFileEnvelope" style="document" />
-      <wsdl:input name="UploadStreamMessage">
-        <soap:header message="tns:UploadStreamMessage_Headers" part="streamLength" use="literal" />
-        <soap:header message="tns:UploadStreamMessage_Headers" part="streamName" use="literal" />
+    <wsdl:operation name="UploadFileWithMetadata">
+      <soap:operation soapAction="http://tempuri.org/IFileStorageService/UploadFileWithMetadata" style="document" />
+      <wsdl:input name="RemoteFileStreamMessage">
+        <soap:header message="tns:RemoteFileStreamMessage_Headers" part="fileId" use="literal" />
+        <soap:header message="tns:RemoteFileStreamMessage_Headers" part="fileName" use="literal" />
+        <soap:header message="tns:RemoteFileStreamMessage_Headers" part="streamLength" use="literal" />
         <soap:body use="literal" />
       </wsdl:input>
       <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DownloadFileWithMetadata">
+      <soap:operation soapAction="http://tempuri.org/IFileStorageService/DownloadFileWithMetadata" style="document" />
+      <wsdl:input name="RemoteFileStreamMessage">
+        <soap:header message="tns:RemoteFileStreamMessage_Headers" part="fileId" use="literal" />
+        <soap:header message="tns:RemoteFileStreamMessage_Headers" part="fileName" use="literal" />
+        <soap:header message="tns:RemoteFileStreamMessage_Headers" part="streamLength" use="literal" />
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="RemoteFileStreamMessage">
+        <soap:header message="tns:RemoteFileStreamMessage_Headers" part="fileId" use="literal" />
+        <soap:header message="tns:RemoteFileStreamMessage_Headers" part="fileName" use="literal" />
+        <soap:header message="tns:RemoteFileStreamMessage_Headers" part="streamLength" use="literal" />
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>

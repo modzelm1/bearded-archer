@@ -56,7 +56,10 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="Properties\DataSources\WCFService.ServiceLibrary.FileDataEnvelope.datasource" />
-    <None Include="Service References\FileStorageServiceReference\Client.ConsoleClient.FileStorageServiceReference.UploadFileEnvelopeResponse.datasource">
+    <None Include="Service References\FileStorageServiceReference\Client.ConsoleClient.FileStorageServiceReference.RemoteFileStreamMessage.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\FileStorageServiceReference\Client.ConsoleClient.FileStorageServiceReference.UploadFileWithMetadataResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\FileStorageServiceReference\Message.xsd">
