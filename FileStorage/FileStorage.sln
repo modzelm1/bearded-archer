@@ -25,6 +25,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WCFService.ServiceLibrary", "WCFService.ServiceLibrary\WCFService.ServiceLibrary.csproj", "{96163181-E0D0-4196-B376-E9587C5FE2F7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Client.WPFClient", "Client.WPFClient\Client.WPFClient.csproj", "{D76AF160-3099-4E9C-AD91-21A7E41D0650}"
+	ProjectSection(ProjectDependencies) = postProject
+		{96163181-E0D0-4196-B376-E9587C5FE2F7} = {96163181-E0D0-4196-B376-E9587C5FE2F7}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

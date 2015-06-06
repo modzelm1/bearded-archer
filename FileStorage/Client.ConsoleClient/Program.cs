@@ -43,12 +43,14 @@ namespace Client.ConsoleClient
                 Guid fileId = Guid.NewGuid();
                 string fileName = string.Empty;
                 long streamLength = 0;
+
                 SourceFileStorageService.DownloadFileWithMetadata(ref fileId, ref fileName,
                     ref streamLength, ref downloadedFile);
 
                 using (var downloadedFileWraper = new ProgressStreamWrapper(downloadedFile))
                 {
-                    downloadedFileWraper.ReportReadProgressEvent += (a, b, c) => { Console.WriteLine("Progress: {0}", b); };
+                    downloadedFileWraper.ReportReadProgressEvent += (a, b, c) => 
+                    { Console.WriteLine("Progress: {0}", b); };
                     LocalFileStorage.AddFile(downloadedFileWraper);
                 }
             }
@@ -57,10 +59,13 @@ namespace Client.ConsoleClient
         private static void TestUploadFileWithMetadata()
         {
             MockFileStorage LocalFileStorage = new MockFileStorage(ConfigurationManager.AppSettings["fileToUploadPath"]);
+
             FileStorageServiceReference.FileStorageServiceClient TargetFileStorageService =
                 new FileStorageServiceReference.FileStorageServiceClient();
+
             var streamToUpload = new ProgressStreamWrapper(LocalFileStorage.GetFile(Guid.Empty));
             streamToUpload.ReportReadProgressEvent += (a, b, c) => { Console.WriteLine("Progress: {0}", b); };
+
             TargetFileStorageService.UploadFileWithMetadata(Guid.NewGuid(), "TestFileName.txt", 
                 streamToUpload.Length, streamToUpload);
         }
@@ -68,6 +73,7 @@ namespace Client.ConsoleClient
         private static void TestFileUpload()
         {
             MockFileStorage LocalFileStorage = new MockFileStorage(ConfigurationManager.AppSettings["fileToUploadPath"]);
+
             using (FileStorageServiceReference.FileStorageServiceClient TargetFileStorageService =
                 new FileStorageServiceReference.FileStorageServiceClient())
             {

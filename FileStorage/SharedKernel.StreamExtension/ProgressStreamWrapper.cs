@@ -65,6 +65,11 @@ namespace SharedKernel.StreamExtension
             return bytesReaded;
         }
 
+        /// <summary>
+        /// a - in step bytes read
+        /// b - total bytes read
+        /// c - stream length
+        /// </summary>
         public event Action<long, long, long> ReportReadProgressEvent = (a, b, c) => { };
 
         public override long Seek(long offset, SeekOrigin origin)
