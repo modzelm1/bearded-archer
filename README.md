@@ -47,6 +47,12 @@ static void Main(string[] args)
 CreateTestFile method is used to generate test file. You can manipulate generated file size in LongStream class definition which is located in FileStorage.StreamCore project.
 
 
+###File storage service
+File storage service is located in FileStorage.ServiceLibrary project. For current testing purpose it iis hosted in Visual Studio thanks to "start wcf service host when debugging another project" option.
+
+https://msdn.microsoft.com/pl-pl/library/cc668754%28v=vs.110%29.aspx
+
+
 ###Helpful links (Under construction ...)
 
 Below you can find helpful links.
@@ -80,8 +86,3 @@ http://stackoverflow.com/questions/10561061/progress-update-while-wcf-is-execute
 #####DataContract Vs MessageContract
 http://www.codeproject.com/Articles/733660/DataContract-Vs-MessageContract-in-WCF
 
-
-###File storage service
-File storage service is located in FileStorage.ServiceLibrary project. For current testing purpose it iis hosted in Visual Studio thanks to "start wcf service host when debugging another project" option.
-
-https://msdn.microsoft.com/pl-pl/library/cc668754%28v=vs.110%29.aspx
