@@ -1,8 +1,6 @@
 # bearded-archer
 This project will be a compilation of solutions for streaming large data files from and to server.
 
-Below you can find helpful links section.
-These are links to the articles which I read while I was working on that project.
 
 ###roadmap
 1. Console client, wcf stream service and mock storage (SQL Filestream in next iteration)
@@ -50,6 +48,9 @@ CreateTestFile method is used to generate test file. You can manipulate generate
 
 
 ###Helpful links (Under construction ...)
+
+Below you can find helpful links.
+These are links to the articles which I read while I was working on that project.
 
 
 #####Stream files
