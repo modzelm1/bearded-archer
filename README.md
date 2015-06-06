@@ -15,7 +15,41 @@ These are links to the articles which I read while I was working on that project
 7. Publish on Azure
 
 
-###Helpful links (Under construction ..)
+###How to use / test Consol Client 
+
+I current version we can download and uplod files using WCF streaming.
+
+In FileStorage.ConsoleClient project Main method looks like this:
+
+```cs
+static void Main(string[] args)
+{
+        Console.WriteLine("Start!");
+
+        Console.WriteLine("Create file to upload ...");
+        GenerateTestFile();
+
+        //Console.WriteLine("Upload file stream ...");
+        //TestFileUpload();
+
+        //Console.WriteLine("Download file stream ...");
+        //TestFileDownload();
+
+        //Console.WriteLine("Upload message with file stream ...");
+        //TestUploadFileWithMetadata();
+
+        //Console.WriteLine("Download message with file stream ...");
+        //TestDownloadFileWithMetadata();
+
+        Console.WriteLine("End!");
+        Console.ReadKey();
+}
+```
+
+CreateTestFile method is used to generate test file. You can manipulate generated file size in LongStream class definition which is located in FileStorage.StreamCore project.
+
+
+###Helpful links (Under construction ...)
 
 
 #####Stream files
@@ -50,37 +84,3 @@ http://www.codeproject.com/Articles/733660/DataContract-Vs-MessageContract-in-WC
 File storage service is located in FileStorage.ServiceLibrary project. For current testing purpose it iis hosted in Visual Studio thanks to "start wcf service host when debugging another project" option.
 
 https://msdn.microsoft.com/pl-pl/library/cc668754%28v=vs.110%29.aspx
-
-
-###How to use / test Consol Client 
-
-I current version we can download and uplod files using WCF streaming.
-
-In FileStorage.ConsoleClient project Main method looks like this:
-
-```cs
-static void Main(string[] args)
-{
-        Console.WriteLine("Start!");
-
-        Console.WriteLine("Create file to upload ...");
-        GenerateTestFile();
-
-        //Console.WriteLine("Upload file stream ...");
-        //TestFileUpload();
-
-        //Console.WriteLine("Download file stream ...");
-        //TestFileDownload();
-
-        //Console.WriteLine("Upload message with file stream ...");
-        //TestUploadFileWithMetadata();
-
-        //Console.WriteLine("Download message with file stream ...");
-        //TestDownloadFileWithMetadata();
-
-        Console.WriteLine("End!");
-        Console.ReadKey();
-}
-```
-
-CreateTestFile method is used to generate test file. You can manipulate generated file size in LongStream class definition which is located in FileStorage.StreamCore project.
