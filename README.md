@@ -88,3 +88,6 @@ http://www.codeproject.com/Articles/733660/DataContract-Vs-MessageContract-in-WC
 
 #####SQL Server Filestream
 https://lennilobel.wordpress.com/2015/03/05/integrating-document-blob-storage-with-sql-server/
+
+http://www.pluralsight.com/courses/sql-server-2012-2014-native-file-streaming
+
