@@ -86,3 +86,5 @@ http://stackoverflow.com/questions/10561061/progress-update-while-wcf-is-execute
 #####DataContract Vs MessageContract
 http://www.codeproject.com/Articles/733660/DataContract-Vs-MessageContract-in-WCF
 
+#####SQL Server Filestream
+https://lennilobel.wordpress.com/2015/03/05/integrating-document-blob-storage-with-sql-server/
