@@ -139,9 +139,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\FileStorageRepository.FileStorageMock\FileStorageRepository.FileStorageMock.csproj">
+    <ProjectReference Include="..\FileStorageRepository.FileStorageMock\FileStorageRepository.MockFileRepository.csproj">
       <Project>{1be106da-2f1b-48dd-904b-b0e0c614efd0}</Project>
-      <Name>FileStorageRepository.FileStorageMock</Name>
+      <Name>FileStorageRepository.MockFileRepository</Name>
     </ProjectReference>
     <ProjectReference Include="..\FileStorageRepository.Interface\FileStorageRepository.Interface.csproj">
       <Project>{c6de4c0e-e6a4-42d2-9204-616a15835e6a}</Project>

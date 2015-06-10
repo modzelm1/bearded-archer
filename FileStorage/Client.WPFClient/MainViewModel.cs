@@ -1,4 +1,4 @@
-﻿using FileStorageRepository.FileStorageMock;
+﻿using FileStorageRepository.MockFileRepository;
 using SharedKernel.StreamExtension;
 using System;
 using System.Collections.Generic;
@@ -38,8 +38,8 @@ namespace Client.WPFClient
 
         private async void UploadFile()
         {
-            MockFileStorage LocalFileStorage = 
-                new MockFileStorage(ConfigurationManager.AppSettings["fileToUploadPath"]);
+            var LocalFileStorage =
+                new MockFileRepository(ConfigurationManager.AppSettings["fileToUploadPath"]);
 
             FileStorageServiceReference.FileStorageServiceClient TargetFileStorageService =
                 new FileStorageServiceReference.FileStorageServiceClient();
@@ -55,8 +55,8 @@ namespace Client.WPFClient
 
         private async void DownloadFile()
         {
-            MockFileStorage LocalFileStorage = 
-                new MockFileStorage(ConfigurationManager.AppSettings["downloadResultFilePath"]);
+            var LocalFileStorage =
+                new MockFileRepository(ConfigurationManager.AppSettings["downloadResultFilePath"]);
 
             using (FileStorageServiceReference.FileStorageServiceClient SourceFileStorageService =
                 new FileStorageServiceReference.FileStorageServiceClient())

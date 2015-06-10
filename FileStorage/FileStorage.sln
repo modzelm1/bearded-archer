@@ -13,7 +13,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "FileStorageRepository", "Fi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileStorageRepository.Interface", "FileStorageRepository.Interface\FileStorageRepository.Interface.csproj", "{C6DE4C0E-E6A4-42D2-9204-616A15835E6A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileStorageRepository.FileStorageMock", "FileStorageRepository.FileStorageMock\FileStorageRepository.FileStorageMock.csproj", "{1BE106DA-2F1B-48DD-904B-B0E0C614EFD0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileStorageRepository.MockFileRepository", "FileStorageRepository.FileStorageMock\FileStorageRepository.MockFileRepository.csproj", "{1BE106DA-2F1B-48DD-904B-B0E0C614EFD0}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Client.ConsoleClient", "Client.ConsoleClient\Client.ConsoleClient.csproj", "{6339ABE1-9539-4AC2-8094-F62DDEE5F308}"
 	ProjectSection(ProjectDependencies) = postProject

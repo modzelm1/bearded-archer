@@ -1,4 +1,4 @@
-﻿using FileStorageRepository.FileStorageMock;
+﻿using FileStorageRepository.MockFileRepository;
 using SharedKernel.StreamExtension;
 using System;
 using System.Configuration;
@@ -34,7 +34,7 @@ namespace Client.ConsoleClient
 
         private static void TestDownloadFileWithMetadata()
         {
-            MockFileStorage LocalFileStorage = new MockFileStorage(ConfigurationManager.AppSettings["downloadResultFilePath"]);
+            var LocalFileStorage = new MockFileRepository(ConfigurationManager.AppSettings["downloadResultFilePath"]);
 
             using (FileStorageServiceReference.FileStorageServiceClient SourceFileStorageService =
                 new FileStorageServiceReference.FileStorageServiceClient())
@@ -58,7 +58,7 @@ namespace Client.ConsoleClient
 
         private static void TestUploadFileWithMetadata()
         {
-            MockFileStorage LocalFileStorage = new MockFileStorage(ConfigurationManager.AppSettings["fileToUploadPath"]);
+            var LocalFileStorage = new MockFileRepository(ConfigurationManager.AppSettings["fileToUploadPath"]);
 
             FileStorageServiceReference.FileStorageServiceClient TargetFileStorageService =
                 new FileStorageServiceReference.FileStorageServiceClient();
@@ -72,7 +72,7 @@ namespace Client.ConsoleClient
 
         private static void TestFileUpload()
         {
-            MockFileStorage LocalFileStorage = new MockFileStorage(ConfigurationManager.AppSettings["fileToUploadPath"]);
+            var LocalFileStorage = new MockFileRepository(ConfigurationManager.AppSettings["fileToUploadPath"]);
 
             using (FileStorageServiceReference.FileStorageServiceClient TargetFileStorageService =
                 new FileStorageServiceReference.FileStorageServiceClient())
@@ -87,7 +87,7 @@ namespace Client.ConsoleClient
 
         private static void TestFileDownload()
         {
-            MockFileStorage LocalFileStorage = new MockFileStorage(ConfigurationManager.AppSettings["downloadResultFilePath"]);
+            var LocalFileStorage = new MockFileRepository(ConfigurationManager.AppSettings["downloadResultFilePath"]);
 
             using (FileStorageServiceReference.FileStorageServiceClient SourceFileStorageService =
                 new FileStorageServiceReference.FileStorageServiceClient())

@@ -2,20 +2,15 @@
 using System;
 using System.IO;
 
-namespace FileStorageRepository.FileStorageMock
+namespace FileStorageRepository.MockFileRepository
 {
-    public class MockFileStorage : IFileStorage
+    public class MockFileRepository : IFileRepository
     {
         string targetPath = "";
 
-        public MockFileStorage(string targetPath)
+        public MockFileRepository(string targetPath)
         {
             this.targetPath = targetPath;
-        }
-
-        public void AddFileMetadata(StoreFileInfo fileInfo)
-        {
-            throw new NotImplementedException();
         }
 
         public void AddFile(System.IO.Stream fileData)
@@ -24,11 +19,6 @@ namespace FileStorageRepository.FileStorageMock
             {
                 fileData.CopyTo(fs, 512);
             }
-        }
-
-        public StoreFileInfo GetFileMetadata(Guid id)
-        {
-            throw new NotImplementedException();
         }
 
         public System.IO.Stream GetFile(Guid id)

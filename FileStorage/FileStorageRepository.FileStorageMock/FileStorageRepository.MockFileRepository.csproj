@@ -7,8 +7,8 @@
     <ProjectGuid>{1BE106DA-2F1B-48DD-904B-B0E0C614EFD0}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>FileStorageRepository.FileStorageMock</RootNamespace>
-    <AssemblyName>FileStorageRepository.FileStorageMock</AssemblyName>
+    <RootNamespace>FileStorageRepository.MockFileRepository</RootNamespace>
+    <AssemblyName>FileStorageRepository.MockFileRepository</AssemblyName>
     <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -39,7 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MockFileStorage.cs" />
+    <Compile Include="MockFileRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
