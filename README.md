@@ -53,7 +53,7 @@ File storage service is located in FileStorage.ServiceLibrary project. For curre
 https://msdn.microsoft.com/pl-pl/library/cc668754%28v=vs.110%29.aspx
 
 
-###Helpful links (Under construction ...)
+###Helpful links
 
 Below you can find helpful links.
 These are links to the articles which I read while I was working on that project.
