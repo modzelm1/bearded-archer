@@ -86,6 +86,7 @@ http://stackoverflow.com/questions/10561061/progress-update-while-wcf-is-execute
 #####DataContract Vs MessageContract
 http://www.codeproject.com/Articles/733660/DataContract-Vs-MessageContract-in-WCF
 
+
 #####SQL Server Filestream
 https://msdn.microsoft.com/en-us/library/cc645583.aspx
 
@@ -93,3 +94,4 @@ https://lennilobel.wordpress.com/2015/03/05/integrating-document-blob-storage-wi
 
 http://www.pluralsight.com/courses/sql-server-2012-2014-native-file-streaming
 
+http://stackoverflow.com/questions/7469955/return-stream-from-wcf-service-using-sqlfilestream?lq=1
