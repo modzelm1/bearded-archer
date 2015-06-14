@@ -58,6 +58,9 @@ https://msdn.microsoft.com/pl-pl/library/cc668754%28v=vs.110%29.aspx
 Below you can find helpful links.
 These are links to the articles which I read while I was working on that project.
 
+#####Stream
+http://stackoverflow.com/questions/507747/can-you-explain-the-concept-of-streams
+
 
 #####Stream files
 https://msdn.microsoft.com/en-us/library/ms733742%28v=vs.110%29.aspx
