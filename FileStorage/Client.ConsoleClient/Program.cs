@@ -13,14 +13,14 @@ namespace Client.ConsoleClient
         {
             Console.WriteLine("Start!");
 
-            Console.WriteLine("Create file to upload ...");
-            GenerateTestFile();
+            //Console.WriteLine("Create file to upload ...");
+            //GenerateTestFile();
 
             //Console.WriteLine("Upload file stream ...");
             //TestFileUpload();
 
-            //Console.WriteLine("Download file stream ...");
-            //TestFileDownload();
+            Console.WriteLine("Download file stream ...");
+            TestFileDownload();
 
             //Console.WriteLine("Upload message with file stream ...");
             //TestUploadFileWithMetadata();
@@ -47,7 +47,7 @@ namespace Client.ConsoleClient
                 SourceFileStorageService.DownloadFileWithMetadata(ref fileId, ref fileName,
                     ref streamLength, ref downloadedFile);
 
-                using (var downloadedFileWraper = new ProgressStreamWrapper(downloadedFile))
+                using (var downloadedFileWraper = new ProgressStreamDecorator(downloadedFile))
                 {
                     downloadedFileWraper.ReportReadProgressEvent += (a, b, c) => 
                     { Console.WriteLine("Progress: {0}", b); };
@@ -63,7 +63,7 @@ namespace Client.ConsoleClient
             FileStorageServiceReference.FileStorageServiceClient TargetFileStorageService =
                 new FileStorageServiceReference.FileStorageServiceClient();
 
-            var streamToUpload = new ProgressStreamWrapper(LocalFileStorage.GetFile(Guid.Empty));
+            var streamToUpload = new ProgressStreamDecorator(LocalFileStorage.GetFile(Guid.Empty));
             streamToUpload.ReportReadProgressEvent += (a, b, c) => { Console.WriteLine("Progress: {0}", b); };
 
             TargetFileStorageService.UploadFileWithMetadata(Guid.NewGuid(), "TestFileName.txt", 
@@ -77,7 +77,7 @@ namespace Client.ConsoleClient
             using (FileStorageServiceReference.FileStorageServiceClient TargetFileStorageService =
                 new FileStorageServiceReference.FileStorageServiceClient())
             {
-                using (var fileToUpload = new ProgressStreamWrapper(LocalFileStorage.GetFile(Guid.Empty)))
+                using (var fileToUpload = new ProgressStreamDecorator(LocalFileStorage.GetFile(Guid.Empty)))
                 {
                     fileToUpload.ReportReadProgressEvent += (a, b, c) => { Console.WriteLine("Progress {0}", b); };
                     TargetFileStorageService.UploadFile(fileToUpload);
@@ -92,7 +92,8 @@ namespace Client.ConsoleClient
             using (FileStorageServiceReference.FileStorageServiceClient SourceFileStorageService =
                 new FileStorageServiceReference.FileStorageServiceClient())
             {
-                using (var downloadedFile = new ProgressStreamWrapper(SourceFileStorageService.DownloadFile(Guid.NewGuid())))
+                var rs = SourceFileStorageService.DownloadFile(Guid.NewGuid());
+                using (var downloadedFile = new ProgressStreamDecorator(rs))
                 {
                     downloadedFile.ReportReadProgressEvent += (a, b, c) => { Console.WriteLine("Progress: {0}", b); };
                     LocalFileStorage.AddFile(downloadedFile);

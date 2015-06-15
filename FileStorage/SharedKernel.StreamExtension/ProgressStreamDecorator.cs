@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 namespace SharedKernel.StreamExtension
 {
     [Serializable]
-    public class ProgressStreamWrapper : Stream
+    public class ProgressStreamDecorator : Stream
     {
         Stream baseStream;
 
-        public ProgressStreamWrapper(Stream baseStream)
+        public ProgressStreamDecorator(Stream baseStream)
         {
             this.baseStream = baseStream;
         }

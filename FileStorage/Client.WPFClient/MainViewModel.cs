@@ -44,7 +44,7 @@ namespace Client.WPFClient
             FileStorageServiceReference.FileStorageServiceClient TargetFileStorageService =
                 new FileStorageServiceReference.FileStorageServiceClient();
 
-            var streamToUpload = new ProgressStreamWrapper(LocalFileStorage.GetFile(Guid.Empty));
+            var streamToUpload = new ProgressStreamDecorator(LocalFileStorage.GetFile(Guid.Empty));
             streamToUpload.ReportReadProgressEvent += reportUploadProgress;
 
             UploadProgressMaxVal = streamToUpload.Length;
@@ -73,7 +73,7 @@ namespace Client.WPFClient
 
                 Task t = Task.Factory.StartNew(
                     () => {
-                        using (var downloadedFileWraper = new ProgressStreamWrapper(downloadedFile))
+                        using (var downloadedFileWraper = new ProgressStreamDecorator(downloadedFile))
                         {
                             downloadedFileWraper.ReportReadProgressEvent += reportDownloadProgress;
                             LocalFileStorage.AddFile(downloadedFileWraper);
