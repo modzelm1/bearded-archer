@@ -35,7 +35,7 @@ namespace WCFService.ServiceLibrary
             sqlTransaction = sqlConnection.BeginTransaction();
 
             var serverPathName = default(string);
-            var serverTxnContext = default(byte[]);
+            var transactionContext = default(byte[]);
 
             using(var cmd = new SqlCommand("GetFileData", sqlConnection, sqlTransaction))
             {
@@ -46,12 +46,12 @@ namespace WCFService.ServiceLibrary
                 {
                     rdr.Read();
                     serverPathName = rdr.GetSqlString(0).Value;
-                    serverTxnContext = rdr.GetSqlBinary(1).Value;
+                    transactionContext = rdr.GetSqlBinary(1).Value;
                     rdr.Close();
                 }
             }
             
-            sqlFileStream = new SqlFileStream(serverPathName, serverTxnContext, FileAccess.Read);
+            sqlFileStream = new SqlFileStream(serverPathName, transactionContext, FileAccess.Read);
         }
 
         protected override void Dispose(bool disposing)
