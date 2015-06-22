@@ -15,7 +15,7 @@ namespace WCFService.ServiceLibrary
     /// Not tested yet...
     /// Wrapps sql filestrem
     /// </summary>
-    class FilestreamWrapper : Stream
+    class SqlFileStreamWrapper : Stream
     {
         private readonly SqlConnection sqlConnection;
         private readonly SqlTransaction sqlTransaction;
@@ -25,7 +25,7 @@ namespace WCFService.ServiceLibrary
         /// Initialization should be moved to the factory.
         /// Constructor should't be doing this ...
         /// </summary>
-        public FilestreamWrapper()
+        public SqlFileStreamWrapper()
         {
             var connectionString =
                 ConfigurationManager.ConnectionStrings["FileStorageDatabase"].ConnectionString;
