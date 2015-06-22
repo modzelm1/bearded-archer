@@ -33,6 +33,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastru
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Client.ConsoleDatabaseClient", "Client.ConsoleDatabaseClient\Client.ConsoleDatabaseClient.csproj", "{A12DA842-6438-4FD8-A8DB-96658D2B43AB}"
 EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "FileStorageDatabase", "FileStorageDatabase\FileStorageDatabase.sqlproj", "{07AC1827-AA11-42ED-993E-C4A42D839E7C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -67,6 +69,12 @@ Global
 		{A12DA842-6438-4FD8-A8DB-96658D2B43AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A12DA842-6438-4FD8-A8DB-96658D2B43AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A12DA842-6438-4FD8-A8DB-96658D2B43AB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{07AC1827-AA11-42ED-993E-C4A42D839E7C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{07AC1827-AA11-42ED-993E-C4A42D839E7C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{07AC1827-AA11-42ED-993E-C4A42D839E7C}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{07AC1827-AA11-42ED-993E-C4A42D839E7C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{07AC1827-AA11-42ED-993E-C4A42D839E7C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{07AC1827-AA11-42ED-993E-C4A42D839E7C}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -79,6 +87,7 @@ Global
 		{96163181-E0D0-4196-B376-E9587C5FE2F7} = {85F710E6-3E3A-43DE-985C-7F1460542BC1}
 		{D76AF160-3099-4E9C-AD91-21A7E41D0650} = {BF60B0EE-B680-4C9A-BD2B-25E5F46BCD6C}
 		{A12DA842-6438-4FD8-A8DB-96658D2B43AB} = {BF60B0EE-B680-4C9A-BD2B-25E5F46BCD6C}
+		{07AC1827-AA11-42ED-993E-C4A42D839E7C} = {BA9F4D70-D2D8-4106-ABC9-D57664B42A1D}
 	EndGlobalSection
 	GlobalSection(Performance) = preSolution
 		HasPerformanceSessions = true
