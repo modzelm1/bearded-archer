@@ -25,7 +25,7 @@ namespace WCFService.ServiceLibrary
         /// Initialization should be moved to the factory.
         /// Constructor should't be doing this ...
         /// </summary>
-        public SqlFileStreamWrapper()
+        public SqlFileStreamWrapper(Guid FileId)
         {
             var connectionString =
                 ConfigurationManager.ConnectionStrings["FileStorageDatabase"].ConnectionString;
@@ -40,7 +40,7 @@ namespace WCFService.ServiceLibrary
             using(var cmd = new SqlCommand("GetFileData", sqlConnection, sqlTransaction))
             {
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@fileId", Guid.Parse("4B776A5C-AC11-E511-825F-E8B1FC35C9BE"));
+                cmd.Parameters.AddWithValue("@fileId", FileId);
                 
                 using (var rdr = cmd.ExecuteReader(CommandBehavior.SingleRow))
                 {

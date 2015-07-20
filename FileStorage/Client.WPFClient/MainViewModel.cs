@@ -1,4 +1,4 @@
-﻿using FileStorageRepository.MockFileRepository;
+﻿using FileSystemStreamHelper;
 using SharedKernel.StreamExtension;
 using System;
 using System.Collections.Generic;
@@ -38,13 +38,12 @@ namespace Client.WPFClient
 
         private async void UploadFile()
         {
-            var LocalFileStorage =
-                new MockFileRepository(ConfigurationManager.AppSettings["fileToUploadPath"]);
+            StreamHelper sh = new StreamHelper();
 
             FileStorageServiceReference.FileStorageServiceClient TargetFileStorageService =
                 new FileStorageServiceReference.FileStorageServiceClient();
 
-            var streamToUpload = new ProgressStreamDecorator(LocalFileStorage.GetFile(Guid.Empty));
+            var streamToUpload = new ProgressStreamDecorator(sh.GetFile(ConfigurationManager.AppSettings["fileToUploadPath"]));
             streamToUpload.ReportReadProgressEvent += reportUploadProgress;
 
             UploadProgressMaxVal = streamToUpload.Length;
@@ -55,8 +54,7 @@ namespace Client.WPFClient
 
         private async void DownloadFile()
         {
-            var LocalFileStorage =
-                new MockFileRepository(ConfigurationManager.AppSettings["downloadResultFilePath"]);
+            StreamHelper sh = new StreamHelper();
 
             using (FileStorageServiceReference.FileStorageServiceClient SourceFileStorageService =
                 new FileStorageServiceReference.FileStorageServiceClient())
@@ -76,7 +74,7 @@ namespace Client.WPFClient
                         using (var downloadedFileWraper = new ProgressStreamDecorator(downloadedFile))
                         {
                             downloadedFileWraper.ReportReadProgressEvent += reportDownloadProgress;
-                            LocalFileStorage.AddFile(downloadedFileWraper);
+                            sh.AddFile(ConfigurationManager.AppSettings["downloadResultFilePath"], downloadedFileWraper);
                         }
                     }
                         );

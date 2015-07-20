@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("FileStorage.Mock")]
+[assembly: AssemblyTitle("FileSystemStreamHelper")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("FileStorage.Mock")]
+[assembly: AssemblyProduct("FileSystemStreamHelper")]
 [assembly: AssemblyCopyright("Copyright ©  2015")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("505acdb8-5db3-4391-b0fb-f21b7de12fa1")]
+[assembly: Guid("c59507fb-b46e-4c14-b47b-a115d78a2176")]
 
 // Version information for an assembly consists of the following four values:
 //

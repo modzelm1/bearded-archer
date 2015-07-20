@@ -25,7 +25,7 @@ namespace WCFService.ServiceLibrary
         public Stream DownloadFile(Guid fileId)
         {
             //return File.OpenRead(ConfigurationManager.AppSettings["fileToDownloadPath"]);
-            return new SqlFileStreamWrapper();
+            return new SqlFileStreamWrapper(fileId);
         }
 
         public void UploadFileWithMetadata(RemoteFileStreamMessage fileData)

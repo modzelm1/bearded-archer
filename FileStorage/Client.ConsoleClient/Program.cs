@@ -1,4 +1,4 @@
-﻿using FileStorageRepository.MockFileRepository;
+﻿using FileSystemStreamHelper;
 using SharedKernel.StreamExtension;
 using System;
 using System.Configuration;
@@ -19,8 +19,8 @@ namespace Client.ConsoleClient
             //Console.WriteLine("Upload file stream ...");
             //TestFileUpload();
 
-            Console.WriteLine("Download file stream ...");
-            TestFileDownload();
+            //Console.WriteLine("Download file stream ...");
+            //TestFileDownload();
 
             //Console.WriteLine("Upload message with file stream ...");
             //TestUploadFileWithMetadata();
@@ -34,7 +34,7 @@ namespace Client.ConsoleClient
 
         private static void TestDownloadFileWithMetadata()
         {
-            var LocalFileStorage = new MockFileRepository(ConfigurationManager.AppSettings["downloadResultFilePath"]);
+            StreamHelper sh = new StreamHelper();
 
             using (FileStorageServiceReference.FileStorageServiceClient SourceFileStorageService =
                 new FileStorageServiceReference.FileStorageServiceClient())
@@ -51,19 +51,20 @@ namespace Client.ConsoleClient
                 {
                     downloadedFileWraper.ReportReadProgressEvent += (a, b, c) => 
                     { Console.WriteLine("Progress: {0}", b); };
-                    LocalFileStorage.AddFile(downloadedFileWraper);
+                    sh.AddFile(ConfigurationManager.AppSettings["downloadResultFilePath"], 
+                        downloadedFileWraper);
                 }
             }
         }
 
         private static void TestUploadFileWithMetadata()
         {
-            var LocalFileStorage = new MockFileRepository(ConfigurationManager.AppSettings["fileToUploadPath"]);
+            StreamHelper sh = new StreamHelper();
 
             FileStorageServiceReference.FileStorageServiceClient TargetFileStorageService =
                 new FileStorageServiceReference.FileStorageServiceClient();
 
-            var streamToUpload = new ProgressStreamDecorator(LocalFileStorage.GetFile(Guid.Empty));
+            var streamToUpload = new ProgressStreamDecorator(sh.GetFile(ConfigurationManager.AppSettings["fileToUploadPath"]));
             streamToUpload.ReportReadProgressEvent += (a, b, c) => { Console.WriteLine("Progress: {0}", b); };
 
             TargetFileStorageService.UploadFileWithMetadata(Guid.NewGuid(), "TestFileName.txt", 
@@ -72,12 +73,14 @@ namespace Client.ConsoleClient
 
         private static void TestFileUpload()
         {
-            var LocalFileStorage = new MockFileRepository(ConfigurationManager.AppSettings["fileToUploadPath"]);
+            StreamHelper sh = new StreamHelper();
 
             using (FileStorageServiceReference.FileStorageServiceClient TargetFileStorageService =
                 new FileStorageServiceReference.FileStorageServiceClient())
             {
-                using (var fileToUpload = new ProgressStreamDecorator(LocalFileStorage.GetFile(Guid.Empty)))
+                using (var fileToUpload = 
+                    new ProgressStreamDecorator(sh.GetFile(
+                        ConfigurationManager.AppSettings["fileToUploadPath"])))
                 {
                     fileToUpload.ReportReadProgressEvent += (a, b, c) => { Console.WriteLine("Progress {0}", b); };
                     TargetFileStorageService.UploadFile(fileToUpload);
@@ -87,16 +90,16 @@ namespace Client.ConsoleClient
 
         private static void TestFileDownload()
         {
-            var LocalFileStorage = new MockFileRepository(ConfigurationManager.AppSettings["downloadResultFilePath"]);
+            StreamHelper sh = new StreamHelper();
 
             using (FileStorageServiceReference.FileStorageServiceClient SourceFileStorageService =
                 new FileStorageServiceReference.FileStorageServiceClient())
             {
-                var rs = SourceFileStorageService.DownloadFile(Guid.NewGuid());
+                var rs = SourceFileStorageService.DownloadFile(Guid.Parse("4B776A5C-AC11-E511-825F-E8B1FC35C9BE"));
                 using (var downloadedFile = new ProgressStreamDecorator(rs))
                 {
                     downloadedFile.ReportReadProgressEvent += (a, b, c) => { Console.WriteLine("Progress: {0}", b); };
-                    LocalFileStorage.AddFile(downloadedFile);
+                    sh.AddFile(ConfigurationManager.AppSettings["downloadResultFilePath"], downloadedFile);
                 }
             }
         }

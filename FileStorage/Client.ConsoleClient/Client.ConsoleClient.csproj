@@ -77,13 +77,9 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\FileStorageRepository.FileStorageMock\FileStorageRepository.MockFileRepository.csproj">
-      <Project>{1be106da-2f1b-48dd-904b-b0e0c614efd0}</Project>
-      <Name>FileStorageRepository.MockFileRepository</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\FileStorageRepository.Interface\FileStorageRepository.Interface.csproj">
-      <Project>{c6de4c0e-e6a4-42d2-9204-616a15835e6a}</Project>
-      <Name>FileStorageRepository.Interface</Name>
+    <ProjectReference Include="..\FileSystemStreamHelper\FileSystemStreamHelper.csproj">
+      <Project>{8e73439e-4b0d-4115-9c6e-d8ec690dcc57}</Project>
+      <Name>FileSystemStreamHelper</Name>
     </ProjectReference>
     <ProjectReference Include="..\SharedKernel.StreamExtension\SharedKernel.StreamExtension.csproj">
       <Project>{d0e48ad8-714b-4e53-a580-928fa572e252}</Project>
