@@ -7,8 +7,8 @@
     <ProjectGuid>{D0E48AD8-714B-4E53-A580-928FA572E252}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SharedKernel.StreamExtension</RootNamespace>
-    <AssemblyName>SharedKernel.StreamExtension</AssemblyName>
+    <RootNamespace>StreamExtension</RootNamespace>
+    <AssemblyName>StreamExtension</AssemblyName>
     <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

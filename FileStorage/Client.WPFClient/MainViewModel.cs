@@ -1,5 +1,5 @@
 ﻿using FileSystemStreamHelper;
-using SharedKernel.StreamExtension;
+using StreamExtension;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

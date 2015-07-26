@@ -1,5 +1,5 @@
 ﻿using FileSystemStreamHelper;
-using SharedKernel.StreamExtension;
+using StreamExtension;
 using System;
 using System.Configuration;
 using System.IO;
@@ -82,7 +82,8 @@ namespace Client.ConsoleClient
                     new ProgressStreamDecorator(sh.GetFile(
                         ConfigurationManager.AppSettings["fileToUploadPath"])))
                 {
-                    fileToUpload.ReportReadProgressEvent += (a, b, c) => { Console.WriteLine("Progress {0}", b); };
+                    fileToUpload.ReportReadProgressEvent 
+                        += (a, b, c) => { Console.WriteLine("Progress {0}", b); };
                     TargetFileStorageService.UploadFile(fileToUpload);
                 }
             }
@@ -98,7 +99,8 @@ namespace Client.ConsoleClient
                 var rs = SourceFileStorageService.DownloadFile(Guid.Parse("4B776A5C-AC11-E511-825F-E8B1FC35C9BE"));
                 using (var downloadedFile = new ProgressStreamDecorator(rs))
                 {
-                    downloadedFile.ReportReadProgressEvent += (a, b, c) => { Console.WriteLine("Progress: {0}", b); };
+                    downloadedFile.ReportReadProgressEvent 
+                        += (a, b, c) => { Console.WriteLine("Progress: {0}", b); };
                     sh.AddFile(ConfigurationManager.AppSettings["downloadResultFilePath"], downloadedFile);
                 }
             }

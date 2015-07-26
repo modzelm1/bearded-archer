@@ -34,3 +34,14 @@ AS
 	FROM FileDataTable 
 	WHERE FileId = @fileId
 GO
+
+CREATE PROCEDURE AddFileData(
+	@fileId UNIQUEIDENTIFIER,
+	@fileName varchar(max))
+ AS
+BEGIN
+	INSERT INTO FileDataTable([FileId], [FileName], [FileData])
+	OUTPUT inserted.FileData.PathName(), GET_FILESTREAM_TRANSACTION_CONTEXT()
+	SELECT @fileId, @fileName, 0x
+END
+GO

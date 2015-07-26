@@ -15,6 +15,56 @@ namespace Client.ConsoleDatabaseClient
     {
         static void Main(string[] args)
         {
+            //TestAddFile();
+            TestGetFile();
+        }
+
+        private static void TestAddFile()
+        {
+            var connectionString =
+                ConfigurationManager.ConnectionStrings["FileStorageDatabase"].ConnectionString;
+
+            using (var dbConnection = new SqlConnection(connectionString))
+            {
+                using (var sqlCommand = new SqlCommand("AddFileData", dbConnection))
+                {
+                    using (var transactionScope = new TransactionScope())
+                    {
+                        sqlCommand.CommandType = CommandType.StoredProcedure;
+                        sqlCommand.Parameters.AddWithValue("@fileId", Guid.Parse("EA6A7E73-500D-E511-825E-E8B1FC35C9BE"));
+                        sqlCommand.Parameters.AddWithValue("@fileName", "test file");
+
+                        var serverPathName = default(string);
+                        var serverTxnContext = default(byte[]);
+
+                        dbConnection.Open();
+                        using (var rdr = sqlCommand.ExecuteReader(CommandBehavior.SingleRow))
+                        {
+                            rdr.Read();
+                            serverPathName = rdr.GetSqlString(0).Value;
+                            serverTxnContext = rdr.GetSqlBinary(1).Value;
+                            rdr.Close();
+                        }
+                        dbConnection.Close();
+
+                        using (var source =
+                                new FileStream(@"C:\TestStorage\test blob.txt", FileMode.OpenOrCreate))
+                        {
+                            using (var dest =
+                            new SqlFileStream(serverPathName, serverTxnContext, FileAccess.Write))
+                            {
+                                source.CopyTo(dest, 4096);
+                                dest.Close();
+                            }
+                        }
+                        transactionScope.Complete();
+                    }
+                }
+            }
+        }
+
+        private static void TestGetFile()
+        {
             var connectionString =
                 ConfigurationManager.ConnectionStrings["FileStorageDatabase"].ConnectionString;
 
@@ -43,11 +93,11 @@ namespace Client.ConsoleDatabaseClient
                         }
                         dbConnection.Close();
 
-                        using (var sourceSqlFileStream = 
+                        using (var sourceSqlFileStream =
                             new SqlFileStream(serverPathName, transactionContext, FileAccess.Read))
                         {
-                            using (var destinationFileStream = 
-                                new FileStream(@"C:\TestStorage\dbfile.txt", FileMode.OpenOrCreate))
+                            using (var destinationFileStream =
+                                new FileStream(@"C:\TestStorage\test result.txt", FileMode.OpenOrCreate))
                             {
                                 sourceSqlFileStream.CopyTo(destinationFileStream, 4096);
                                 destinationFileStream.Close();

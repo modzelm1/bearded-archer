@@ -5,8 +5,6 @@ VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WCFService", "WCFService", "{85F710E6-3E3A-43DE-985C-7F1460542BC1}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SharedKernel", "SharedKernel", "{FD1334BA-1B11-49EC-832F-469D9D69E158}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Client", "Client", "{BF60B0EE-B680-4C9A-BD2B-25E5F46BCD6C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Client.ConsoleClient", "Client.ConsoleClient\Client.ConsoleClient.csproj", "{6339ABE1-9539-4AC2-8094-F62DDEE5F308}"
@@ -14,7 +12,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Client.ConsoleClient", "Cli
 		{96163181-E0D0-4196-B376-E9587C5FE2F7} = {96163181-E0D0-4196-B376-E9587C5FE2F7}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharedKernel.StreamExtension", "SharedKernel.StreamExtension\SharedKernel.StreamExtension.csproj", "{D0E48AD8-714B-4E53-A580-928FA572E252}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StreamExtension", "SharedKernel.StreamExtension\StreamExtension.csproj", "{D0E48AD8-714B-4E53-A580-928FA572E252}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WCFService.ServiceLibrary", "WCFService.ServiceLibrary\WCFService.ServiceLibrary.csproj", "{96163181-E0D0-4196-B376-E9587C5FE2F7}"
 EndProject
@@ -27,9 +25,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastru
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Client.ConsoleDatabaseClient", "Client.ConsoleDatabaseClient\Client.ConsoleDatabaseClient.csproj", "{A12DA842-6438-4FD8-A8DB-96658D2B43AB}"
 EndProject
-Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "FileStorageDatabase", "FileStorageDatabase\FileStorageDatabase.sqlproj", "{07AC1827-AA11-42ED-993E-C4A42D839E7C}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileSystemStreamHelper", "FileSystemStreamHelper\FileSystemStreamHelper.csproj", "{8E73439E-4B0D-4115-9C6E-D8EC690DCC57}"
+EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "FileStorageDatabase", "FileStorageDatabase\FileStorageDatabase.sqlproj", "{5DCA8D3C-57CF-4BD8-812B-55788D6E53D8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SQLStreamExtension", "SQLStreamExtension\SQLStreamExtension.csproj", "{CF3C7F64-8B65-43B4-A1A4-F861CACFBA48}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -57,27 +57,32 @@ Global
 		{A12DA842-6438-4FD8-A8DB-96658D2B43AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A12DA842-6438-4FD8-A8DB-96658D2B43AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A12DA842-6438-4FD8-A8DB-96658D2B43AB}.Release|Any CPU.Build.0 = Release|Any CPU
-		{07AC1827-AA11-42ED-993E-C4A42D839E7C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{07AC1827-AA11-42ED-993E-C4A42D839E7C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{07AC1827-AA11-42ED-993E-C4A42D839E7C}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
-		{07AC1827-AA11-42ED-993E-C4A42D839E7C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{07AC1827-AA11-42ED-993E-C4A42D839E7C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{07AC1827-AA11-42ED-993E-C4A42D839E7C}.Release|Any CPU.Deploy.0 = Release|Any CPU
 		{8E73439E-4B0D-4115-9C6E-D8EC690DCC57}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{8E73439E-4B0D-4115-9C6E-D8EC690DCC57}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8E73439E-4B0D-4115-9C6E-D8EC690DCC57}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8E73439E-4B0D-4115-9C6E-D8EC690DCC57}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5DCA8D3C-57CF-4BD8-812B-55788D6E53D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5DCA8D3C-57CF-4BD8-812B-55788D6E53D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5DCA8D3C-57CF-4BD8-812B-55788D6E53D8}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{5DCA8D3C-57CF-4BD8-812B-55788D6E53D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5DCA8D3C-57CF-4BD8-812B-55788D6E53D8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5DCA8D3C-57CF-4BD8-812B-55788D6E53D8}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{CF3C7F64-8B65-43B4-A1A4-F861CACFBA48}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CF3C7F64-8B65-43B4-A1A4-F861CACFBA48}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CF3C7F64-8B65-43B4-A1A4-F861CACFBA48}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CF3C7F64-8B65-43B4-A1A4-F861CACFBA48}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{6339ABE1-9539-4AC2-8094-F62DDEE5F308} = {BF60B0EE-B680-4C9A-BD2B-25E5F46BCD6C}
-		{D0E48AD8-714B-4E53-A580-928FA572E252} = {FD1334BA-1B11-49EC-832F-469D9D69E158}
+		{D0E48AD8-714B-4E53-A580-928FA572E252} = {BF60B0EE-B680-4C9A-BD2B-25E5F46BCD6C}
 		{96163181-E0D0-4196-B376-E9587C5FE2F7} = {85F710E6-3E3A-43DE-985C-7F1460542BC1}
 		{D76AF160-3099-4E9C-AD91-21A7E41D0650} = {BF60B0EE-B680-4C9A-BD2B-25E5F46BCD6C}
 		{A12DA842-6438-4FD8-A8DB-96658D2B43AB} = {BF60B0EE-B680-4C9A-BD2B-25E5F46BCD6C}
-		{07AC1827-AA11-42ED-993E-C4A42D839E7C} = {BA9F4D70-D2D8-4106-ABC9-D57664B42A1D}
+		{5DCA8D3C-57CF-4BD8-812B-55788D6E53D8} = {BA9F4D70-D2D8-4106-ABC9-D57664B42A1D}
+		{CF3C7F64-8B65-43B4-A1A4-F861CACFBA48} = {85F710E6-3E3A-43DE-985C-7F1460542BC1}
 	EndGlobalSection
 	GlobalSection(Performance) = preSolution
 		HasPerformanceSessions = true

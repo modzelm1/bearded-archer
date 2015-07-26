@@ -9,58 +9,30 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WCFService.ServiceLibrary
+namespace SQLStreamExtension
 {
     /// <summary>
-    /// Not tested yet...
-    /// Wrapps sql filestrem
+    /// Wrapps sql filestrem and close it when done
     /// </summary>
-    class SqlFileStreamWrapper : Stream
+    public class SqlFileStreamWrapper : Stream
     {
         private readonly SqlConnection sqlConnection;
         private readonly SqlTransaction sqlTransaction;
         private readonly SqlFileStream sqlFileStream;
 
-        /// <summary>
-        /// Initialization should be moved to the factory.
-        /// Constructor should't be doing this ...
-        /// </summary>
-        public SqlFileStreamWrapper(Guid FileId)
+        public SqlFileStreamWrapper(SqlConnection sqlConnection, SqlTransaction sqlTransaction,
+            SqlFileStream sqlFileStream)
         {
-            var connectionString =
-                ConfigurationManager.ConnectionStrings["FileStorageDatabase"].ConnectionString;
-
-            sqlConnection = new SqlConnection(connectionString);
-            sqlConnection.Open();
-            sqlTransaction = sqlConnection.BeginTransaction();
-
-            var serverPathName = default(string);
-            var transactionContext = default(byte[]);
-
-            using(var cmd = new SqlCommand("GetFileData", sqlConnection, sqlTransaction))
-            {
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@fileId", FileId);
-                
-                using (var rdr = cmd.ExecuteReader(CommandBehavior.SingleRow))
-                {
-                    rdr.Read();
-                    serverPathName = rdr.GetSqlString(0).Value;
-                    transactionContext = rdr.GetSqlBinary(1).Value;
-                    rdr.Close();
-                }
-            }
-            
-            sqlFileStream = new SqlFileStream(serverPathName, transactionContext, FileAccess.Read);
+            this.sqlConnection = sqlConnection;
+            this.sqlTransaction = sqlTransaction;
+            this.sqlFileStream = sqlFileStream;
         }
 
         protected override void Dispose(bool disposing)
         {
-            //sqlDataReader.Close();
             sqlFileStream.Close();
             sqlTransaction.Commit();
             sqlConnection.Close();
-
         }
 
         public override void Flush()

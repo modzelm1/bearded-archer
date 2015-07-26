@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SharedKernel.StreamExtension
+namespace StreamExtension
 {
     public class LongStream : Stream
     {

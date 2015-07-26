@@ -7,7 +7,7 @@
     <Name>FileStorageDatabase</Name>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectVersion>4.1</ProjectVersion>
-    <ProjectGuid>{07ac1827-aa11-42ed-993e-c4a42d839e7c}</ProjectGuid>
+    <ProjectGuid>{5dca8d3c-57cf-4bd8-812b-55788d6e53d8}</ProjectGuid>
     <DSP>Microsoft.Data.Tools.Schema.Sql.Sql120DatabaseSchemaProvider</DSP>
     <OutputType>Database</OutputType>
     <RootPath>
@@ -59,6 +59,6 @@
     <Folder Include="Properties" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="CreateDatabaseScript.sql" />
+    <None Include="CreateFileStorageDatabase.sql" />
   </ItemGroup>
 </Project>
