@@ -3,9 +3,8 @@ using StreamExtension;
 using System;
 using System.Configuration;
 using System.IO;
-using System.ServiceModel;
 
-namespace Client.ConsoleClient
+namespace Client.WCFServiceConsoleClient
 {
     class Program
     {
@@ -44,13 +43,12 @@ namespace Client.ConsoleClient
                 string fileName = string.Empty;
                 long streamLength = 0;
 
-                SourceFileStorageService.DownloadFileWithMetadata(ref fileId, ref fileName,
-                    ref streamLength, ref downloadedFile);
+                fileName = SourceFileStorageService.DownloadFile(ref fileId, out streamLength, out downloadedFile);
 
-                using (var downloadedFileWraper = new ProgressStreamDecorator(downloadedFile))
+                using (var downloadedFileWraper = 
+                    ProgressStreamDecorator.GetProgressStreamDecorator
+                    (downloadedFile, (a, b, c) => { Console.WriteLine("Progress: {0}", b); }))
                 {
-                    downloadedFileWraper.ReportReadProgressEvent += (a, b, c) => 
-                    { Console.WriteLine("Progress: {0}", b); };
                     sh.AddFile(ConfigurationManager.AppSettings["downloadResultFilePath"], 
                         downloadedFileWraper);
                 }
@@ -64,47 +62,50 @@ namespace Client.ConsoleClient
             FileStorageServiceReference.FileStorageServiceClient TargetFileStorageService =
                 new FileStorageServiceReference.FileStorageServiceClient();
 
-            var streamToUpload = new ProgressStreamDecorator(sh.GetFile(ConfigurationManager.AppSettings["fileToUploadPath"]));
-            streamToUpload.ReportReadProgressEvent += (a, b, c) => { Console.WriteLine("Progress: {0}", b); };
+            var streamToUpload = 
+                ProgressStreamDecorator.GetProgressStreamDecorator(
+                sh.GetFile(ConfigurationManager.AppSettings["fileToUploadPath"]),
+                (a, b, c) => { Console.WriteLine("Progress: {0}", b); });
+            
+            //streamToUpload.ReportReadProgressEvent += (a, b, c) => { Console.WriteLine("Progress: {0}", b); };
 
-            TargetFileStorageService.UploadFileWithMetadata(Guid.NewGuid(), "TestFileName.txt", 
-                streamToUpload.Length, streamToUpload);
+            TargetFileStorageService.UploadFile(Guid.NewGuid(), "TestFileName.txt", streamToUpload.Length, streamToUpload);
         }
 
-        private static void TestFileUpload()
-        {
-            StreamHelper sh = new StreamHelper();
+        //private static void TestFileUpload()
+        //{
+        //    StreamHelper sh = new StreamHelper();
 
-            using (FileStorageServiceReference.FileStorageServiceClient TargetFileStorageService =
-                new FileStorageServiceReference.FileStorageServiceClient())
-            {
-                using (var fileToUpload = 
-                    new ProgressStreamDecorator(sh.GetFile(
-                        ConfigurationManager.AppSettings["fileToUploadPath"])))
-                {
-                    fileToUpload.ReportReadProgressEvent 
-                        += (a, b, c) => { Console.WriteLine("Progress {0}", b); };
-                    TargetFileStorageService.UploadFile(fileToUpload);
-                }
-            }
-        }
+        //    using (FileStorageServiceReference.FileStorageServiceClient TargetFileStorageService =
+        //        new FileStorageServiceReference.FileStorageServiceClient())
+        //    {
+        //        using (var fileToUpload = 
+        //            new ProgressStreamDecorator(sh.GetFile(
+        //                ConfigurationManager.AppSettings["fileToUploadPath"])))
+        //        {
+        //            fileToUpload.ReportReadProgressEvent 
+        //                += (a, b, c) => { Console.WriteLine("Progress {0}", b); };
+        //            TargetFileStorageService.UploadFile(fileToUpload);
+        //        }
+        //    }
+        //}
 
-        private static void TestFileDownload()
-        {
-            StreamHelper sh = new StreamHelper();
+        //private static void TestFileDownload()
+        //{
+        //    StreamHelper sh = new StreamHelper();
 
-            using (FileStorageServiceReference.FileStorageServiceClient SourceFileStorageService =
-                new FileStorageServiceReference.FileStorageServiceClient())
-            {
-                var rs = SourceFileStorageService.DownloadFile(Guid.Parse("4B776A5C-AC11-E511-825F-E8B1FC35C9BE"));
-                using (var downloadedFile = new ProgressStreamDecorator(rs))
-                {
-                    downloadedFile.ReportReadProgressEvent 
-                        += (a, b, c) => { Console.WriteLine("Progress: {0}", b); };
-                    sh.AddFile(ConfigurationManager.AppSettings["downloadResultFilePath"], downloadedFile);
-                }
-            }
-        }
+        //    using (FileStorageServiceReference.FileStorageServiceClient SourceFileStorageService =
+        //        new FileStorageServiceReference.FileStorageServiceClient())
+        //    {
+        //        var rs = SourceFileStorageService.DownloadFile(Guid.Parse("4B776A5C-AC11-E511-825F-E8B1FC35C9BE"));
+        //        using (var downloadedFile = new ProgressStreamDecorator(rs))
+        //        {
+        //            downloadedFile.ReportReadProgressEvent 
+        //                += (a, b, c) => { Console.WriteLine("Progress: {0}", b); };
+        //            sh.AddFile(ConfigurationManager.AppSettings["downloadResultFilePath"], downloadedFile);
+        //        }
+        //    }
+        //}
 
         private static void GenerateTestFile()
         {

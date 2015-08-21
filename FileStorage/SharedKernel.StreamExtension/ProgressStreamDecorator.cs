@@ -12,9 +12,16 @@ namespace StreamExtension
     {
         Stream baseStream;
 
-        public ProgressStreamDecorator(Stream baseStream)
+        public static ProgressStreamDecorator GetProgressStreamDecorator(Stream baseStream, Action<long, long, long> progressAction)
         {
-            this.baseStream = baseStream;
+            ProgressStreamDecorator progressStreamDecorator = new ProgressStreamDecorator();
+            progressStreamDecorator.baseStream = baseStream;
+            progressStreamDecorator.ReportReadProgressEvent += progressAction;
+            return progressStreamDecorator;
+        }
+
+        private ProgressStreamDecorator()
+        {
         }
 
         public override bool CanRead

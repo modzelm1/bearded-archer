@@ -12,15 +12,15 @@ namespace WCFService.ServiceLibrary
     public interface IFileStorageService
     {
         [OperationContract]
-        void UploadFile(Stream fileData);
+        void UploadFile(RemoteFileStreamMessage fileData);
 
         [OperationContract]
-        Stream DownloadFile(Guid fileId);
+        RemoteFileStreamMessage DownloadFile(RemoteFileStreamRequest fileRequest);
 
-        [OperationContract]
-        void UploadFileWithMetadata(RemoteFileStreamMessage fileData);
+        //[OperationContract]
+        //void UploadFileWithMetadata(RemoteFileStreamMessage fileData);
 
-        [OperationContract]
-        RemoteFileStreamMessage DownloadFileWithMetadata(RemoteFileStreamMessage fileRequest);
+        //[OperationContract]
+        //RemoteFileStreamMessage DownloadFileWithMetadata(RemoteFileStreamMessage fileRequest);
     }
 }

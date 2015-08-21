@@ -52,7 +52,6 @@
     <Compile Include="FileStorageService.cs" />
     <Compile Include="RemoteFileStreamMessage.cs" />
     <Compile Include="RemoteFileStreamRequest.cs" />
-    <Compile Include="SQLStreamBuilder.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

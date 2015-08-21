@@ -14,14 +14,21 @@ namespace SQLStreamExtension
     /// <summary>
     /// Wrapps sql filestrem and close it when done
     /// </summary>
-    public class SqlFileStreamWrapper : Stream
+    public class SqlFileStreamDecorator : Stream
     {
         private readonly SqlConnection sqlConnection;
         private readonly SqlTransaction sqlTransaction;
         private readonly SqlFileStream sqlFileStream;
 
-        public SqlFileStreamWrapper(SqlConnection sqlConnection, SqlTransaction sqlTransaction,
-            SqlFileStream sqlFileStream)
+        public static SqlFileStreamDecorator 
+            GetSqlFileStreamDecorator(SqlConnection sqlConnection, SqlTransaction sqlTransaction, SqlFileStream sqlFileStream)
+        {
+            SqlFileStreamDecorator sqlFileStreamDecorator = new SqlFileStreamDecorator(sqlConnection, sqlTransaction, sqlFileStream);
+            return sqlFileStreamDecorator;
+        }
+
+        private SqlFileStreamDecorator
+            (SqlConnection sqlConnection, SqlTransaction sqlTransaction, SqlFileStream sqlFileStream)
         {
             this.sqlConnection = sqlConnection;
             this.sqlTransaction = sqlTransaction;

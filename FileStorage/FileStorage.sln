@@ -7,7 +7,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WCFService", "WCFService", 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Client", "Client", "{BF60B0EE-B680-4C9A-BD2B-25E5F46BCD6C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Client.ConsoleClient", "Client.ConsoleClient\Client.ConsoleClient.csproj", "{6339ABE1-9539-4AC2-8094-F62DDEE5F308}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Client.WCFServiceConsoleClient", "Client.ConsoleClient\Client.WCFServiceConsoleClient.csproj", "{6339ABE1-9539-4AC2-8094-F62DDEE5F308}"
 	ProjectSection(ProjectDependencies) = postProject
 		{96163181-E0D0-4196-B376-E9587C5FE2F7} = {96163181-E0D0-4196-B376-E9587C5FE2F7}
 	EndProjectSection
@@ -16,20 +16,24 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StreamExtension", "SharedKe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WCFService.ServiceLibrary", "WCFService.ServiceLibrary\WCFService.ServiceLibrary.csproj", "{96163181-E0D0-4196-B376-E9587C5FE2F7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Client.WPFClient", "Client.WPFClient\Client.WPFClient.csproj", "{D76AF160-3099-4E9C-AD91-21A7E41D0650}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Client.WCFServiceWPFClient", "Client.WPFClient\Client.WCFServiceWPFClient.csproj", "{D76AF160-3099-4E9C-AD91-21A7E41D0650}"
 	ProjectSection(ProjectDependencies) = postProject
 		{96163181-E0D0-4196-B376-E9587C5FE2F7} = {96163181-E0D0-4196-B376-E9587C5FE2F7}
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{BA9F4D70-D2D8-4106-ABC9-D57664B42A1D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Client.ConsoleDatabaseClient", "Client.ConsoleDatabaseClient\Client.ConsoleDatabaseClient.csproj", "{A12DA842-6438-4FD8-A8DB-96658D2B43AB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Client.LocalDatabaseConsoleClient", "Client.ConsoleDatabaseClient\Client.LocalDatabaseConsoleClient.csproj", "{A12DA842-6438-4FD8-A8DB-96658D2B43AB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileSystemStreamHelper", "FileSystemStreamHelper\FileSystemStreamHelper.csproj", "{8E73439E-4B0D-4115-9C6E-D8EC690DCC57}"
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "FileStorageDatabase", "FileStorageDatabase\FileStorageDatabase.sqlproj", "{5DCA8D3C-57CF-4BD8-812B-55788D6E53D8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SQLStreamExtension", "SQLStreamExtension\SQLStreamExtension.csproj", "{CF3C7F64-8B65-43B4-A1A4-F861CACFBA48}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "FileStorage", "FileStorage", "{00488901-8210-4F1B-B2FF-B1AD83256D2D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileStorage", "FileStorage\FileStorage.csproj", "{0E2AA076-8A54-46D0-B498-5D531480637A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -71,6 +75,10 @@ Global
 		{CF3C7F64-8B65-43B4-A1A4-F861CACFBA48}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CF3C7F64-8B65-43B4-A1A4-F861CACFBA48}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CF3C7F64-8B65-43B4-A1A4-F861CACFBA48}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0E2AA076-8A54-46D0-B498-5D531480637A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0E2AA076-8A54-46D0-B498-5D531480637A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0E2AA076-8A54-46D0-B498-5D531480637A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0E2AA076-8A54-46D0-B498-5D531480637A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -82,7 +90,8 @@ Global
 		{D76AF160-3099-4E9C-AD91-21A7E41D0650} = {BF60B0EE-B680-4C9A-BD2B-25E5F46BCD6C}
 		{A12DA842-6438-4FD8-A8DB-96658D2B43AB} = {BF60B0EE-B680-4C9A-BD2B-25E5F46BCD6C}
 		{5DCA8D3C-57CF-4BD8-812B-55788D6E53D8} = {BA9F4D70-D2D8-4106-ABC9-D57664B42A1D}
-		{CF3C7F64-8B65-43B4-A1A4-F861CACFBA48} = {85F710E6-3E3A-43DE-985C-7F1460542BC1}
+		{CF3C7F64-8B65-43B4-A1A4-F861CACFBA48} = {00488901-8210-4F1B-B2FF-B1AD83256D2D}
+		{0E2AA076-8A54-46D0-B498-5D531480637A} = {00488901-8210-4F1B-B2FF-B1AD83256D2D}
 	EndGlobalSection
 	GlobalSection(Performance) = preSolution
 		HasPerformanceSessions = true

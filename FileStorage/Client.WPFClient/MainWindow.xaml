@@ -1,7 +1,7 @@
-﻿<Window x:Class="Client.WPFClient.MainWindow"
+﻿<Window x:Class="Client.WCFServiceWPFClient.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:local="clr-namespace:Client.WPFClient"
+        xmlns:local="clr-namespace:Client.WCFServiceWPFClient"
         Title="MainWindow" Height="350" Width="525">
 
     <Window.DataContext>

@@ -7,9 +7,9 @@
     <ProjectGuid>{D76AF160-3099-4E9C-AD91-21A7E41D0650}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Client.WPFClient</RootNamespace>
-    <AssemblyName>Client.WPFClient</AssemblyName>
-    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <RootNamespace>Client.WCFServiceWPFClient</RootNamespace>
+    <AssemblyName>Client.WCFServiceWPFClient</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
@@ -100,10 +100,10 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
-    <None Include="Service References\FileStorageServiceReference\Client.WPFClient.FileStorageServiceReference.RemoteFileStreamMessage.datasource">
+    <None Include="Service References\FileStorageServiceReference\Client.WCFServiceWPFClient.FileStorageServiceReference.RemoteFileStreamMessage.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\FileStorageServiceReference\Client.WPFClient.FileStorageServiceReference.UploadFileWithMetadataResponse.datasource">
+    <None Include="Service References\FileStorageServiceReference\Client.WCFServiceWPFClient.FileStorageServiceReference.UploadFileResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\FileStorageServiceReference\Message.xsd">

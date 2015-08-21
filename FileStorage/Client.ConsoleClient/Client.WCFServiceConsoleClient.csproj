@@ -7,11 +7,12 @@
     <ProjectGuid>{6339ABE1-9539-4AC2-8094-F62DDEE5F308}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Client.ConsoleClient</RootNamespace>
-    <AssemblyName>Client.ConsoleClient</AssemblyName>
-    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <RootNamespace>Client.WCFServiceConsoleClient</RootNamespace>
+    <AssemblyName>Client.WCFServiceConsoleClient</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -56,10 +57,10 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="Properties\DataSources\WCFService.ServiceLibrary.FileDataEnvelope.datasource" />
-    <None Include="Service References\FileStorageServiceReference\Client.ConsoleClient.FileStorageServiceReference.RemoteFileStreamMessage.datasource">
+    <None Include="Service References\FileStorageServiceReference\Client.WCFServiceConsoleClient.FileStorageServiceReference.RemoteFileStreamMessage.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\FileStorageServiceReference\Client.ConsoleClient.FileStorageServiceReference.UploadFileWithMetadataResponse.datasource">
+    <None Include="Service References\FileStorageServiceReference\Client.WCFServiceConsoleClient.FileStorageServiceReference.UploadFileResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\FileStorageServiceReference\Message.xsd">

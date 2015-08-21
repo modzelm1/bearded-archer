@@ -6,7 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace Client.WPFClient
+namespace Client.WCFServiceWPFClient
 {
     /// <summary>
     /// Interaction logic for App.xaml

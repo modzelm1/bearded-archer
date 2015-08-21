@@ -8,33 +8,55 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WCFService.ServiceLibrary
+namespace SQLStreamExtension
 {
-    public class SQLStreamBuilder
+    public class SqlFileStreamBuilder
     {
         public SqlConnection Connection { get; private set; }
         public SqlTransaction Transaction { get; private set; }
         public SqlFileStream FileStream { get; private set; }
+        public string SqlFileName { get; private set; }
+        public Guid SqlFileId { get; private set; }
 
-        public void CreateSqlConnection(string connectionString)
+        public SqlFileStreamBuilder(Guid fileId)
+        {
+            SqlFileId = fileId;
+        }
+
+        public void OpenSqlDatabaseConnection(string connectionString)
         {
             Connection = new SqlConnection(connectionString);
         }
 
-        public void CreateSqlTransaction()
+        public void BeginSqlTransaction()
         {
             Connection.Open();
             Transaction = Connection.BeginTransaction();
         }
 
-        public void CreateSqlFileStream(Guid fileId)
+        public void GetSqlFileMetadata()
+        {
+            using (var cmd = new SqlCommand("GetFileMetadata", Connection, Transaction))
+            {
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@fileId", SqlFileId);
+                using (var rdr = cmd.ExecuteReader(CommandBehavior.SingleRow))
+                {
+                    rdr.Read();
+                    SqlFileName = rdr.GetSqlString(1).Value;
+                    rdr.Close();
+                }
+            }
+        }
+
+        public void GetSqlFileStream()
         {
             var serverPathName = default(string);
             var transactionContext = default(byte[]);
             using (var cmd = new SqlCommand("GetFileData", Connection, Transaction))
             {
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@fileId", fileId);
+                cmd.Parameters.AddWithValue("@fileId", SqlFileId);
                 using (var rdr = cmd.ExecuteReader(CommandBehavior.SingleRow))
                 {
                     rdr.Read();

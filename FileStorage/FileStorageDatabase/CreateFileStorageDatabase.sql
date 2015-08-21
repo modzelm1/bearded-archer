@@ -22,7 +22,10 @@ GO
 CREATE PROCEDURE [GetFileMetadata]
 	@fileId UNIQUEIDENTIFIER
 AS
-	SELECT [FileName] FROM FileDataTable WHERE FileId = @fileId
+	SELECT [FileId]
+		  ,[FileName] 
+	FROM FileDataTable 
+	WHERE FileId = @fileId
 GO
 
 CREATE PROCEDURE [GetFileData]

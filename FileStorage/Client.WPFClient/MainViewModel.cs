@@ -10,7 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace Client.WPFClient
+namespace Client.WCFServiceWPFClient
 {
     class MainViewModel : INotifyPropertyChanged
     {
@@ -43,12 +43,14 @@ namespace Client.WPFClient
             FileStorageServiceReference.FileStorageServiceClient TargetFileStorageService =
                 new FileStorageServiceReference.FileStorageServiceClient();
 
-            var streamToUpload = new ProgressStreamDecorator(sh.GetFile(ConfigurationManager.AppSettings["fileToUploadPath"]));
-            streamToUpload.ReportReadProgressEvent += reportUploadProgress;
+            var streamToUpload =
+                ProgressStreamDecorator.GetProgressStreamDecorator
+                (sh.GetFile(ConfigurationManager.AppSettings["fileToUploadPath"]), reportUploadProgress);
+            //streamToUpload.ReportReadProgressEvent += reportUploadProgress;
 
             UploadProgressMaxVal = streamToUpload.Length;
 
-            await TargetFileStorageService.UploadFileWithMetadataAsync(Guid.NewGuid(), "TestFileName.txt",
+            await TargetFileStorageService.UploadFileAsync(Guid.NewGuid(), "TestFileName.txt",
                 streamToUpload.Length, streamToUpload);
         }
 
@@ -64,16 +66,16 @@ namespace Client.WPFClient
                 string fileName = string.Empty;
                 long streamLength = 0;
 
-                SourceFileStorageService.DownloadFileWithMetadata(ref fileId, ref fileName,
-                    ref streamLength, ref downloadedFile);
+                fileName = SourceFileStorageService.DownloadFile(ref fileId, out streamLength, out downloadedFile);
 
                 DownloadProgressMaxVal = streamLength;
 
                 Task t = Task.Factory.StartNew(
                     () => {
-                        using (var downloadedFileWraper = new ProgressStreamDecorator(downloadedFile))
+                        using (var downloadedFileWraper =
+                            ProgressStreamDecorator.GetProgressStreamDecorator(downloadedFile, reportDownloadProgress))
                         {
-                            downloadedFileWraper.ReportReadProgressEvent += reportDownloadProgress;
+                            //downloadedFileWraper.ReportReadProgressEvent += reportDownloadProgress;
                             sh.AddFile(ConfigurationManager.AppSettings["downloadResultFilePath"], downloadedFileWraper);
                         }
                     }
