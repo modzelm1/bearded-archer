@@ -9,17 +9,92 @@
     </Window.DataContext>
 
     <Grid>
-        <Button Content="Start Download" HorizontalAlignment="Left" Margin="419,60,0,0" VerticalAlignment="Top" Width="89"
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="32"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            
+        </Grid.ColumnDefinitions>
+        
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            
+            <StackPanel
+                VerticalAlignment="Top"
+                Orientation="Vertical">
+                <Label>Working Directory:</Label>
+                <TextBox
+                    Text="{Binding WorkingDirectory}">
+                    
+                </TextBox>
+
+                <Label Margin="5,15,5,5">Files in remote store:</Label>
+                <ListView ItemsSource="{Binding RemoteRepositoryFiles}"
+                    Height="150">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn 
+                                Width="150" 
+                                Header="File Id" 
+                                DisplayMemberBinding="{Binding Id}"/>
+                            <GridViewColumn 
+                                Width="150" 
+                                Header="File Name" 
+                                DisplayMemberBinding="{Binding Name}" />
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </StackPanel>
+            
+            <StackPanel
+                VerticalAlignment="Center"
+                Orientation="Vertical" 
+                Grid.Column="1">
+                <Button 
+                    Command="{Binding UploadAllFilesCommand}"
+                    Margin="5"
+                    ToolTip="Upload files from working directory">
+                    Upload Files
+                </Button>
+                <Button
+                    Command="{Binding DeleteAllFilesCommand}"
+                    Margin="5"
+                    ToolTip="Delete files from remote storage">
+                    Delete Files
+                </Button>
+            </StackPanel>
+            
+            <!--<Button Content="Start Download" HorizontalAlignment="Left" Margin="419,60,0,0" VerticalAlignment="Top" Width="89"
                 Command="{Binding StartDownload}"/>
-        <ProgressBar HorizontalAlignment="Left" Height="19" Margin="10,60,0,0" VerticalAlignment="Top" Width="404"
+            <ProgressBar HorizontalAlignment="Left" Height="19" Margin="10,60,0,0" VerticalAlignment="Top" Width="404"
                      Maximum="{Binding DownloadProgressMaxVal}"
                      Value="{Binding DownloadProgressVal}"/>
-      
-        <Button Content="Start Upload" HorizontalAlignment="Left" Margin="419,84,0,0" VerticalAlignment="Top" Width="89"
-        	Command="{Binding StartUpload}"/>
-        <ProgressBar HorizontalAlignment="Left" Height="19" Margin="10,84,0,0" VerticalAlignment="Top" Width="404"
+
+            <Button Content="Start Upload" HorizontalAlignment="Left" Margin="419,84,0,0" VerticalAlignment="Top" Width="89"
+        	Command="{Binding StartUpload}"/>-->
+            
+        </Grid>
+        
+        <StatusBar Grid.Row="1">
+            <StatusBarItem>
+                <Label
+                    Content="{Binding LogInfo}"
+                    Width="150">
+                </Label>
+            </StatusBarItem>
+            <StatusBarItem>
+                <ProgressBar 
+                    HorizontalAlignment="Left" 
+                    Height="19" 
+                    Width="404"
         	Maximum="{Binding UploadProgressMaxVal}"
         	Value="{Binding UploadProgressVal}"/>
+            </StatusBarItem>
+        </StatusBar>
 
     </Grid>
 </Window>

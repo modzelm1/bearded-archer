@@ -9,7 +9,102 @@
 //------------------------------------------------------------------------------
 
 namespace Client.WCFServiceWPFClient.FileStorageServiceReference {
+    using System.Runtime.Serialization;
+    using System;
     
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="RemoteFileStreamMessage", Namespace="http://schemas.datacontract.org/2004/07/WCFService.ServiceLibrary")]
+    [System.SerializableAttribute()]
+    public partial class RemoteFileStreamMessage : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.IO.Stream dataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Guid fileIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string fileNameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private long streamLengthField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.IO.Stream data {
+            get {
+                return this.dataField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.dataField, value) != true)) {
+                    this.dataField = value;
+                    this.RaisePropertyChanged("data");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid fileId {
+            get {
+                return this.fileIdField;
+            }
+            set {
+                if ((this.fileIdField.Equals(value) != true)) {
+                    this.fileIdField = value;
+                    this.RaisePropertyChanged("fileId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string fileName {
+            get {
+                return this.fileNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.fileNameField, value) != true)) {
+                    this.fileNameField = value;
+                    this.RaisePropertyChanged("fileName");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long streamLength {
+            get {
+                return this.streamLengthField;
+            }
+            set {
+                if ((this.streamLengthField.Equals(value) != true)) {
+                    this.streamLengthField = value;
+                    this.RaisePropertyChanged("streamLength");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="FileStorageServiceReference.IFileStorageService")]
@@ -17,24 +112,37 @@ namespace Client.WCFServiceWPFClient.FileStorageServiceReference {
         
         // CODEGEN: Generating message contract since the operation UploadFile is neither RPC nor document wrapped.
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFileStorageService/UploadFile", ReplyAction="http://tempuri.org/IFileStorageService/UploadFileResponse")]
-        Client.WCFServiceWPFClient.FileStorageServiceReference.UploadFileResponse UploadFile(Client.WCFServiceWPFClient.FileStorageServiceReference.RemoteFileStreamMessage request);
+        Client.WCFServiceWPFClient.FileStorageServiceReference.UploadFileResponse UploadFile(Client.WCFServiceWPFClient.FileStorageServiceReference.RemoteFileStreamMessage1 request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFileStorageService/UploadFile", ReplyAction="http://tempuri.org/IFileStorageService/UploadFileResponse")]
-        System.Threading.Tasks.Task<Client.WCFServiceWPFClient.FileStorageServiceReference.UploadFileResponse> UploadFileAsync(Client.WCFServiceWPFClient.FileStorageServiceReference.RemoteFileStreamMessage request);
+        System.Threading.Tasks.Task<Client.WCFServiceWPFClient.FileStorageServiceReference.UploadFileResponse> UploadFileAsync(Client.WCFServiceWPFClient.FileStorageServiceReference.RemoteFileStreamMessage1 request);
         
         // CODEGEN: Generating message contract since the wrapper name (RemoteFileStreamRequest) of message RemoteFileStreamRequest does not match the default value (DownloadFile)
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFileStorageService/DownloadFile", ReplyAction="http://tempuri.org/IFileStorageService/DownloadFileResponse")]
-        Client.WCFServiceWPFClient.FileStorageServiceReference.RemoteFileStreamMessage DownloadFile(Client.WCFServiceWPFClient.FileStorageServiceReference.RemoteFileStreamRequest request);
+        Client.WCFServiceWPFClient.FileStorageServiceReference.RemoteFileStreamMessage1 DownloadFile(Client.WCFServiceWPFClient.FileStorageServiceReference.RemoteFileStreamRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFileStorageService/DownloadFile", ReplyAction="http://tempuri.org/IFileStorageService/DownloadFileResponse")]
-        System.Threading.Tasks.Task<Client.WCFServiceWPFClient.FileStorageServiceReference.RemoteFileStreamMessage> DownloadFileAsync(Client.WCFServiceWPFClient.FileStorageServiceReference.RemoteFileStreamRequest request);
+        System.Threading.Tasks.Task<Client.WCFServiceWPFClient.FileStorageServiceReference.RemoteFileStreamMessage1> DownloadFileAsync(Client.WCFServiceWPFClient.FileStorageServiceReference.RemoteFileStreamRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFileStorageService/GetAllFilesMetadata", ReplyAction="http://tempuri.org/IFileStorageService/GetAllFilesMetadataResponse")]
+        Client.WCFServiceWPFClient.FileStorageServiceReference.RemoteFileStreamMessage[] GetAllFilesMetadata();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFileStorageService/GetAllFilesMetadata", ReplyAction="http://tempuri.org/IFileStorageService/GetAllFilesMetadataResponse")]
+        System.Threading.Tasks.Task<Client.WCFServiceWPFClient.FileStorageServiceReference.RemoteFileStreamMessage[]> GetAllFilesMetadataAsync();
+        
+        // CODEGEN: Generating message contract since the operation DeleteFile is neither RPC nor document wrapped.
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFileStorageService/DeleteFile", ReplyAction="http://tempuri.org/IFileStorageService/DeleteFileResponse")]
+        Client.WCFServiceWPFClient.FileStorageServiceReference.DeleteFileResponse DeleteFile(Client.WCFServiceWPFClient.FileStorageServiceReference.RemoteFileStreamRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFileStorageService/DeleteFile", ReplyAction="http://tempuri.org/IFileStorageService/DeleteFileResponse")]
+        System.Threading.Tasks.Task<Client.WCFServiceWPFClient.FileStorageServiceReference.DeleteFileResponse> DeleteFileAsync(Client.WCFServiceWPFClient.FileStorageServiceReference.RemoteFileStreamRequest request);
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="RemoteFileStreamMessage", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
-    public partial class RemoteFileStreamMessage {
+    public partial class RemoteFileStreamMessage1 {
         
         [System.ServiceModel.MessageHeaderAttribute(Namespace="http://tempuri.org/")]
         public System.Guid fileId;
@@ -48,10 +156,10 @@ namespace Client.WCFServiceWPFClient.FileStorageServiceReference {
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=0)]
         public System.IO.Stream data;
         
-        public RemoteFileStreamMessage() {
+        public RemoteFileStreamMessage1() {
         }
         
-        public RemoteFileStreamMessage(System.Guid fileId, string fileName, long streamLength, System.IO.Stream data) {
+        public RemoteFileStreamMessage1(System.Guid fileId, string fileName, long streamLength, System.IO.Stream data) {
             this.fileId = fileId;
             this.fileName = fileName;
             this.streamLength = streamLength;
@@ -86,6 +194,16 @@ namespace Client.WCFServiceWPFClient.FileStorageServiceReference {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class DeleteFileResponse {
+        
+        public DeleteFileResponse() {
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public interface IFileStorageServiceChannel : Client.WCFServiceWPFClient.FileStorageServiceReference.IFileStorageService, System.ServiceModel.IClientChannel {
     }
@@ -114,12 +232,12 @@ namespace Client.WCFServiceWPFClient.FileStorageServiceReference {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        Client.WCFServiceWPFClient.FileStorageServiceReference.UploadFileResponse Client.WCFServiceWPFClient.FileStorageServiceReference.IFileStorageService.UploadFile(Client.WCFServiceWPFClient.FileStorageServiceReference.RemoteFileStreamMessage request) {
+        Client.WCFServiceWPFClient.FileStorageServiceReference.UploadFileResponse Client.WCFServiceWPFClient.FileStorageServiceReference.IFileStorageService.UploadFile(Client.WCFServiceWPFClient.FileStorageServiceReference.RemoteFileStreamMessage1 request) {
             return base.Channel.UploadFile(request);
         }
         
         public void UploadFile(System.Guid fileId, string fileName, long streamLength, System.IO.Stream data) {
-            Client.WCFServiceWPFClient.FileStorageServiceReference.RemoteFileStreamMessage inValue = new Client.WCFServiceWPFClient.FileStorageServiceReference.RemoteFileStreamMessage();
+            Client.WCFServiceWPFClient.FileStorageServiceReference.RemoteFileStreamMessage1 inValue = new Client.WCFServiceWPFClient.FileStorageServiceReference.RemoteFileStreamMessage1();
             inValue.fileId = fileId;
             inValue.fileName = fileName;
             inValue.streamLength = streamLength;
@@ -128,12 +246,12 @@ namespace Client.WCFServiceWPFClient.FileStorageServiceReference {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<Client.WCFServiceWPFClient.FileStorageServiceReference.UploadFileResponse> Client.WCFServiceWPFClient.FileStorageServiceReference.IFileStorageService.UploadFileAsync(Client.WCFServiceWPFClient.FileStorageServiceReference.RemoteFileStreamMessage request) {
+        System.Threading.Tasks.Task<Client.WCFServiceWPFClient.FileStorageServiceReference.UploadFileResponse> Client.WCFServiceWPFClient.FileStorageServiceReference.IFileStorageService.UploadFileAsync(Client.WCFServiceWPFClient.FileStorageServiceReference.RemoteFileStreamMessage1 request) {
             return base.Channel.UploadFileAsync(request);
         }
         
         public System.Threading.Tasks.Task<Client.WCFServiceWPFClient.FileStorageServiceReference.UploadFileResponse> UploadFileAsync(System.Guid fileId, string fileName, long streamLength, System.IO.Stream data) {
-            Client.WCFServiceWPFClient.FileStorageServiceReference.RemoteFileStreamMessage inValue = new Client.WCFServiceWPFClient.FileStorageServiceReference.RemoteFileStreamMessage();
+            Client.WCFServiceWPFClient.FileStorageServiceReference.RemoteFileStreamMessage1 inValue = new Client.WCFServiceWPFClient.FileStorageServiceReference.RemoteFileStreamMessage1();
             inValue.fileId = fileId;
             inValue.fileName = fileName;
             inValue.streamLength = streamLength;
@@ -142,14 +260,14 @@ namespace Client.WCFServiceWPFClient.FileStorageServiceReference {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        Client.WCFServiceWPFClient.FileStorageServiceReference.RemoteFileStreamMessage Client.WCFServiceWPFClient.FileStorageServiceReference.IFileStorageService.DownloadFile(Client.WCFServiceWPFClient.FileStorageServiceReference.RemoteFileStreamRequest request) {
+        Client.WCFServiceWPFClient.FileStorageServiceReference.RemoteFileStreamMessage1 Client.WCFServiceWPFClient.FileStorageServiceReference.IFileStorageService.DownloadFile(Client.WCFServiceWPFClient.FileStorageServiceReference.RemoteFileStreamRequest request) {
             return base.Channel.DownloadFile(request);
         }
         
         public string DownloadFile(ref System.Guid fileId, out long streamLength, out System.IO.Stream data) {
             Client.WCFServiceWPFClient.FileStorageServiceReference.RemoteFileStreamRequest inValue = new Client.WCFServiceWPFClient.FileStorageServiceReference.RemoteFileStreamRequest();
             inValue.fileId = fileId;
-            Client.WCFServiceWPFClient.FileStorageServiceReference.RemoteFileStreamMessage retVal = ((Client.WCFServiceWPFClient.FileStorageServiceReference.IFileStorageService)(this)).DownloadFile(inValue);
+            Client.WCFServiceWPFClient.FileStorageServiceReference.RemoteFileStreamMessage1 retVal = ((Client.WCFServiceWPFClient.FileStorageServiceReference.IFileStorageService)(this)).DownloadFile(inValue);
             fileId = retVal.fileId;
             streamLength = retVal.streamLength;
             data = retVal.data;
@@ -157,14 +275,44 @@ namespace Client.WCFServiceWPFClient.FileStorageServiceReference {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<Client.WCFServiceWPFClient.FileStorageServiceReference.RemoteFileStreamMessage> Client.WCFServiceWPFClient.FileStorageServiceReference.IFileStorageService.DownloadFileAsync(Client.WCFServiceWPFClient.FileStorageServiceReference.RemoteFileStreamRequest request) {
+        System.Threading.Tasks.Task<Client.WCFServiceWPFClient.FileStorageServiceReference.RemoteFileStreamMessage1> Client.WCFServiceWPFClient.FileStorageServiceReference.IFileStorageService.DownloadFileAsync(Client.WCFServiceWPFClient.FileStorageServiceReference.RemoteFileStreamRequest request) {
             return base.Channel.DownloadFileAsync(request);
         }
         
-        public System.Threading.Tasks.Task<Client.WCFServiceWPFClient.FileStorageServiceReference.RemoteFileStreamMessage> DownloadFileAsync(System.Guid fileId) {
+        public System.Threading.Tasks.Task<Client.WCFServiceWPFClient.FileStorageServiceReference.RemoteFileStreamMessage1> DownloadFileAsync(System.Guid fileId) {
             Client.WCFServiceWPFClient.FileStorageServiceReference.RemoteFileStreamRequest inValue = new Client.WCFServiceWPFClient.FileStorageServiceReference.RemoteFileStreamRequest();
             inValue.fileId = fileId;
             return ((Client.WCFServiceWPFClient.FileStorageServiceReference.IFileStorageService)(this)).DownloadFileAsync(inValue);
+        }
+        
+        public Client.WCFServiceWPFClient.FileStorageServiceReference.RemoteFileStreamMessage[] GetAllFilesMetadata() {
+            return base.Channel.GetAllFilesMetadata();
+        }
+        
+        public System.Threading.Tasks.Task<Client.WCFServiceWPFClient.FileStorageServiceReference.RemoteFileStreamMessage[]> GetAllFilesMetadataAsync() {
+            return base.Channel.GetAllFilesMetadataAsync();
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        Client.WCFServiceWPFClient.FileStorageServiceReference.DeleteFileResponse Client.WCFServiceWPFClient.FileStorageServiceReference.IFileStorageService.DeleteFile(Client.WCFServiceWPFClient.FileStorageServiceReference.RemoteFileStreamRequest request) {
+            return base.Channel.DeleteFile(request);
+        }
+        
+        public void DeleteFile(System.Guid fileId) {
+            Client.WCFServiceWPFClient.FileStorageServiceReference.RemoteFileStreamRequest inValue = new Client.WCFServiceWPFClient.FileStorageServiceReference.RemoteFileStreamRequest();
+            inValue.fileId = fileId;
+            Client.WCFServiceWPFClient.FileStorageServiceReference.DeleteFileResponse retVal = ((Client.WCFServiceWPFClient.FileStorageServiceReference.IFileStorageService)(this)).DeleteFile(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<Client.WCFServiceWPFClient.FileStorageServiceReference.DeleteFileResponse> Client.WCFServiceWPFClient.FileStorageServiceReference.IFileStorageService.DeleteFileAsync(Client.WCFServiceWPFClient.FileStorageServiceReference.RemoteFileStreamRequest request) {
+            return base.Channel.DeleteFileAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<Client.WCFServiceWPFClient.FileStorageServiceReference.DeleteFileResponse> DeleteFileAsync(System.Guid fileId) {
+            Client.WCFServiceWPFClient.FileStorageServiceReference.RemoteFileStreamRequest inValue = new Client.WCFServiceWPFClient.FileStorageServiceReference.RemoteFileStreamRequest();
+            inValue.fileId = fileId;
+            return ((Client.WCFServiceWPFClient.FileStorageServiceReference.IFileStorageService)(this)).DeleteFileAsync(inValue);
         }
     }
 }
