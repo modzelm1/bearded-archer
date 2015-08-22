@@ -47,9 +47,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SQLStreamExtension\SQLStreamExtension.csproj">
+    <ProjectReference Include="..\SQLStreamExtension\SQLStreamLib.csproj">
       <Project>{cf3c7f64-8b65-43b4-a1a4-f861cacfba48}</Project>
-      <Name>SQLStreamExtension</Name>
+      <Name>SQLStreamLib</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

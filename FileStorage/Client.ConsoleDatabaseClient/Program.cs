@@ -1,48 +1,85 @@
 ﻿using FileStorage;
 using FileSystemStreamHelper;
+using StreamExtension;
 using System;
+using System.Collections.Generic;
+using System.IO;
 
 namespace Client.LocalDatabaseConsoleClient
 {
-    /// <summary>
-    /// Application for testing sql file stream. It is not a part of the solution.
-    /// </summary>
     class Program
     {
-        private static Guid testGuid = Guid.Parse("EA6A7E73-500D-E511-825E-E8B1FC35C9BE");
+        private static string localStorePath = @"C:\TestStorage\Client\";
 
         static void Main(string[] args)
         {
-            TestAddFile();
-            //TestGetFile();
+            TestLocalSqlFileStorage();
 
             Console.ReadKey();
         }
 
-        //Action<long, long, long> reportProgress = (a, b, c) => { Console.WriteLine("Progress: {0}", b); };
-
-        private static void TestAddFile()
+        private static void ReportProgress(long inStepBytesRead, long totalBytesRead, long streamLength)
         {
-            StreamHelper streamHelper = new StreamHelper();
-            SqlFileStorage localFileStorage = new SqlFileStorage();
-
-            FileEnvelope fileEnvelope =
-                new FileEnvelope() {
-                    FileId = Guid.NewGuid(), 
-                    FileName = "my file 2",
-                    FileData = streamHelper.GetFile(@"C:\TestStorage\Client\fileToUpload.txt")
-                };
-
-            localFileStorage.AddFile(fileEnvelope);
+            Console.WriteLine("Bytes read: {0}", totalBytesRead.ToString("D16"));
+            //Console.WriteLine("Progress: {0}", string.Format("{0:0%}", (totalBytesRead / streamLength)));
         }
 
-        private static void TestGetFile()
+        private static void TestLocalSqlFileStorage()
         {
-            SqlFileStorage localFileStorage = new SqlFileStorage();
-            var file = localFileStorage.GetFileById(testGuid);
+            var sqlFileStorage = new SqlFileStorage();
+            var streamHelper = new StreamHelper();
 
-            StreamHelper streamHelper = new StreamHelper();
-            streamHelper.AddFile(@"C:\TestStorage\Client\fileToUpload.txt", file.FileData);
+            DirectoryInfo directoryInfo = new DirectoryInfo(localStorePath);
+            foreach (var fileInfo in directoryInfo.GetFiles())
+            {
+                AddFile(sqlFileStorage, fileInfo.Name, fileInfo.OpenRead());
+                ShowAllFiles(sqlFileStorage);
+            }
+
+            Console.WriteLine("Now delete all files");
+
+            DeleteAllFiles(sqlFileStorage);
+            ShowAllFiles(sqlFileStorage);
+
+            Console.WriteLine("Files deleted!");
+        }
+
+        private static void AddFile(SqlFileStorage sqlFileStorage, string fileName, Stream fileData)
+        {
+            var fileEnvelope = new FileEnvelope()
+            {
+                FileId = Guid.NewGuid(),
+                FileName = fileName,
+                FileData = ProgressStreamDecorator.GetProgressStreamDecorator(fileData, ReportProgress)
+            };
+            Console.WriteLine("Adding file: {0}", fileName);
+            sqlFileStorage.AddFile(fileEnvelope);
+            Console.WriteLine("File: {0} added", fileName);
+        }
+
+        private static void DeleteAllFiles(SqlFileStorage sqlFileStorage)
+        {
+            var filesList = sqlFileStorage.GetAllFilesMetadata();
+            Console.WriteLine("Deleting files from database:");
+            foreach (var fileEnvelope in filesList)
+            {
+                Console.WriteLine("Deleting file: {0} ...", fileEnvelope.FileName);
+                sqlFileStorage.DeleteFileById(fileEnvelope.FileId);
+                Console.WriteLine("File: {0} deleted!", fileEnvelope.FileName);
+                Console.WriteLine();
+            }
+            Console.WriteLine();
+        }
+
+        private static void ShowAllFiles(SqlFileStorage sqlFileStorage)
+        {
+            var filesList = sqlFileStorage.GetAllFilesMetadata();
+            Console.WriteLine("Sql Database Contains:");
+            foreach (var fileEnvelope in filesList)
+            {
+                Console.WriteLine("File: {0}", fileEnvelope.FileName);
+            }
+            Console.WriteLine();
         }
     }
 }

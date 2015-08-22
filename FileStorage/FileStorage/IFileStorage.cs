@@ -9,8 +9,14 @@ namespace FileStorage
 {
     interface IFileStorage
     {
+        void AddFile(FileEnvelope file);
+
         FileEnvelope GetFileById(Guid fileId);
 
-        void AddFile(FileEnvelope file);
+        List<FileEnvelope> GetAllFilesMetadata();
+
+        void DeleteFileById(Guid fileId);
+
+        void UpdateFileMetadata(FileEnvelope file);
     }
 }

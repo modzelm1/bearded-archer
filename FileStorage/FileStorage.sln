@@ -29,7 +29,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileSystemStreamHelper", "F
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "FileStorageDatabase", "FileStorageDatabase\FileStorageDatabase.sqlproj", "{5DCA8D3C-57CF-4BD8-812B-55788D6E53D8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SQLStreamExtension", "SQLStreamExtension\SQLStreamExtension.csproj", "{CF3C7F64-8B65-43B4-A1A4-F861CACFBA48}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SQLStreamLib", "SQLStreamExtension\SQLStreamLib.csproj", "{CF3C7F64-8B65-43B4-A1A4-F861CACFBA48}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "FileStorage", "FileStorage", "{00488901-8210-4F1B-B2FF-B1AD83256D2D}"
 EndProject

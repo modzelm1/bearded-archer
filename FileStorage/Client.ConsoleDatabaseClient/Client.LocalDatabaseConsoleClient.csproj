@@ -58,6 +58,10 @@
       <Project>{8e73439e-4b0d-4115-9c6e-d8ec690dcc57}</Project>
       <Name>FileSystemStreamHelper</Name>
     </ProjectReference>
+    <ProjectReference Include="..\SharedKernel.StreamExtension\StreamExtension.csproj">
+      <Project>{d0e48ad8-714b-4e53-a580-928fa572e252}</Project>
+      <Name>StreamExtension</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

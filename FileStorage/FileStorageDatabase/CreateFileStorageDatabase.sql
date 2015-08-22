@@ -28,6 +28,13 @@ AS
 	WHERE FileId = @fileId
 GO
 
+CREATE PROCEDURE [dbo].[GetAllFilesMetadata]
+AS
+	SELECT [FileId]
+		  ,[FileName] 
+	FROM FileDataTable
+GO
+
 CREATE PROCEDURE [GetFileData]
 	@fileId UNIQUEIDENTIFIER
 AS
@@ -47,4 +54,12 @@ BEGIN
 	OUTPUT inserted.FileData.PathName(), GET_FILESTREAM_TRANSACTION_CONTEXT()
 	SELECT @fileId, @fileName, 0x
 END
+GO
+
+CREATE PROCEDURE [dbo].[DeleteFileById]
+	@fileId UNIQUEIDENTIFIER
+AS
+	DELETE 
+	FROM FileDataTable
+	WHERE FileId = @fileId
 GO

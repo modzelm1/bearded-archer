@@ -7,8 +7,8 @@
     <ProjectGuid>{CF3C7F64-8B65-43B4-A1A4-F861CACFBA48}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SQLStreamExtension</RootNamespace>
-    <AssemblyName>SQLStreamExtension</AssemblyName>
+    <RootNamespace>SQLStreamExtensionLib</RootNamespace>
+    <AssemblyName>SQLStreamExtensionLib</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

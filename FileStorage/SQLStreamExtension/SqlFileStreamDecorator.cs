@@ -9,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SQLStreamExtension
+namespace SQLStreamExtensionLib
 {
     /// <summary>
     /// Wrapps sql filestrem and close it when done

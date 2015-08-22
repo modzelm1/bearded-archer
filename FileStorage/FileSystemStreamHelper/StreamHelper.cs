@@ -9,7 +9,7 @@ namespace FileSystemStreamHelper
 {
     public class StreamHelper
     {
-        public void AddFile(string targetPath, System.IO.Stream fileData)
+        public void SaveFileStream(string targetPath, System.IO.Stream fileData)
         {
             using (FileStream fs = new FileStream(targetPath, FileMode.OpenOrCreate, FileAccess.Write))
             {
@@ -17,7 +17,7 @@ namespace FileSystemStreamHelper
             }
         }
 
-        public System.IO.Stream GetFile(string targetPath)
+        public System.IO.Stream GetFileStream(string targetPath)
         {
             return File.OpenRead(targetPath); ;
         }

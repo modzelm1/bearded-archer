@@ -43,9 +43,8 @@ namespace Client.WCFServiceWPFClient
             FileStorageServiceReference.FileStorageServiceClient TargetFileStorageService =
                 new FileStorageServiceReference.FileStorageServiceClient();
 
-            var streamToUpload =
-                ProgressStreamDecorator.GetProgressStreamDecorator
-                (sh.GetFile(ConfigurationManager.AppSettings["fileToUploadPath"]), reportUploadProgress);
+            var streamToUpload = ProgressStreamDecorator.GetProgressStreamDecorator
+                (sh.GetFileStream(ConfigurationManager.AppSettings["fileToUploadPath"]), reportUploadProgress);
             //streamToUpload.ReportReadProgressEvent += reportUploadProgress;
 
             UploadProgressMaxVal = streamToUpload.Length;
@@ -76,7 +75,7 @@ namespace Client.WCFServiceWPFClient
                             ProgressStreamDecorator.GetProgressStreamDecorator(downloadedFile, reportDownloadProgress))
                         {
                             //downloadedFileWraper.ReportReadProgressEvent += reportDownloadProgress;
-                            sh.AddFile(ConfigurationManager.AppSettings["downloadResultFilePath"], downloadedFileWraper);
+                            sh.SaveFileStream(ConfigurationManager.AppSettings["downloadResultFilePath"], downloadedFileWraper);
                         }
                     }
                         );

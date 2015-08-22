@@ -12,6 +12,16 @@ namespace StreamExtension
     {
         Stream baseStream;
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="baseStream"></param>
+        /// <param name="progressAction">
+        /// a - in step bytes read
+        /// b - total bytes read
+        /// c - stream length 
+        /// </param>
+        /// <returns></returns>
         public static ProgressStreamDecorator GetProgressStreamDecorator(Stream baseStream, Action<long, long, long> progressAction)
         {
             ProgressStreamDecorator progressStreamDecorator = new ProgressStreamDecorator();

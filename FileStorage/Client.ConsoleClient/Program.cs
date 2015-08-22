@@ -49,7 +49,7 @@ namespace Client.WCFServiceConsoleClient
                     ProgressStreamDecorator.GetProgressStreamDecorator
                     (downloadedFile, (a, b, c) => { Console.WriteLine("Progress: {0}", b); }))
                 {
-                    sh.AddFile(ConfigurationManager.AppSettings["downloadResultFilePath"], 
+                    sh.SaveFileStream(ConfigurationManager.AppSettings["downloadResultFilePath"], 
                         downloadedFileWraper);
                 }
             }
@@ -64,7 +64,7 @@ namespace Client.WCFServiceConsoleClient
 
             var streamToUpload = 
                 ProgressStreamDecorator.GetProgressStreamDecorator(
-                sh.GetFile(ConfigurationManager.AppSettings["fileToUploadPath"]),
+                sh.GetFileStream(ConfigurationManager.AppSettings["fileToUploadPath"]),
                 (a, b, c) => { Console.WriteLine("Progress: {0}", b); });
             
             //streamToUpload.ReportReadProgressEvent += (a, b, c) => { Console.WriteLine("Progress: {0}", b); };
