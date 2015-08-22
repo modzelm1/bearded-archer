@@ -1,4 +1,5 @@
-﻿using SQLStreamExtension;
+﻿using FileStorage;
+using SQLStreamLib;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -18,80 +19,52 @@ namespace WCFService.ServiceLibrary
     {
         public void UploadFile(RemoteFileStreamMessage fileData)
         {
-            var connectionString =
-                ConfigurationManager.ConnectionStrings["FileStorageDatabase"].ConnectionString;
-
-            using (var dbConnection = new SqlConnection(connectionString))
+            var sqlFileStorage = new SqlFileStorage();
+            var fileEnvelope = new FileEnvelope()
             {
-                using (var sqlCommand = new SqlCommand("AddFileData", dbConnection))
-                {
-                    using (var transactionScope = new TransactionScope())
-                    {
-                        sqlCommand.CommandType = CommandType.StoredProcedure;
-                        sqlCommand.Parameters.AddWithValue("@fileId", fileData.fileId);
-                        sqlCommand.Parameters.AddWithValue("@fileName", fileData.fileName);
-
-                        var serverPathName = default(string);
-                        var serverTxnContext = default(byte[]);
-
-                        dbConnection.Open();
-                        using (var rdr = sqlCommand.ExecuteReader(CommandBehavior.SingleRow))
-                        {
-                            rdr.Read();
-                            serverPathName = rdr.GetSqlString(0).Value;
-                            serverTxnContext = rdr.GetSqlBinary(1).Value;
-                            rdr.Close();
-                        }
-                        dbConnection.Close();
-
-                        using (var dest = new SqlFileStream(serverPathName, serverTxnContext, FileAccess.Write))
-                        {
-                            fileData.data.CopyTo(dest, 4096);
-                            dest.Close();
-                        }
-                        transactionScope.Complete();
-                    }
-                }
-            }
+                FileId = fileData.fileId,
+                FileName = fileData.fileName,
+                FileData = fileData.data
+            };
+            sqlFileStorage.AddFile(fileEnvelope);
             fileData.data.Close();
         }
 
         public RemoteFileStreamMessage DownloadFile(RemoteFileStreamRequest fileRequest)
         {
-            var builder = new SqlFileStreamBuilder(fileRequest.fileId);
-            builder.OpenSqlDatabaseConnection(ConfigurationManager.ConnectionStrings["FileStorageDatabase"].ConnectionString);
-            builder.BeginSqlTransaction();
-            builder.GetSqlFileStream();
+            var sqlFileStorage = new SqlFileStorage();
+            var fileEnvelope = sqlFileStorage.GetFileById(fileRequest.fileId);
 
-            var sqlFileStreamWrapper = 
-                SqlFileStreamDecorator.GetSqlFileStreamDecorator(builder.Connection, builder.Transaction, builder.FileStream);
-
-            var remoteFileStreamMessage = new RemoteFileStreamMessage() 
-                { fileId = fileRequest.fileId, streamLength = sqlFileStreamWrapper.Length, data = sqlFileStreamWrapper };
+            var remoteFileStreamMessage = new RemoteFileStreamMessage()
+            {
+                fileId = fileEnvelope.FileId,
+                streamLength = fileEnvelope.FileData.Length,
+                data = fileEnvelope.FileData 
+            };
 
             return remoteFileStreamMessage;
         }
 
-        //public void UploadFileWithMetadata(RemoteFileStreamMessage fileData)
-        //{
-        //    using (FileStream fs = new FileStream(ConfigurationManager.AppSettings["uploadResultFilePath"],
-        //        FileMode.OpenOrCreate,
-        //        FileAccess.Write))
-        //    {
-        //        fileData.data.CopyTo(fs, 512);
-        //    }
-        //    fileData.data.Close();
-        //}
+        public List<RemoteFileStreamMessage> GetAllFilesMetadata()
+        {
+            var sqlFileStorage = new SqlFileStorage();
+            var fileEnvelopesList =  sqlFileStorage.GetAllFilesMetadata();
+            var remoteFilesList = fileEnvelopesList.Select(x =>
+                new RemoteFileStreamMessage()
+                {
+                    fileId = x.FileId,
+                    fileName = x.FileName, 
+                    data = null, 
+                    streamLength = -1
+                }).ToList();
 
-        //public RemoteFileStreamMessage DownloadFileWithMetadata(RemoteFileStreamMessage fileRequest)
-        //{
-        //    var file = File.OpenRead(ConfigurationManager.AppSettings["fileToDownloadPath"]);
-        //    RemoteFileStreamMessage rfsm = new RemoteFileStreamMessage();
-        //    rfsm.fileId = Guid.NewGuid();
-        //    rfsm.fileName = "test";
-        //    rfsm.streamLength = file.Length;
-        //    rfsm.data = file;
-        //    return rfsm;
-        //}
+            return remoteFilesList;
+        }
+
+        public void DeleteFile(RemoteFileStreamRequest fileRequest)
+        {
+            var sqlFileStorage = new SqlFileStorage();
+            sqlFileStorage.DeleteFileById(fileRequest.fileId);
+        }
     }
 }

@@ -57,7 +57,13 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="Properties\DataSources\WCFService.ServiceLibrary.FileDataEnvelope.datasource" />
+    <None Include="Service References\FileStorageServiceReference\Client.WCFServiceConsoleClient.FileStorageServiceReference.DeleteFileResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\FileStorageServiceReference\Client.WCFServiceConsoleClient.FileStorageServiceReference.RemoteFileStreamMessage.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\FileStorageServiceReference\Client.WCFServiceConsoleClient.FileStorageServiceReference.RemoteFileStreamMessage1.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\FileStorageServiceReference\Client.WCFServiceConsoleClient.FileStorageServiceReference.UploadFileResponse.datasource">
@@ -71,6 +77,15 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\FileStorageServiceReference\service1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\FileStorageServiceReference\System.IO.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\FileStorageServiceReference\System.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\FileStorageServiceReference\WCFService.ServiceLibrary.xsd">
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>

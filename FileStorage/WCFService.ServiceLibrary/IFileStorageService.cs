@@ -17,10 +17,10 @@ namespace WCFService.ServiceLibrary
         [OperationContract]
         RemoteFileStreamMessage DownloadFile(RemoteFileStreamRequest fileRequest);
 
-        //[OperationContract]
-        //void UploadFileWithMetadata(RemoteFileStreamMessage fileData);
+        [OperationContract]
+        List<RemoteFileStreamMessage> GetAllFilesMetadata();
 
-        //[OperationContract]
-        //RemoteFileStreamMessage DownloadFileWithMetadata(RemoteFileStreamMessage fileRequest);
+        [OperationContract]
+        void DeleteFile(RemoteFileStreamRequest fileRequest);
     }
 }

@@ -26,6 +26,9 @@
     <MetadataFile FileName="Message.xsd" MetadataType="Schema" ID="3b79e109-7a1c-4866-998c-f9e50aa03474" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/FileStorage.ServiceLibrary/Service1/mex" />
     <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="b2293aac-7ff2-4e67-9f91-736a8b27867f" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/FileStorage.ServiceLibrary/Service1/mex" />
     <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="bec09593-0000-455e-96e6-f4f38eaab100" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/FileStorage.ServiceLibrary/Service1/mex" />
+    <MetadataFile FileName="WCFService.ServiceLibrary.xsd" MetadataType="Schema" ID="561d0248-e684-48ab-acfc-86eab6f6306b" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/FileStorage.ServiceLibrary/Service1/mex" />
+    <MetadataFile FileName="System.IO.xsd" MetadataType="Schema" ID="6fdd2537-6ac6-4475-9b04-20ec3a8bc03e" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/FileStorage.ServiceLibrary/Service1/mex" />
+    <MetadataFile FileName="System.xsd" MetadataType="Schema" ID="d8e79d69-a8be-4122-9001-e809f130da85" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/FileStorage.ServiceLibrary/Service1/mex" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

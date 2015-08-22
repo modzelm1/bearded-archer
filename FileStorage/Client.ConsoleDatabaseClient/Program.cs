@@ -21,7 +21,6 @@ namespace Client.LocalDatabaseConsoleClient
         private static void ReportProgress(long inStepBytesRead, long totalBytesRead, long streamLength)
         {
             Console.WriteLine("Bytes read: {0}", totalBytesRead.ToString("D16"));
-            //Console.WriteLine("Progress: {0}", string.Format("{0:0%}", (totalBytesRead / streamLength)));
         }
 
         private static void TestLocalSqlFileStorage()

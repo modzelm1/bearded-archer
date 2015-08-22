@@ -1,4 +1,5 @@
-﻿using FileSystemStreamHelper;
+﻿using Client.WCFServiceConsoleClient.FileStorageServiceReference;
+using FileSystemStreamHelper;
 using StreamExtension;
 using System;
 using System.Configuration;
@@ -8,104 +9,76 @@ namespace Client.WCFServiceConsoleClient
 {
     class Program
     {
+        private static string localStorePath = @"C:\TestStorage\Client\";
+
         static void Main(string[] args)
         {
             Console.WriteLine("Start!");
 
-            //Console.WriteLine("Create file to upload ...");
-            //GenerateTestFile();
-
-            //Console.WriteLine("Upload file stream ...");
-            //TestFileUpload();
-
-            //Console.WriteLine("Download file stream ...");
-            //TestFileDownload();
-
-            //Console.WriteLine("Upload message with file stream ...");
-            //TestUploadFileWithMetadata();
-
-            //Console.WriteLine("Download message with file stream ...");
-            //TestDownloadFileWithMetadata();
+            TestWCFSqlFileStorage();
 
             Console.WriteLine("End!");
             Console.ReadKey();
         }
 
-        private static void TestDownloadFileWithMetadata()
+        private static void ReportProgress(long inStepBytesRead, long totalBytesRead, long streamLength)
         {
-            StreamHelper sh = new StreamHelper();
+            //Console.WriteLine("Bytes read: {0}", totalBytesRead.ToString("D16"));
+        }
 
-            using (FileStorageServiceReference.FileStorageServiceClient SourceFileStorageService =
-                new FileStorageServiceReference.FileStorageServiceClient())
+        private static void TestWCFSqlFileStorage()
+        {
+            using (var FileStorageService = new FileStorageServiceClient())
             {
-                Stream downloadedFile = new MemoryStream();
-                Guid fileId = Guid.NewGuid();
-                string fileName = string.Empty;
-                long streamLength = 0;
-
-                fileName = SourceFileStorageService.DownloadFile(ref fileId, out streamLength, out downloadedFile);
-
-                using (var downloadedFileWraper = 
-                    ProgressStreamDecorator.GetProgressStreamDecorator
-                    (downloadedFile, (a, b, c) => { Console.WriteLine("Progress: {0}", b); }))
+                DirectoryInfo directoryInfo = new DirectoryInfo(localStorePath);
+                foreach (var fileInfo in directoryInfo.GetFiles())
                 {
-                    sh.SaveFileStream(ConfigurationManager.AppSettings["downloadResultFilePath"], 
-                        downloadedFileWraper);
+                    AddFileToWCFService(FileStorageService, fileInfo.Name, fileInfo.OpenRead());
+                    ShowAllFiles(FileStorageService);
                 }
+
+                Console.WriteLine("Now delete all files");
+
+                DeleteAllFiles(FileStorageService);
+                ShowAllFiles(FileStorageService);
+
+                Console.WriteLine("Files deleted!");
             }
         }
 
-        private static void TestUploadFileWithMetadata()
+        private static void AddFileToWCFService(FileStorageServiceClient fileStorageService, string fileName, Stream fileData)
         {
-            StreamHelper sh = new StreamHelper();
-
-            FileStorageServiceReference.FileStorageServiceClient TargetFileStorageService =
-                new FileStorageServiceReference.FileStorageServiceClient();
-
-            var streamToUpload = 
-                ProgressStreamDecorator.GetProgressStreamDecorator(
-                sh.GetFileStream(ConfigurationManager.AppSettings["fileToUploadPath"]),
-                (a, b, c) => { Console.WriteLine("Progress: {0}", b); });
-            
-            //streamToUpload.ReportReadProgressEvent += (a, b, c) => { Console.WriteLine("Progress: {0}", b); };
-
-            TargetFileStorageService.UploadFile(Guid.NewGuid(), "TestFileName.txt", streamToUpload.Length, streamToUpload);
+            fileStorageService.UploadFile(
+                Guid.NewGuid(), 
+                fileName, 
+                fileData.Length, 
+                ProgressStreamDecorator.GetProgressStreamDecorator(fileData, ReportProgress));
         }
 
-        //private static void TestFileUpload()
-        //{
-        //    StreamHelper sh = new StreamHelper();
+        private static void ShowAllFiles(FileStorageServiceClient fileStorageService)
+        {
+            var filesList = fileStorageService.GetAllFilesMetadata();
+            Console.WriteLine("Sql Database Contains:");
+            foreach (var fileEnvelope in filesList)
+            {
+                Console.WriteLine("File: {0}", fileEnvelope.fileName);
+            }
+            Console.WriteLine();
+        }
 
-        //    using (FileStorageServiceReference.FileStorageServiceClient TargetFileStorageService =
-        //        new FileStorageServiceReference.FileStorageServiceClient())
-        //    {
-        //        using (var fileToUpload = 
-        //            new ProgressStreamDecorator(sh.GetFile(
-        //                ConfigurationManager.AppSettings["fileToUploadPath"])))
-        //        {
-        //            fileToUpload.ReportReadProgressEvent 
-        //                += (a, b, c) => { Console.WriteLine("Progress {0}", b); };
-        //            TargetFileStorageService.UploadFile(fileToUpload);
-        //        }
-        //    }
-        //}
-
-        //private static void TestFileDownload()
-        //{
-        //    StreamHelper sh = new StreamHelper();
-
-        //    using (FileStorageServiceReference.FileStorageServiceClient SourceFileStorageService =
-        //        new FileStorageServiceReference.FileStorageServiceClient())
-        //    {
-        //        var rs = SourceFileStorageService.DownloadFile(Guid.Parse("4B776A5C-AC11-E511-825F-E8B1FC35C9BE"));
-        //        using (var downloadedFile = new ProgressStreamDecorator(rs))
-        //        {
-        //            downloadedFile.ReportReadProgressEvent 
-        //                += (a, b, c) => { Console.WriteLine("Progress: {0}", b); };
-        //            sh.AddFile(ConfigurationManager.AppSettings["downloadResultFilePath"], downloadedFile);
-        //        }
-        //    }
-        //}
+        private static void DeleteAllFiles(FileStorageServiceClient fileStorageService)
+        {
+            var filesList = fileStorageService.GetAllFilesMetadata();
+            Console.WriteLine("Deleting files from database:");
+            foreach (var fileEnvelope in filesList)
+            {
+                Console.WriteLine("Deleting file: {0} ...", fileEnvelope.fileName);
+                fileStorageService.DeleteFile(fileEnvelope.fileId);
+                Console.WriteLine("File: {0} deleted!", fileEnvelope.fileName);
+                Console.WriteLine();
+            }
+            Console.WriteLine();
+        }
 
         private static void GenerateTestFile()
         {

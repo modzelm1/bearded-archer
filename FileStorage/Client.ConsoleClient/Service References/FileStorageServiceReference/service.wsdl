@@ -5,6 +5,9 @@
       <xsd:import namespace="http://tempuri.org/" />
       <xsd:import namespace="http://schemas.microsoft.com/Message" />
       <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import namespace="http://schemas.datacontract.org/2004/07/WCFService.ServiceLibrary" />
+      <xsd:import namespace="http://schemas.datacontract.org/2004/07/System.IO" />
+      <xsd:import namespace="http://schemas.datacontract.org/2004/07/System" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="RemoteFileStreamMessage">
@@ -22,6 +25,13 @@
   <wsdl:message name="RemoteFileStreamRequest_Headers">
     <wsdl:part name="fileId" element="tns:fileId" />
   </wsdl:message>
+  <wsdl:message name="IFileStorageService_GetAllFilesMetadata_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllFilesMetadata" />
+  </wsdl:message>
+  <wsdl:message name="IFileStorageService_GetAllFilesMetadata_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllFilesMetadataResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFileStorageService_DeleteFile_OutputMessage" />
   <wsdl:portType name="IFileStorageService">
     <wsdl:operation name="UploadFile">
       <wsdl:input wsaw:Action="http://tempuri.org/IFileStorageService/UploadFile" name="RemoteFileStreamMessage" message="tns:RemoteFileStreamMessage" />
@@ -30,6 +40,14 @@
     <wsdl:operation name="DownloadFile">
       <wsdl:input wsaw:Action="http://tempuri.org/IFileStorageService/DownloadFile" name="RemoteFileStreamRequest" message="tns:RemoteFileStreamRequest" />
       <wsdl:output wsaw:Action="http://tempuri.org/IFileStorageService/DownloadFileResponse" name="RemoteFileStreamMessage" message="tns:RemoteFileStreamMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllFilesMetadata">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFileStorageService/GetAllFilesMetadata" message="tns:IFileStorageService_GetAllFilesMetadata_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFileStorageService/GetAllFilesMetadataResponse" message="tns:IFileStorageService_GetAllFilesMetadata_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteFile">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFileStorageService/DeleteFile" name="RemoteFileStreamRequest" message="tns:RemoteFileStreamRequest" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFileStorageService/DeleteFileResponse" message="tns:IFileStorageService_DeleteFile_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IFileStorageService" type="tns:IFileStorageService">
@@ -56,6 +74,25 @@
         <soap:header message="tns:RemoteFileStreamMessage_Headers" part="fileId" use="literal" />
         <soap:header message="tns:RemoteFileStreamMessage_Headers" part="fileName" use="literal" />
         <soap:header message="tns:RemoteFileStreamMessage_Headers" part="streamLength" use="literal" />
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllFilesMetadata">
+      <soap:operation soapAction="http://tempuri.org/IFileStorageService/GetAllFilesMetadata" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteFile">
+      <soap:operation soapAction="http://tempuri.org/IFileStorageService/DeleteFile" style="document" />
+      <wsdl:input name="RemoteFileStreamRequest">
+        <soap:header message="tns:RemoteFileStreamRequest_Headers" part="fileId" use="literal" />
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>

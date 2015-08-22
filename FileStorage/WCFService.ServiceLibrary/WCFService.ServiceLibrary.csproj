@@ -57,6 +57,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\FileStorage\FileStorage.csproj">
+      <Project>{0e2aa076-8a54-46d0-b498-5d531480637a}</Project>
+      <Name>FileStorage</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SQLStreamExtension\SQLStreamLib.csproj">
       <Project>{cf3c7f64-8b65-43b4-a1a4-f861cacfba48}</Project>
       <Name>SQLStreamLib</Name>
