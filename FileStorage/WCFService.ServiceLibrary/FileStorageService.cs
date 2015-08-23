@@ -39,6 +39,7 @@ namespace WCFService.ServiceLibrary
             {
                 fileId = fileEnvelope.FileId,
                 streamLength = fileEnvelope.FileData.Length,
+                fileName = fileEnvelope.FileName,
                 data = fileEnvelope.FileData 
             };
 

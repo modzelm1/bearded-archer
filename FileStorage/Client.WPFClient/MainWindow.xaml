@@ -34,9 +34,13 @@
 
                 <Label Margin="5,15,5,5">Files in remote store:</Label>
                 <ListView ItemsSource="{Binding RemoteRepositoryFiles}"
+                          SelectedItem="{Binding SelectedRepositoryItem}"
                     Height="150">
                     <ListView.View>
                         <GridView>
+                            <GridViewColumn 
+                                Width="30" 
+                                Header=""/>
                             <GridViewColumn 
                                 Width="150" 
                                 Header="File Id" 
@@ -60,22 +64,25 @@
                     ToolTip="Upload files from working directory">
                     Upload Files
                 </Button>
+                <Button 
+                    Command="{Binding DownloadFileCommand}"
+                    Margin="5"
+                    ToolTip="Upload files from working directory">
+                    Download selected file
+                </Button>
+                <Button
+                    Command="{Binding DeleteFileCommand}"
+                    Margin="5"
+                    ToolTip="Delete files from remote storage">
+                    Delete selected file
+                </Button>
                 <Button
                     Command="{Binding DeleteAllFilesCommand}"
                     Margin="5"
                     ToolTip="Delete files from remote storage">
-                    Delete Files
+                    Delete all files
                 </Button>
             </StackPanel>
-            
-            <!--<Button Content="Start Download" HorizontalAlignment="Left" Margin="419,60,0,0" VerticalAlignment="Top" Width="89"
-                Command="{Binding StartDownload}"/>
-            <ProgressBar HorizontalAlignment="Left" Height="19" Margin="10,60,0,0" VerticalAlignment="Top" Width="404"
-                     Maximum="{Binding DownloadProgressMaxVal}"
-                     Value="{Binding DownloadProgressVal}"/>
-
-            <Button Content="Start Upload" HorizontalAlignment="Left" Margin="419,84,0,0" VerticalAlignment="Top" Width="89"
-        	Command="{Binding StartUpload}"/>-->
             
         </Grid>
         
@@ -91,8 +98,8 @@
                     HorizontalAlignment="Left" 
                     Height="19" 
                     Width="404"
-        	Maximum="{Binding UploadProgressMaxVal}"
-        	Value="{Binding UploadProgressVal}"/>
+        	Maximum="{Binding ProgressMaxVal}"
+        	Value="{Binding ProgressVal}"/>
             </StatusBarItem>
         </StatusBar>
 

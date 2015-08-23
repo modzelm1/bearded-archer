@@ -19,32 +19,93 @@ namespace Client.WCFServiceWPFClient
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public CommandBase StartDownload  { get; private set; }
+        //public CommandBase StartDownload  { get; private set; }
 
-        public CommandBase StartUpload { get; private set; }
+        //public CommandBase StartUpload { get; private set; }
 
         public CommandBase UploadAllFilesCommand { get; private set; }
+
+        public CommandBase DownloadFileCommand { get; private set; }
+
+        public CommandBase DeleteFileCommand { get; private set; }
 
         public CommandBase DeleteAllFilesCommand { get; private set; }
 
         //Action<long, long, long> reportDownloadProgress;
 
-        Action<long, long, long> reportUploadProgress;
+        Action<long, long, long> reportProgress;
 
         public MainViewModel()
         {
             UploadAllFilesCommand = new CommandBase(UploadAllFiles);
+            DownloadFileCommand = new CommandBase(DownloadFile);
+            DeleteFileCommand = new CommandBase(DeleteFile);
             DeleteAllFilesCommand = new CommandBase(DeleteAllFiles);
             //StartDownload = new CommandBase(DownloadFile);
             //StartUpload = new CommandBase(UploadFile);
             //reportDownloadProgress = (a, b, c) => DownloadProgressVal = b;
-            reportUploadProgress = (a, b, c) => UploadProgressVal = b;
-            UploadProgressMaxVal = 100;
-            UploadProgressVal = 0;
+            reportProgress = (a, b, c) => ProgressVal = b;
+            ProgressMaxVal = 100;
+            ProgressVal = 0;
             //DownloadProgressMaxVal = 100;
             //DownloadProgressVal = 0;
             WorkingDirectory = @"C:\TestStorage\Client\";
             LogInfo = "Log";
+        }
+
+        private void ResetProgress()
+        {
+            ProgressVal = 0;
+        }
+
+        private void SetLog(string message)
+        {
+            LogInfo = message;
+        }
+
+        private void DeleteFile()
+        {
+            if(SelectedRepositoryItem != null)
+            {
+                using (var FileStorageService = new FileStorageServiceClient())
+                {
+                    FileStorageService.DeleteFile(SelectedRepositoryItem.Id);
+                    ShowFiles(FileStorageService);
+                }
+            }
+        }
+
+        public async void DownloadFile()
+        {
+            if (SelectedRepositoryItem != null)
+            {
+                SetLog("Downloading " + SelectedRepositoryItem.Name);
+                ResetProgress();
+                using (var FileStorageService = new FileStorageServiceClient())
+                {
+                    Guid id = SelectedRepositoryItem.Id;
+                    long length = 0;
+                    Stream data = new MemoryStream();
+                    var name = FileStorageService.DownloadFile(ref id, out length, out data);
+
+                    Task t = Task.Factory.StartNew(
+                        () =>
+                        {
+                            StreamHelper sh = new StreamHelper();
+                            DirectoryInfo directoryInfo = new DirectoryInfo(WorkingDirectory);
+                            string path = Path.Combine(WorkingDirectory, DateTime.Now.Millisecond + "_" + name);
+                            using (var downloadedFileWraper =
+                                ProgressStreamDecorator.GetProgressStreamDecorator(data, reportProgress))
+                            {
+                                sh.SaveFileStream(path, downloadedFileWraper);
+                            }
+                        }
+                            );
+                    await t;
+                }
+                SetLog(string.Empty);
+                ResetProgress();
+            }
         }
 
         public async void UploadAllFiles()
@@ -54,12 +115,12 @@ namespace Client.WCFServiceWPFClient
                 DirectoryInfo directoryInfo = new DirectoryInfo(WorkingDirectory);
                 foreach (var fileInfo in directoryInfo.GetFiles())
                 {
-                    UploadProgressVal = 0;
-                    UploadProgressMaxVal = fileInfo.Length;
+                    ResetProgress();
+                    ProgressMaxVal = fileInfo.Length;
 
-                    LogInfo = "Upload: " + fileInfo.Name;
+                    SetLog("Upload: " + fileInfo.Name);
 
-                    var streamToUpload = ProgressStreamDecorator.GetProgressStreamDecorator(fileInfo.OpenRead(), reportUploadProgress);
+                    var streamToUpload = ProgressStreamDecorator.GetProgressStreamDecorator(fileInfo.OpenRead(), reportProgress);
                     await FileStorageService.UploadFileAsync
                         (Guid.NewGuid(), 
                         fileInfo.Name, 
@@ -68,6 +129,9 @@ namespace Client.WCFServiceWPFClient
 
                     ShowFiles(FileStorageService);
                 }
+
+                SetLog(string.Empty);
+                ResetProgress();
             }
         }
 
@@ -77,7 +141,7 @@ namespace Client.WCFServiceWPFClient
             var filesList = fileStorageService.GetAllFilesMetadata();
             foreach (var file in filesList)
             {
-                RemoteRepositoryFiles.Add(new { Id = file.fileId, Name = file.fileName  });
+                RemoteRepositoryFiles.Add(new { Id = file.fileId, Name = file.fileName, Selected = true  });
             }
         }
 
@@ -125,8 +189,8 @@ namespace Client.WCFServiceWPFClient
             }
         }
 
-        ObservableCollection<object> _RemoteRepositoryFiles;
-        public ObservableCollection<object> RemoteRepositoryFiles
+        ObservableCollection<dynamic> _RemoteRepositoryFiles;
+        public ObservableCollection<dynamic> RemoteRepositoryFiles
         {
             get 
             {
@@ -140,111 +204,49 @@ namespace Client.WCFServiceWPFClient
             }
         }
 
-        //private async void UploadFile()
-        //{
-        //    StreamHelper sh = new StreamHelper();
-
-        //    FileStorageServiceReference.FileStorageServiceClient TargetFileStorageService =
-        //        new FileStorageServiceReference.FileStorageServiceClient();
-
-        //    var streamToUpload = ProgressStreamDecorator.GetProgressStreamDecorator
-        //        (sh.GetFileStream(ConfigurationManager.AppSettings["fileToUploadPath"]), reportUploadProgress);
-        //    //streamToUpload.ReportReadProgressEvent += reportUploadProgress;
-
-        //    UploadProgressMaxVal = streamToUpload.Length;
-
-        //    await TargetFileStorageService.UploadFileAsync(Guid.NewGuid(), "TestFileName.txt",
-        //        streamToUpload.Length, streamToUpload);
-        //}
-
-        //private async void DownloadFile()
-        //{
-        //    StreamHelper sh = new StreamHelper();
-
-        //    using (FileStorageServiceReference.FileStorageServiceClient SourceFileStorageService =
-        //        new FileStorageServiceReference.FileStorageServiceClient())
-        //    {
-        //        Stream downloadedFile = new MemoryStream();
-        //        Guid fileId = Guid.NewGuid();
-        //        string fileName = string.Empty;
-        //        long streamLength = 0;
-
-        //        fileName = SourceFileStorageService.DownloadFile(ref fileId, out streamLength, out downloadedFile);
-
-        //        DownloadProgressMaxVal = streamLength;
-
-        //        Task t = Task.Factory.StartNew(
-        //            () => {
-        //                using (var downloadedFileWraper =
-        //                    ProgressStreamDecorator.GetProgressStreamDecorator(downloadedFile, reportDownloadProgress))
-        //                {
-        //                    //downloadedFileWraper.ReportReadProgressEvent += reportDownloadProgress;
-        //                    sh.SaveFileStream(ConfigurationManager.AppSettings["downloadResultFilePath"], downloadedFileWraper);
-        //                }
-        //            }
-        //                );
-        //        await t;
-        //    }
-        //}
-
-        long _UploadProgressMaxVal;
-        public long UploadProgressMaxVal
+        dynamic _SelectedRepositoryItem;
+        public dynamic SelectedRepositoryItem 
         {
             get
             {
-                return _UploadProgressMaxVal;
+                return _SelectedRepositoryItem;
             }
             set
             {
-                _UploadProgressMaxVal = value;
+                _SelectedRepositoryItem = value;
                 if (PropertyChanged != null)
-                    PropertyChanged(this, new PropertyChangedEventArgs("UploadProgressMaxVal"));
-            }
+                    PropertyChanged(this, new PropertyChangedEventArgs("SelectedRepositoryItem"));
+            } 
         }
 
-        long _UploadProgressVal;
-        public long UploadProgressVal
+        long _ProgressMaxVal;
+        public long ProgressMaxVal
         {
             get
             {
-                return _UploadProgressVal;
+                return _ProgressMaxVal;
             }
             set
             {
-                _UploadProgressVal = value;
+                _ProgressMaxVal = value;
                 if (PropertyChanged != null)
-                    PropertyChanged(this, new PropertyChangedEventArgs("UploadProgressVal"));
+                    PropertyChanged(this, new PropertyChangedEventArgs("ProgressMaxVal"));
             }
         }
 
-        //long _DownloadProgressMaxVal;
-        //public long DownloadProgressMaxVal 
-        //{ 
-        //    get
-        //    {
-        //        return _DownloadProgressMaxVal;
-        //    }
-        //    set 
-        //    {
-        //        _DownloadProgressMaxVal = value;
-        //        if (PropertyChanged != null)
-        //            PropertyChanged(this, new PropertyChangedEventArgs("DownloadProgressMaxVal"));
-        //    } 
-        //}
-
-        //long _DownloadProgressVal;
-        //public long DownloadProgressVal
-        //{
-        //    get
-        //    {
-        //        return _DownloadProgressVal;
-        //    }
-        //    set
-        //    {
-        //        _DownloadProgressVal = value;
-        //        if (PropertyChanged != null)
-        //            PropertyChanged(this, new PropertyChangedEventArgs("DownloadProgressVal"));
-        //    }
-        //}
+        long _ProgressVal;
+        public long ProgressVal
+        {
+            get
+            {
+                return _ProgressVal;
+            }
+            set
+            {
+                _ProgressVal = value;
+                if (PropertyChanged != null)
+                    PropertyChanged(this, new PropertyChangedEventArgs("ProgressVal"));
+            }
+        }
     }
 }
