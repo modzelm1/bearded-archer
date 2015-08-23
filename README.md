@@ -13,42 +13,23 @@ This project will be a compilation of solutions for streaming large data files f
 7. Publish on Azure
 
 
-###How to use / test Consol Client 
+###How to use / test
 
-I current version we can download and uplod files using WCF streaming.
+There are three projects which shows how to use sql file storage.
 
-In FileStorage.ConsoleClient project Main method looks like this:
+#####Client.LocalDatabaseConsoleClient
+This project uses SqlFileStorage component to interact with the database. SqlFileStorage component conects dircetly to the database.
 
-```cs
-static void Main(string[] args)
-{
-        Console.WriteLine("Start!");
+#####Client.WCFServiceConsoleClient
+This project uses FileStorageService which allows to stream file into WCF service and then through SqlFileStorage to the database.
 
-        Console.WriteLine("Create file to upload ...");
-        GenerateTestFile();
+#####Client.WCFServiceWPFClient
+It is a WPF application which sends files through FileStorageService.
 
-        //Console.WriteLine("Upload file stream ...");
-        //TestFileUpload();
-
-        //Console.WriteLine("Download file stream ...");
-        //TestFileDownload();
-
-        //Console.WriteLine("Upload message with file stream ...");
-        //TestUploadFileWithMetadata();
-
-        //Console.WriteLine("Download message with file stream ...");
-        //TestDownloadFileWithMetadata();
-
-        Console.WriteLine("End!");
-        Console.ReadKey();
-}
-```
-
-CreateTestFile method is used to generate test file. You can manipulate generated file size in LongStream class definition which is located in FileStorage.StreamCore project.
 
 
 ###File storage service
-File storage service is located in FileStorage.ServiceLibrary project. For current testing purpose it iis hosted in Visual Studio thanks to "start wcf service host when debugging another project" option.
+File storage service is located in WCFService.ServiceLibrary project. For current testing purpose it iis hosted in Visual Studio thanks to "start wcf service host when debugging another project" option.
 
 https://msdn.microsoft.com/pl-pl/library/cc668754%28v=vs.110%29.aspx
 
